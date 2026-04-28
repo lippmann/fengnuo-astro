@@ -1,0 +1,428 @@
+---
+import Base from '../layouts/Base.astro';
+import feedData from '../data/feed.json';
+
+const feed = (feedData as any[]).slice(0, 4);
+
+function formatDate(iso: string) {
+  const [y, m, d] = iso.split('-');
+  return `${y} · ${m} · ${d}`;
+}
+
+function truncate(text: string, max = 120) {
+  return text.length > max ? text.slice(0, max).trimEnd() + '…' : text;
+}
+---
+
+<Base title="冯诺" description="冯诺 — 译者、写作者、业余开发者">
+
+<nav>
+  <div class="nav-logo">冯诺<span>·</span></div>
+  <ul class="nav-links">
+    <li><a href="/books">译的书</a></li>
+    <li><a href="/writing">写的文</a></li>
+    <li><a href="/projects">编的程</a></li>
+    <li><a href="/says">碎碎念</a></li>
+  </ul>
+  <button class="theme-toggle" id="themeBtn" onclick="toggleTheme()" aria-label="切换主题">
+    <svg id="iconSun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="display:none">
+      <circle cx="12" cy="12" r="4"/>
+      <line x1="12" y1="2" x2="12" y2="4"/>
+      <line x1="12" y1="20" x2="12" y2="22"/>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+      <line x1="2" y1="12" x2="4" y2="12"/>
+      <line x1="20" y1="12" x2="22" y2="12"/>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+    </svg>
+    <svg id="iconMoon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+    </svg>
+  </button>
+</nav>
+
+<section class="hero">
+  <div class="hero-left">
+    <p class="hero-eyebrow">译者 · 写作者 · 业余开发者</p>
+    <h1 class="hero-name">冯诺<span class="hero-name-dot"></span></h1>
+    <p class="hero-tagline">在语言之间穿行。翻译人文社科，写随笔与书评，也在深夜 vibe coding。</p>
+    <div class="hero-roles">
+      <span class="hero-role">Translator</span>
+      <span class="hero-role">Writer</span>
+      <span class="hero-role">Developer</span>
+    </div>
+    <div class="hero-social">
+      <a href="https://www.douban.com/people/L.Revolution/" target="_blank" rel="noopener">豆瓣</a>
+      <a href="https://x.com/Surudo1892" target="_blank" rel="noopener">X / Twitter</a>
+      <a href="https://github.com/lippmann" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <a class="work-card" href="/books">
+      <div class="work-num">01 · Translator</div>
+      <div class="work-title">译的书</div>
+      <div class="work-sub">已出版多部译作<br>人文社科 · 社会学 · 历史 · 文化</div>
+      <div class="work-arrow">→</div>
+    </a>
+    <a class="work-card" href="/writing">
+      <div class="work-num">02 · Writer</div>
+      <div class="work-title">写的文</div>
+      <div class="work-sub">随笔 · 书评 · 当代观察</div>
+      <div class="work-arrow">→</div>
+    </a>
+    <a class="work-card" href="/projects">
+      <div class="work-num">03 · Developer</div>
+      <div class="work-title">编的程</div>
+      <div class="work-sub">独立项目 · 开源工具<br>业余时间开发，深夜 vibe coding</div>
+      <div class="work-arrow">→</div>
+    </a>
+  </div>
+</section>
+
+<section class="says-section">
+  <div class="section-header">
+    <span class="section-label">碎碎念</span>
+    <div class="section-rule"></div>
+    <a class="says-more-link" href="/says">全部 →</a>
+  </div>
+  <div class="says-grid">
+    {feed.map((item: any) => (
+      <a class="says-card" href={item.url} target="_blank" rel="noopener">
+        <div class="says-meta">
+          <span class={`says-dot dot-${item.platform}`}></span>
+          <span class="says-platform">{item.platform === 'twitter' ? 'X / Twitter' : 'Douban'}</span>
+          <span class="says-date">{formatDate(item.date)}</span>
+        </div>
+        <p class="says-text">{truncate(item.text, 140)}</p>
+        {item.images && item.images.length > 0 && item.images.some((img: string) => !img.includes('new_menu') && !img.includes('/icon/')) && (
+          <div class="says-imgs">
+            {item.images
+              .filter((img: string) => !img.includes('new_menu') && !img.includes('/icon/'))
+              .slice(0, 3)
+              .map((img: string) => (
+                <img src={img} loading="lazy" alt="" referrerpolicy="no-referrer" />
+              ))
+            }
+          </div>
+        )}
+      </a>
+    ))}
+  </div>
+</section>
+
+<footer>
+  <span class="footer-text">© 2026 冯诺</span>
+  <span class="footer-text">Translator · Writer · Developer</span>
+</footer>
+
+</Base>
+
+<style>
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 60px;
+  height: 64px;
+  border-bottom: 1px solid var(--rule);
+}
+.nav-logo {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: .04em;
+  color: var(--paper);
+}
+.nav-logo span { color: var(--gold); }
+.nav-links {
+  display: flex;
+  gap: 32px;
+  list-style: none;
+}
+.nav-links a {
+  font-size: 11px;
+  letter-spacing: .12em;
+  color: var(--dim);
+  transition: color .15s;
+}
+.nav-links a:hover { color: var(--paper); }
+.theme-toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--dim);
+  display: flex;
+  align-items: center;
+  padding: 4px;
+  transition: color .2s;
+}
+.theme-toggle:hover { color: var(--paper); }
+.theme-toggle svg { width: 15px; height: 15px; }
+
+.hero {
+  padding: 80px 60px 100px;
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 64px;
+  align-items: start;
+  min-height: calc(100vh - 64px);
+  border-bottom: 1px solid var(--rule);
+}
+.hero-left { padding-top: 16px; }
+.hero-eyebrow {
+  font-size: 10px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--dim);
+  font-weight: 300;
+  margin-bottom: 32px;
+}
+.hero-name {
+  font-family: 'Noto Serif SC', serif;
+  font-size: clamp(72px, 10vw, 120px);
+  font-weight: 900;
+  line-height: 1.0;
+  letter-spacing: -.02em;
+  color: var(--paper);
+  margin-bottom: 0;
+}
+.hero-name-dot {
+  display: inline-block;
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: var(--gold);
+  margin-left: 4px;
+  vertical-align: super;
+}
+.hero-tagline {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 2;
+  color: var(--dim);
+  max-width: 420px;
+  margin-top: 36px;
+  padding-top: 36px;
+  border-top: 1px solid var(--rule);
+}
+.hero-roles {
+  display: flex;
+  gap: 20px;
+  margin-top: 28px;
+}
+.hero-role {
+  font-size: 10px;
+  font-weight: 300;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.hero-role + .hero-role::before {
+  content: '·';
+  margin-right: 20px;
+  color: var(--gold);
+  opacity: .5;
+}
+.hero-social {
+  display: flex;
+  gap: 20px;
+  margin-top: 40px;
+}
+.hero-social a {
+  font-size: 10px;
+  font-weight: 300;
+  letter-spacing: .1em;
+  color: var(--dim);
+  text-transform: uppercase;
+  transition: color .15s;
+}
+.hero-social a:hover { color: var(--gold); }
+
+.hero-right {
+  padding-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.work-card {
+  background: var(--surface);
+  padding: 28px 28px;
+  border-radius: 2px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  cursor: pointer;
+  transition: background .2s, transform .2s;
+  border: 1px solid var(--rule);
+}
+.work-card:hover {
+  background: var(--hover);
+  transform: translateY(-1px);
+}
+.work-num {
+  font-size: 9px;
+  font-weight: 300;
+  letter-spacing: .14em;
+  color: var(--gold);
+}
+.work-title {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--paper);
+  letter-spacing: .01em;
+}
+.work-sub {
+  font-size: 11px;
+  font-weight: 300;
+  color: var(--dim);
+  letter-spacing: .05em;
+  line-height: 1.7;
+}
+.work-arrow {
+  font-size: 14px;
+  color: var(--gold);
+  opacity: .6;
+  margin-top: 4px;
+}
+
+.says-section {
+  padding: 64px 60px 80px;
+}
+.section-header {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  margin-bottom: 28px;
+}
+.section-label {
+  font-size: 10px;
+  font-weight: 300;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--dim);
+  white-space: nowrap;
+}
+.section-rule {
+  flex: 1;
+  height: 1px;
+  background: var(--rule);
+}
+.says-more-link {
+  font-size: 10px;
+  font-weight: 300;
+  letter-spacing: .1em;
+  color: var(--gold);
+  white-space: nowrap;
+  transition: opacity .15s;
+}
+.says-more-link:hover { opacity: .7; }
+.says-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.says-card {
+  background: var(--surface);
+  padding: 28px;
+  border-radius: 2px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  cursor: pointer;
+  transition: background .2s;
+  border: 1px solid var(--rule);
+}
+.says-card:hover { background: var(--hover); }
+.says-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.says-dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.dot-twitter { background: var(--paper); }
+.dot-douban  { background: #07a761; }
+.says-platform {
+  font-size: 9px;
+  font-weight: 300;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  flex: 1;
+}
+.says-date {
+  font-size: 9px;
+  font-weight: 300;
+  color: var(--muted);
+  letter-spacing: .08em;
+}
+.says-text {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 13px;
+  font-weight: 300;
+  line-height: 2;
+  color: var(--dim);
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.says-imgs {
+  display: flex;
+  gap: 4px;
+}
+.says-imgs img {
+  width: 52px; height: 52px;
+  object-fit: cover;
+  border-radius: 2px;
+}
+
+footer {
+  padding: 28px 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid var(--rule);
+}
+.footer-text {
+  font-size: 10px;
+  font-weight: 300;
+  letter-spacing: .14em;
+  color: var(--muted);
+}
+
+@media (max-width: 900px) {
+  .hero {
+    grid-template-columns: 1fr;
+    padding: 60px 24px 80px;
+  }
+  .hero-right { padding-top: 0; }
+  nav { padding: 0 24px; }
+  .says-section { padding: 48px 24px 60px; }
+  .says-grid { grid-template-columns: 1fr; }
+  footer { padding: 24px; }
+}
+</style>
+
+<script is:inline>
+function updateIcon(isDark) {
+  document.getElementById('iconSun').style.display  = isDark ? 'block' : 'none';
+  document.getElementById('iconMoon').style.display = isDark ? 'none'  : 'block';
+}
+function toggleTheme() {
+  var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  var next = isDark ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', next);
+  localStorage.setItem('site-theme', next);
+  updateIcon(next === 'dark');
+}
+(function () {
+  var saved = localStorage.getItem('site-theme') || 'light';
+  updateIcon(saved === 'dark');
+}());
+</script>

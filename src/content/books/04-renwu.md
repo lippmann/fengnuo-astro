@@ -1,0 +1,11 @@
+---
+title: 人物设定创意宝库
+original: 积极特质词汇速查，塑造值得支持的人物
+author: 安杰拉·阿克曼 & 贝卡·普利西
+year: 2023
+cover: https://img3.doubanio.com/view/subject/l/public/s34694203.jpg
+douban: https://book.douban.com/subject/36641005/
+order: 4
+---
+
+写作者的人物塑造工具书。书中系统梳理了数百种积极性格特质，每条词条附有行为表现、对话示例和叙事应用，帮助作者摆脱"好人扁平化"的困境，塑造立体、真实、值得读者投入感情的角色。
