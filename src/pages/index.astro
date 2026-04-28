@@ -1,17 +1,5 @@
 ---
 import Base from '../layouts/Base.astro';
-import feedData from '../data/feed.json';
-
-const feed = (feedData as any[]).slice(0, 4);
-
-function formatDate(iso: string) {
-  const [y, m, d] = iso.split('-');
-  return `${y} · ${m} · ${d}`;
-}
-
-function truncate(text: string, max = 120) {
-  return text.length > max ? text.slice(0, max).trimEnd() + '…' : text;
-}
 ---
 
 <Base title="冯诺" description="冯诺 — 译者、写作者、业余开发者">
@@ -22,7 +10,7 @@ function truncate(text: string, max = 120) {
     <li><a href="/books">译的书</a></li>
     <li><a href="/writing">写的文</a></li>
     <li><a href="/projects">编的程</a></li>
-    <li><a href="/says">碎碎念</a></li>
+    <li><a href="/tweets">碎的念</a></li>
   </ul>
   <button class="theme-toggle" id="themeBtn" onclick="toggleTheme()" aria-label="切换主题">
     <svg id="iconSun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="display:none">
@@ -62,52 +50,23 @@ function truncate(text: string, max = 120) {
     <a class="work-card" href="/books">
       <div class="work-num">01 · Translator</div>
       <div class="work-title">译的书</div>
-      <div class="work-sub">已出版多部译作<br>人文社科 · 社会学 · 历史 · 文化</div>
       <div class="work-arrow">→</div>
     </a>
     <a class="work-card" href="/writing">
       <div class="work-num">02 · Writer</div>
       <div class="work-title">写的文</div>
-      <div class="work-sub">随笔 · 书评 · 当代观察</div>
       <div class="work-arrow">→</div>
     </a>
     <a class="work-card" href="/projects">
       <div class="work-num">03 · Developer</div>
       <div class="work-title">编的程</div>
-      <div class="work-sub">独立项目 · 开源工具<br>业余时间开发，深夜 vibe coding</div>
       <div class="work-arrow">→</div>
     </a>
-  </div>
-</section>
-
-<section class="says-section">
-  <div class="section-header">
-    <span class="section-label">碎碎念</span>
-    <div class="section-rule"></div>
-    <a class="says-more-link" href="/says">全部 →</a>
-  </div>
-  <div class="says-grid">
-    {feed.map((item: any) => (
-      <a class="says-card" href={item.url} target="_blank" rel="noopener">
-        <div class="says-meta">
-          <span class={`says-dot dot-${item.platform}`}></span>
-          <span class="says-platform">{item.platform === 'twitter' ? 'X / Twitter' : 'Douban'}</span>
-          <span class="says-date">{formatDate(item.date)}</span>
-        </div>
-        <p class="says-text">{truncate(item.text, 140)}</p>
-        {item.images && item.images.length > 0 && item.images.some((img: string) => !img.includes('new_menu') && !img.includes('/icon/')) && (
-          <div class="says-imgs">
-            {item.images
-              .filter((img: string) => !img.includes('new_menu') && !img.includes('/icon/'))
-              .slice(0, 3)
-              .map((img: string) => (
-                <img src={img} loading="lazy" alt="" referrerpolicy="no-referrer" />
-              ))
-            }
-          </div>
-        )}
-      </a>
-    ))}
+    <a class="work-card" href="/tweets">
+      <div class="work-num">04 · Says</div>
+      <div class="work-title">碎的念</div>
+      <div class="work-arrow">→</div>
+    </a>
   </div>
 </section>
 
@@ -163,7 +122,7 @@ nav {
 .hero {
   padding: 80px 60px 100px;
   display: grid;
-  grid-template-columns: 1fr 380px;
+  grid-template-columns: 1fr 400px;
   gap: 64px;
   align-items: start;
   min-height: calc(100vh - 64px);
@@ -241,17 +200,17 @@ nav {
 
 .hero-right {
   padding-top: 16px;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   gap: 8px;
 }
 .work-card {
   background: var(--surface);
-  padding: 28px 28px;
+  padding: 24px 20px;
   border-radius: 2px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 8px;
   cursor: pointer;
   transition: background .2s, transform .2s;
   border: 1px solid var(--rule);
@@ -268,118 +227,16 @@ nav {
 }
 .work-title {
   font-family: 'Noto Serif SC', serif;
-  font-size: 22px;
+  font-size: 20px;
   font-weight: 700;
   color: var(--paper);
   letter-spacing: .01em;
-}
-.work-sub {
-  font-size: 11px;
-  font-weight: 300;
-  color: var(--dim);
-  letter-spacing: .05em;
-  line-height: 1.7;
+  flex: 1;
 }
 .work-arrow {
-  font-size: 14px;
+  font-size: 13px;
   color: var(--gold);
   opacity: .6;
-  margin-top: 4px;
-}
-
-.says-section {
-  padding: 64px 60px 80px;
-}
-.section-header {
-  display: flex;
-  align-items: baseline;
-  gap: 16px;
-  margin-bottom: 28px;
-}
-.section-label {
-  font-size: 10px;
-  font-weight: 300;
-  letter-spacing: .2em;
-  text-transform: uppercase;
-  color: var(--dim);
-  white-space: nowrap;
-}
-.section-rule {
-  flex: 1;
-  height: 1px;
-  background: var(--rule);
-}
-.says-more-link {
-  font-size: 10px;
-  font-weight: 300;
-  letter-spacing: .1em;
-  color: var(--gold);
-  white-space: nowrap;
-  transition: opacity .15s;
-}
-.says-more-link:hover { opacity: .7; }
-.says-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-}
-.says-card {
-  background: var(--surface);
-  padding: 28px;
-  border-radius: 2px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  cursor: pointer;
-  transition: background .2s;
-  border: 1px solid var(--rule);
-}
-.says-card:hover { background: var(--hover); }
-.says-meta {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-.says-dot {
-  width: 7px; height: 7px;
-  border-radius: 50%;
-  flex-shrink: 0;
-}
-.dot-twitter { background: var(--paper); }
-.dot-douban  { background: #07a761; }
-.says-platform {
-  font-size: 9px;
-  font-weight: 300;
-  letter-spacing: .14em;
-  text-transform: uppercase;
-  color: var(--muted);
-  flex: 1;
-}
-.says-date {
-  font-size: 9px;
-  font-weight: 300;
-  color: var(--muted);
-  letter-spacing: .08em;
-}
-.says-text {
-  font-family: 'Noto Serif SC', serif;
-  font-size: 13px;
-  font-weight: 300;
-  line-height: 2;
-  color: var(--dim);
-  display: -webkit-box;
-  -webkit-line-clamp: 4;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-.says-imgs {
-  display: flex;
-  gap: 4px;
-}
-.says-imgs img {
-  width: 52px; height: 52px;
-  object-fit: cover;
-  border-radius: 2px;
 }
 
 footer {
@@ -403,8 +260,6 @@ footer {
   }
   .hero-right { padding-top: 0; }
   nav { padding: 0 24px; }
-  .says-section { padding: 48px 24px 60px; }
-  .says-grid { grid-template-columns: 1fr; }
   footer { padding: 24px; }
 }
 </style>
