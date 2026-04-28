@@ -12,6 +12,13 @@ function formatDate(iso: string) {
 function filterImages(images: string[]) {
   return images.filter(img => !img.includes('new_menu') && !img.includes('/icon/'));
 }
+
+function proxyImg(url: string) {
+  if (url.includes('doubanio.com')) {
+    return `https://wsrv.nl/?url=${encodeURIComponent(url)}&w=200&h=200&fit=cover`;
+  }
+  return url;
+}
 ---
 
 <Base title="碎的念 · 冯诺" description="冯诺的碎片记录 — 豆瓣 · X / Twitter">
@@ -67,7 +74,7 @@ function filterImages(images: string[]) {
             {imgs.length > 0 && (
               <div class="entry-imgs">
                 {imgs.slice(0, 4).map((img: string) => (
-                  <img src={img} loading="lazy" alt="" referrerpolicy="no-referrer" />
+                  <img src={proxyImg(img)} loading="lazy" alt="" />
                 ))}
               </div>
             )}
