@@ -3,7 +3,7 @@ title: 一路微光
 original: A Lite Too Bright
 author: 塞缪尔·米勒（Samuel Miller）
 year: 2021
-cover: https://img3.doubanio.com/view/subject/l/public/s33873703.jpg
+cover: /covers/s33873703.jpg
 douban: https://book.douban.com/subject/35067904/
 order: 6
 ---

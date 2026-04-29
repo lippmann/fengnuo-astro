@@ -3,7 +3,7 @@ title: 热点！
 original: 如何一眼辨别真假信息
 author: 尼克·谢里登（Nick Sheridan，1992—2024）
 year: 2024
-cover: https://img1.doubanio.com/view/subject/l/public/s34999389.jpg
+cover: /covers/s34999389.jpg
 douban: https://book.douban.com/subject/37106144/
 order: 3
 ---

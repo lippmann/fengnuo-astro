@@ -4,7 +4,7 @@ original: The Gentrification of the Internet
 author: 杰西·林格尔（Jessie Lingel）
 year: 2023
 publisher: 浙江人民出版社·潮汐
-cover: https://img3.doubanio.com/view/subject/l/public/s34642537.jpg
+cover: /covers/s34642537.jpg
 douban: https://book.douban.com/subject/36453354/
 order: 2
 ---

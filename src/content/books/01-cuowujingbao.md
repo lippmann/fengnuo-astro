@@ -4,7 +4,7 @@ original: False Alarm
 author: 比约恩·隆伯格（Bjørn Lomborg）
 year: 2024
 publisher: 浙江人民出版社
-cover: https://img9.doubanio.com/view/subject/l/public/s34975355.jpg
+cover: /covers/s34975355.jpg
 douban: https://book.douban.com/subject/37066249/
 order: 1
 ---

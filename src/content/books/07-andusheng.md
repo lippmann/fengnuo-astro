@@ -3,7 +3,7 @@ title: 安徒生童话
 original: Hans Christian Andersen
 author: 汉斯·克里斯蒂安·安徒生（1805—1875）
 year: 2021
-cover: https://img1.doubanio.com/view/subject/l/public/s33610310.jpg
+cover: /covers/s33610310.jpg
 douban: https://book.douban.com/subject/35018390/
 order: 7
 ---

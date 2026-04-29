@@ -8,7 +8,7 @@ const books = defineCollection({
     author: z.string(),
     year: z.number(),
     publisher: z.string().optional(),
-    cover: z.string().url(),
+    cover: z.string(),
     douban: z.string().url(),
     order: z.number(),
   }),

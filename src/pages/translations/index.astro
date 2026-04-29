@@ -7,12 +7,6 @@ const total = books.length;
 const years = books.map(b => b.data.year).sort();
 const yearRange = `${years[0]} — ${years[years.length - 1]}`;
 
-function proxyCover(url: string) {
-  if (url.includes('doubanio.com')) {
-    return `https://wsrv.nl/?url=${encodeURIComponent(url)}&w=440&h=660&fit=cover`;
-  }
-  return url;
-}
 ---
 
 <Base title="译的书 · 冯诺" description="冯诺翻译作品列表">
@@ -63,7 +57,7 @@ function proxyCover(url: string) {
       <div class="book-cover-col">
         <img
           class="book-cover-img"
-          src={proxyCover(book.data.cover)}
+          src={book.data.cover}
           alt={book.data.title}
           loading="lazy"
         />

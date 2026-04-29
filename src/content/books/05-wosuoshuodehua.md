@@ -3,7 +3,7 @@ title: 我所说的话
 original: What I Say
 author: 本·贝利·史密斯（Ben Bailey Smith）
 year: 2023
-cover: https://img1.doubanio.com/view/subject/l/public/s34483849.jpg
+cover: /covers/s34483849.jpg
 douban: https://book.douban.com/subject/36337285/
 order: 5
 ---

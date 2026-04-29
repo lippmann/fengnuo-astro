@@ -3,7 +3,7 @@ title: 人物设定创意宝库
 original: 积极特质词汇速查，塑造值得支持的人物
 author: 安杰拉·阿克曼 & 贝卡·普利西
 year: 2023
-cover: https://img3.doubanio.com/view/subject/l/public/s34694203.jpg
+cover: /covers/s34694203.jpg
 douban: https://book.douban.com/subject/36641005/
 order: 4
 ---
