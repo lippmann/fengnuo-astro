@@ -51,21 +51,83 @@ import Base from '../layouts/Base.astro';
       <div class="work-num">01 · Translator</div>
       <div class="work-title">译的书</div>
       <div class="work-arrow">→</div>
+      <svg class="card-svg svg-books" width="220" height="143" viewBox="0 0 140 90" fill="none" stroke="currentColor" aria-hidden="true">
+        <g class="book-l">
+          <rect x="6"  y="8" width="54" height="74" rx="2" stroke-width="1.2"/>
+          <line x1="19" y1="8"  x2="19" y2="82" stroke-width=".7" opacity=".3"/>
+          <line x1="60" y1="10" x2="60" y2="80" stroke-width="3" stroke-linecap="round" opacity=".07"/>
+          <line x1="24" y1="26" x2="52" y2="26" stroke-width="2"   stroke-linecap="round"/>
+          <line x1="24" y1="35" x2="50" y2="35" stroke-width="1.2" stroke-linecap="round" opacity=".55"/>
+          <line x1="24" y1="44" x2="44" y2="44" stroke-width="1"   stroke-linecap="round" opacity=".38"/>
+          <line x1="24" y1="64" x2="46" y2="64" stroke-width=".8"  stroke-linecap="round" opacity=".3"/>
+        </g>
+        <g opacity=".4">
+          <path d="M70 40 Q73 37 76 40" fill="none" stroke-width="1" stroke-linecap="round"/>
+          <path d="M70 47 Q73 44 76 47" fill="none" stroke-width="1" stroke-linecap="round"/>
+        </g>
+        <g class="book-r">
+          <rect x="80" y="8" width="54" height="74" rx="2" stroke-width="1.2"/>
+          <line x1="93"  y1="8"  x2="93"  y2="82" stroke-width=".7" opacity=".3"/>
+          <line x1="80"  y1="10" x2="80"  y2="80" stroke-width="3"  stroke-linecap="round" opacity=".07"/>
+          <line x1="98" y1="26" x2="126" y2="26" stroke-width="2"   stroke-linecap="round"/>
+          <line x1="98" y1="35" x2="122" y2="35" stroke-width="1.2" stroke-linecap="round" opacity=".55"/>
+          <line x1="98" y1="44" x2="112" y2="44" stroke-width="1"   stroke-linecap="round" opacity=".38"/>
+          <line x1="98" y1="64" x2="120" y2="64" stroke-width=".8"  stroke-linecap="round" opacity=".3"/>
+        </g>
+      </svg>
     </a>
     <a class="work-card" href="/writing">
       <div class="work-num">02 · Writer</div>
       <div class="work-title">写的文</div>
       <div class="work-arrow">→</div>
+      <svg class="card-svg svg-pen" width="220" height="152" viewBox="0 0 130 90" fill="none" stroke="currentColor" aria-hidden="true">
+        <line x1="8"  y1="16" x2="122" y2="16" stroke-width="1"   stroke-linecap="round" opacity=".5"/>
+        <line x1="8"  y1="31" x2="122" y2="31" stroke-width="1"   stroke-linecap="round" opacity=".5"/>
+        <line x1="8"  y1="46" x2="122" y2="46" stroke-width="1"   stroke-linecap="round" opacity=".5"/>
+        <line x1="8"  y1="61" x2="88"  y2="61" stroke-width="1"   stroke-linecap="round" opacity=".5"/>
+        <path class="write-line" d="M88 61 C98 61 108 55 118 50" stroke-width="1.5" stroke-linecap="round"/>
+        <circle class="pen-tip" cx="118" cy="50" r="2.5" fill="currentColor" stroke="none"/>
+        <line x1="24" y1="8"  x2="24"  y2="82" stroke-width=".8"  stroke-linecap="round" opacity=".35"/>
+      </svg>
     </a>
     <a class="work-card" href="/projects">
       <div class="work-num">03 · Developer</div>
       <div class="work-title">编的程</div>
       <div class="work-arrow">→</div>
+      <svg class="card-svg svg-code" width="220" height="152" viewBox="0 0 130 90" fill="none" stroke="currentColor" aria-hidden="true">
+        <rect x="8" y="8" width="114" height="74" rx="6" stroke-width="1" opacity=".4"/>
+        <circle cx="22" cy="22" r="3.5" stroke-width="1" opacity=".5"/>
+        <circle cx="34" cy="22" r="3.5" stroke-width="1" opacity=".5"/>
+        <circle cx="46" cy="22" r="3.5" stroke-width="1" opacity=".5"/>
+        <line x1="8" y1="32" x2="122" y2="32" stroke-width=".8" opacity=".3"/>
+        <g class="bracket-l">
+          <path d="M38 46 L30 46 L30 58 L38 58" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        </g>
+        <g class="bracket-r">
+          <path d="M92 46 L100 46 L100 58 L92 58" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        </g>
+        <path d="M50 52 L56 47 L50 42" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" opacity=".6"/>
+        <rect class="cursor" x="62" y="44" width="14" height="2.5" rx="1.2" fill="currentColor" stroke="none"/>
+        <line x1="20" y1="72" x2="60" y2="72" stroke-width=".8" opacity=".2" stroke-linecap="round"/>
+      </svg>
     </a>
     <a class="work-card" href="/tweets">
       <div class="work-num">04 · Says</div>
       <div class="work-title">碎的念</div>
       <div class="work-arrow">→</div>
+      <svg class="card-svg svg-fragments" width="220" height="168" viewBox="0 0 130 100" fill="none" stroke="currentColor" aria-hidden="true">
+        <g class="frag-a">
+          <circle cx="65" cy="42" r="28" stroke-width="1.2"/>
+          <line x1="45" y1="35" x2="85" y2="35" stroke-width="1" opacity=".55" stroke-linecap="round"/>
+          <line x1="45" y1="43" x2="85" y2="43" stroke-width="1" opacity=".55" stroke-linecap="round"/>
+          <line x1="45" y1="51" x2="72" y2="51" stroke-width="1" opacity=".4"  stroke-linecap="round"/>
+        </g>
+        <circle class="frag-b" cx="48" cy="78" r="5.5" stroke-width="1.1"/>
+        <circle class="frag-c" cx="36" cy="88" r="3.5" stroke-width="1"/>
+        <circle class="frag-d" cx="26" cy="95" r="2"   stroke-width=".9"/>
+        <circle class="frag-b" cx="102" cy="22" r="7"  stroke-width="1"  opacity=".5"/>
+        <circle class="frag-c" cx="112" cy="36" r="4"  stroke-width=".9" opacity=".4"/>
+      </svg>
     </a>
   </div>
 </section>
@@ -221,11 +283,74 @@ nav {
   cursor: pointer;
   transition: background .2s, transform .2s;
   border: 1px solid var(--rule);
+  position: relative;
+  overflow: hidden;
 }
 .work-card:hover {
   background: var(--surface);
   transform: none;
 }
+
+/* ── SVG illustrations ── */
+.card-svg {
+  position: absolute;
+  left: 50%;
+  top: 55%;
+  transform: translate(-50%, -50%);
+  opacity: .15;
+  color: var(--gold);
+  pointer-events: none;
+  transition: opacity .5s ease, transform .6s cubic-bezier(.22,1,.36,1);
+}
+.work-card:hover .card-svg {
+  opacity: .3;
+  transform: translate(-50%, -54%) scale(1.04);
+}
+
+/* 译的书 — 两册分开合拢 */
+@keyframes spread-l {
+  0%, 100% { transform: translateX(0); }
+  45%, 55% { transform: translateX(-12px); }
+}
+@keyframes spread-r {
+  0%, 100% { transform: translateX(0); }
+  45%, 55% { transform: translateX(12px); }
+}
+.work-card:hover .svg-books .book-l { animation: spread-l 3.2s cubic-bezier(.45,0,.55,1) infinite; }
+.work-card:hover .svg-books .book-r { animation: spread-r 3.2s cubic-bezier(.45,0,.55,1) infinite; }
+
+/* 写的文 — 钢笔尖脉冲 + 末行书写 */
+@keyframes pen-pulse {
+  0%, 100% { r: 2.5; opacity: 1; }
+  50%       { r: 4;   opacity: .5; }
+}
+.svg-pen .write-line {
+  stroke-dasharray: 34;
+  stroke-dashoffset: 34;
+  transition: stroke-dashoffset 1s .15s ease;
+}
+.work-card:hover .svg-pen .write-line { stroke-dashoffset: 0; }
+.work-card:hover .svg-pen .pen-tip   { animation: pen-pulse 2.4s ease-in-out infinite; }
+
+/* 编的程 — 括号滑入 + 光标闪烁 */
+@keyframes cursor-blink {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+.svg-code .bracket-l { transform: translateX(8px);  transition: transform .5s cubic-bezier(.22,1,.36,1); }
+.svg-code .bracket-r { transform: translateX(-8px); transition: transform .5s cubic-bezier(.22,1,.36,1); }
+.work-card:hover .svg-code .bracket-l,
+.work-card:hover .svg-code .bracket-r { transform: translateX(0); }
+.work-card:hover .svg-code .cursor    { animation: cursor-blink 1s step-end infinite; }
+
+/* 碎的念 — 气泡漂浮 */
+@keyframes float-a { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-6px)} }
+@keyframes float-b { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-4px)} }
+@keyframes float-c { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-2px)} }
+.work-card:hover .svg-fragments .frag-a { animation: float-a 3s ease-in-out infinite; }
+.work-card:hover .svg-fragments .frag-b { animation: float-b 3s .4s ease-in-out infinite; }
+.work-card:hover .svg-fragments .frag-c { animation: float-c 3s .8s ease-in-out infinite; }
+.work-card:hover .svg-fragments .frag-d { animation: float-a 3s 1.2s ease-in-out infinite; }
 .work-num {
   font-size: 9px;
   font-weight: 300;
