@@ -1,46 +1,46 @@
 /* ── Fonts ── */
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;700;900&family=IBM+Plex+Mono:ital,wght@0,200;0,300;0,400;1,300&display=swap');
 
-/* ── Light theme (default) ── */
+/* ── Light theme (default) · 青瓷 Celadon ── */
 :root {
-  --bg:      #ffffff;
-  --surface: #f4f4f5;
-  --paper:   #09090b;
-  --dim:     #52525b;
-  --muted:   #71717a;
-  --rule:    #e4e4e7;
-  --gold:    #c9a96e;
-  --gold-d:  #8a6f3e;
-  --hover:   #f4f4f5;
+  --bg:      #f7faf9;
+  --surface: #eef3f1;
+  --paper:   #0a100e;
+  --dim:     #4a5e58;
+  --muted:   #8fa49e;
+  --rule:    #d8e4e0;
+  --gold:    #4d8e7a;
+  --gold-d:  #326257;
+  --hover:   #eef3f1;
 
-  --paper-dim:     rgba(9,9,11,.55);
-  --paper-faint:   rgba(9,9,11,.45);
-  --author-span:   rgba(9,9,11,.5);
-  --nav-gradient:  linear-gradient(to bottom, rgba(255,255,255,.97) 70%, transparent);
+  --paper-dim:     rgba(10,16,14,.55);
+  --paper-faint:   rgba(10,16,14,.45);
+  --author-span:   rgba(10,16,14,.5);
+  --nav-gradient:  linear-gradient(to bottom, rgba(247,250,249,.97) 70%, transparent);
   --cover-overlay: linear-gradient(135deg, rgba(0,0,0,.02), transparent 60%);
-  --hero-stroke:   rgba(0,0,0,.03);
-  --shadow-sm:     0 2px 8px rgba(0,0,0,.08), 0 12px 40px rgba(0,0,0,.1);
-  --shadow-hover:  0 6px 24px rgba(0,0,0,.12), 0 24px 64px rgba(0,0,0,.16);
+  --hero-stroke:   rgba(77,142,122,.06);
+  --shadow-sm:     0 2px 8px rgba(0,0,0,.07), 0 12px 40px rgba(0,0,0,.09);
+  --shadow-hover:  0 6px 24px rgba(0,0,0,.10), 0 24px 64px rgba(0,0,0,.14);
 }
 
-/* ── Dark theme ── */
+/* ── Dark theme · 青瓷 Celadon ── */
 [data-theme="dark"] {
-  --bg:      #0e0c0a;
-  --surface: #161310;
-  --paper:   #f0ebe2;
-  --dim:     #7a7268;
-  --muted:   #453f38;
-  --rule:    #211e1a;
-  --gold:    #c9a96e;
-  --gold-d:  #8a6f3e;
-  --hover:   #1e1b17;
+  --bg:      #0a100e;
+  --surface: #111a17;
+  --paper:   #e8f0ee;
+  --dim:     #8fa49e;
+  --muted:   #4a5e58;
+  --rule:    #1e2e2a;
+  --gold:    #5aab94;
+  --gold-d:  #4d8e7a;
+  --hover:   #162420;
 
-  --paper-dim:     rgba(240,235,226,.5);
-  --paper-faint:   rgba(240,235,226,.45);
-  --author-span:   rgba(240,235,226,.5);
-  --nav-gradient:  linear-gradient(to bottom, rgba(14,12,10,.97) 70%, transparent);
-  --cover-overlay: linear-gradient(135deg, rgba(201,169,110,.04), transparent 60%);
-  --hero-stroke:   rgba(201,169,110,.05);
+  --paper-dim:     rgba(232,240,238,.5);
+  --paper-faint:   rgba(232,240,238,.45);
+  --author-span:   rgba(232,240,238,.5);
+  --nav-gradient:  linear-gradient(to bottom, rgba(10,16,14,.97) 70%, transparent);
+  --cover-overlay: linear-gradient(135deg, rgba(77,142,122,.05), transparent 60%);
+  --hero-stroke:   rgba(90,171,148,.06);
   --shadow-sm:     0 4px 16px rgba(0,0,0,.5), 0 20px 60px rgba(0,0,0,.7);
   --shadow-hover:  0 8px 32px rgba(0,0,0,.6), 0 32px 80px rgba(0,0,0,.8);
 }
