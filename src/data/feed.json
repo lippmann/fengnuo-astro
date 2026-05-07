@@ -1,5 +1,32 @@
 [
   {
+    "id": "douban_486454896",
+    "platform": "douban",
+    "text": "看潘佐夫《蒋介石：失败的胜利者》台版中译，碰到一个从来没见过的词「刻正」，查了下是「此刻正在」的意思，常用在公文里。PS，本书豆瓣尚无条目，已手动添加，但按照豆瓣现在的审核强度，大概率过不了。",
+    "images": [
+      "https://img3.doubanio.com/f/shire/e49eca1517424a941871a2667a8957fd6c72d632/pics/new_menu.gif",
+      "https://img9.doubanio.com/icon/up2079635-35.jpg",
+      "https://img9.doubanio.com/icon/up2079635-35.jpg"
+    ],
+    "date": "2026-05-06",
+    "timestamp": 1778072157,
+    "url": "https://www.douban.com/topic/486454896/"
+  },
+  {
+    "id": "douban_485830174",
+    "platform": "douban",
+    "text": "3 月份开发的一个Chrome 扩展插件终于通过审核了。\n核心功能就是你每次打开新的标签页，就能随机弹出一个单词供你学习，可以根据自己的水平自定义单词的等级，主打的是轻量化学习，即使不学，单纯作为新标签页的背景，也是够的。\n名字叫 Tabulosa，玩了一个谐音梗，由 Tab （标签页）和西班牙语单词 Fabulosa （跟英文 fabulous 同义）组成。\n地址如下：\n主要特色有以下几点：\n放几张截图：",
+    "images": [
+      "https://img3.doubanio.com/f/shire/e49eca1517424a941871a2667a8957fd6c72d632/pics/new_menu.gif",
+      "https://img9.doubanio.com/icon/up2079635-35.jpg",
+      "https://img3.doubanio.com/view/group_topic/l/public/p730012332.jpg",
+      "https://img3.doubanio.com/view/group_topic/l/public/p730012397.jpg"
+    ],
+    "date": "2026-04-30",
+    "timestamp": 1777560681,
+    "url": "https://www.douban.com/topic/485830174/"
+  },
+  {
     "id": "douban_484507348",
     "platform": "douban",
     "text": "Pocket 倒闭后，一直想找个替代品，找来找去都不是特别满意。我现在用微信读书比较多，于是索性自己 vibe code 了一个 Chrome 扩展，一键可以将网页文章传到自己的微信读书里。再加上 我用别的插件把微读的摘录和批注全部同步到 Obsidian 里，算是初步实现了笔记的归拢。\n下载地址如下：\n以下是本扩展的功能介绍和使用方式，直接照抄了 Chrome 应用商店的文案：\n━━ 核心功能 ━━\n\n▎一键发送\n打开文章页面，点击扩展图标，确认后即可发送。无需复制粘贴，无需手动制作文件。\n\n▎智能提取正文\n自动识别文章主体内容，过滤广告、导航栏、评论区等无关元素。适配主流中文及海外新闻网站。\n\n▎分页文章自动合并\n遇到多页长文时，自动依次抓取所有页面并合并成完整内容，一次发送，无需手动翻页。\n▎图片完整保留\n在页面上下文中抓取图片，自动携带 Referer，可绕过 CDN 防盗链限制。支持懒加载图片。图片以内嵌方式写入 EPUB，在微信读书中离线可见。\n\n▎生成标准 EPUB\n纯本地生成，无需网络接口，自动填充标题、作者、来源站点、发布日期，并在文章开头附上原始链接，方便溯源。\n\n━━ 使用方法 ━━\n\n1. 在 weread.qq.com 登录微信读书网页版（一次即可）\n2. 打开任意想保存的文章页面\n3. 点击工具栏中的扩展图标\n4. 确认标题和字数，按需修改标题\n5. 点击「发送到微信读书」\n\n发送成功后，在微信读书「书架」中即可找到文章。",
