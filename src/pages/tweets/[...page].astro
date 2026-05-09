@@ -65,14 +65,15 @@ function proxyImg(url: string) {
     {page.data.map((item: any) => {
       const imgs = filterImages(item.images || []);
       return (
-        <a class="entry" href={item.url} target="_blank" rel="noopener">
+        <div class="entry">
           <div class="entry-spine">
             <span class={`entry-dot dot-${item.platform}`}></span>
             <div class="entry-line"></div>
           </div>
           <div class="entry-body">
             <div class="entry-meta">
-              <span class="entry-platform">{item.platform === 'twitter' ? 'X / Twitter' : 'Douban'}</span>
+              <span class="entry-platform">{item.platform === 'twitter' ? 'X' : 'Douban'}</span>
+              <a class="entry-source" href={item.url} target="_blank" rel="noopener">查看原文</a>
               <span class="entry-date">{formatDate(item.date)}</span>
             </div>
             <p class="entry-text">{item.text}</p>
@@ -84,7 +85,7 @@ function proxyImg(url: string) {
               </div>
             )}
           </div>
-        </a>
+        </div>
       );
     })}
   </div>
