@@ -27,7 +27,7 @@ from datetime import datetime, timedelta, timezone
 
 # ── Constants ────────────────────────────────────────────────────────────────
 
-BASE_URL          = "https://i.weread.qq.com"
+BASE_URL          = "https://weread.qq.com"
 API_BASE_URL      = "https://weread.qq.com"
 BOOK_URL_TEMPLATE = "https://weread.qq.com/web/bookDetail/{bookId}"
 
