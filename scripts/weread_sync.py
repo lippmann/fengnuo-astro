@@ -165,7 +165,7 @@ def _get_reviews(book_id: str, cookie: str) -> list[dict]:
     """Return personal note/review list for one book."""
     try:
         data = _fetch_json(
-            f"{BASE_URL}/review/list?bookId={book_id}&listType=11&mine=1&synckey=0"
+            f"{BASE_URL}/web/review/list?bookId={book_id}&listType=11&mine=1&synckey=0"
         )
         return data.get("reviews", [])
     except Exception as e:
