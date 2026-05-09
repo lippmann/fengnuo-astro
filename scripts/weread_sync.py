@@ -102,16 +102,14 @@ def _fetch_json(url: str) -> dict:
 # ── WeRead API calls ─────────────────────────────────────────────────────────
 
 def _get_shelf(cookie: str) -> list[dict]:
-    """Return list of book dicts from the user's shelf/recent list."""
-    data = _fetch_json(
-        "/shelf/sync?synckey=0&teenmode=0&id=&totalBookCount=0",
-        cookie,
-    )
-    # books live under data["books"] as list of {"bookInfo": {...}, ...}
+    """Return list of book dicts using the /api/user/notebook endpoint (same as obsidian plugin)."""
+    global _cookie_jar
+    _cookie_jar = _parse_cookie_string(cookie)
+    data = _fetch_json(f"{API_BASE_URL}/api/user/notebook")
     books = []
     for item in data.get("books", []):
-        info = item.get("bookInfo") or item.get("book") or {}
-        if not info:
+        info = item.get("bookInfo") or item.get("book") or item
+        if not info or not info.get("bookId"):
             continue
         books.append(info)
     return books
@@ -120,7 +118,7 @@ def _get_shelf(cookie: str) -> list[dict]:
 def _get_bookmarks(book_id: str, cookie: str) -> list[dict]:
     """Return raw bookmark (highlight) list for one book."""
     try:
-        data = _fetch_json(f"/book/bookmarklist?bookId={book_id}", cookie)
+        data = _fetch_json(f"{BASE_URL}/book/bookmarklist?bookId={book_id}")
         return data.get("updated", []) or data.get("bookmarks", [])
     except Exception as e:
         print(f"[weread]     bookmark fetch failed for {book_id}: {e}")
@@ -131,8 +129,7 @@ def _get_reviews(book_id: str, cookie: str) -> list[dict]:
     """Return personal note/review list for one book."""
     try:
         data = _fetch_json(
-            f"/review/list?bookId={book_id}&listType=11&mine=1&synckey=0",
-            cookie,
+            f"{BASE_URL}/review/list?bookId={book_id}&listType=11&mine=1&synckey=0"
         )
         return data.get("reviews", [])
     except Exception as e:
