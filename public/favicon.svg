@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
+  <!-- key body: dark rounded rectangle -->
+  <rect x="1" y="1" width="30" height="30" rx="7" ry="7" fill="#1a1a1a"/>
+  <!-- subtle inner highlight (key top surface) -->
+  <rect x="2" y="2" width="28" height="28" rx="6" ry="6" fill="none" stroke="#2e2e2e" stroke-width="1"/>
+  <!-- bottom edge shadow for 3D key feel -->
+  <rect x="1" y="24" width="30" height="7" rx="7" ry="7" fill="#0d0d0d"/>
+
+  <!-- globe icon bottom-left (like fn key) -->
+  <g transform="translate(5, 19)" opacity="0.75">
+    <circle cx="4" cy="4" r="3.4" fill="none" stroke="white" stroke-width="0.7"/>
+    <!-- latitude lines -->
+    <line x1="0.7" y1="2.6" x2="7.3" y2="2.6" stroke="white" stroke-width="0.5" opacity="0.8"/>
+    <line x1="0.7" y1="5.4" x2="7.3" y2="5.4" stroke="white" stroke-width="0.5" opacity="0.8"/>
+    <!-- vertical meridian -->
+    <line x1="4" y1="0.6" x2="4" y2="7.4" stroke="white" stroke-width="0.5" opacity="0.8"/>
+    <!-- curved meridians -->
+    <path d="M4 0.6 Q6 4 4 7.4" fill="none" stroke="white" stroke-width="0.5" opacity="0.6"/>
+    <path d="M4 0.6 Q2 4 4 7.4" fill="none" stroke="white" stroke-width="0.5" opacity="0.6"/>
+  </g>
+
+  <!-- fn text, right-aligned, slightly higher -->
+  <text
+    x="26"
+    y="15"
+    font-family="'SF Pro', -apple-system, 'Helvetica Neue', sans-serif"
+    font-size="10"
+    font-weight="300"
+    fill="white"
+    text-anchor="end"
+    letter-spacing="-0.2"
+  >fn</text>
+</svg>
