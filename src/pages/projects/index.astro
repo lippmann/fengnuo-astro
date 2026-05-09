@@ -1,0 +1,406 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+
+const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
+const total = projects.length;
+---
+
+<Base title="编的程 · 冯诺" description="冯诺自己写的小工具和项目">
+
+<nav>
+  <a class="nav-home" href="/">冯诺</a>
+  <ul class="nav-links">
+    <li><a href="/translations">译的书</a></li>
+    <li><a href="/writing">写的文</a></li>
+    <li><a href="/projects" class="here">编的程</a></li>
+    <li><a href="/tweets">碎的念</a></li>
+  </ul>
+  <button class="theme-toggle" id="themeBtn" onclick="toggleTheme()" aria-label="切换主题">
+    <svg id="iconSun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="display:none">
+      <circle cx="12" cy="12" r="4"/>
+      <line x1="12" y1="2" x2="12" y2="4"/>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+      <line x1="2" y1="12" x2="4" y2="12"/>
+      <line x1="20" y1="12" x2="22" y2="12"/>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+    </svg>
+    <svg id="iconMoon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+    </svg>
+  </button>
+</nav>
+
+<section class="hero">
+  <div class="hero-bg" aria-hidden="true">程</div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Works · Vibe Coding</p>
+    <h1 class="hero-title">编的程</h1>
+    <p class="hero-count">{total} Projects</p>
+    <div class="hero-rule"></div>
+    <p class="hero-desc">用代码解决自己的问题，<br>顺便分享出来。</p>
+  </div>
+  <div class="hero-scroll">
+    <span class="hero-scroll-line"></span>
+    Scroll
+  </div>
+</section>
+
+<section class="projects">
+  {projects.map((p, i) => (
+    <a class="project-entry" href={`/projects/${p.slug}`}>
+      <div class="project-visual-col">
+        {p.data.screenshots && p.data.screenshots.length > 0 ? (
+          <div class="project-screens">
+            <img
+              class="screen-main"
+              src={p.data.screenshots[0]}
+              alt={p.data.title}
+              loading="lazy"
+            />
+            {p.data.screenshots[1] && (
+              <img
+                class="screen-secondary"
+                src={p.data.screenshots[1]}
+                alt={p.data.title}
+                loading="lazy"
+              />
+            )}
+          </div>
+        ) : p.data.icon ? (
+          <div class="project-icon-solo">
+            <img src={p.data.icon} alt={p.data.title} width="80" height="80" />
+          </div>
+        ) : null}
+      </div>
+
+      <div class="project-info-col">
+        <div class="project-num">{String(i + 1).padStart(2, '0')} / {String(total).padStart(2, '0')}</div>
+        <h2 class="project-title">{p.data.title}</h2>
+        <p class="project-type-line">{p.data.type}</p>
+        <p class="project-subtitle">{p.data.subtitle}</p>
+        <div class="project-divider"></div>
+        <p class="project-desc">{p.data.description}</p>
+        <div class="project-footer">
+          <div class="project-tags">
+            {p.data.tags.map(t => <span class="tag">{t}</span>)}
+          </div>
+          <span class="project-cta">
+            查看详情
+            <span class="cta-arrow">→</span>
+          </span>
+        </div>
+      </div>
+    </a>
+  ))}
+</section>
+
+<footer>
+  <a class="foot-back" href="/">← 返回主页</a>
+  <span class="foot-copy">© 2026 冯诺</span>
+</footer>
+
+</Base>
+
+<style>
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 99;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 52px;
+  height: 56px;
+  background: var(--nav-gradient);
+  transition: background .25s;
+}
+.nav-home {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 15px; font-weight: 700;
+  letter-spacing: .02em;
+  opacity: .7; transition: opacity .2s;
+}
+.nav-home:hover { opacity: 1; }
+.nav-links { display: flex; gap: 28px; list-style: none; }
+.nav-links a {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 10px; letter-spacing: .18em;
+  text-transform: uppercase; color: var(--dim);
+  transition: color .2s;
+}
+.nav-links a:hover { color: var(--paper); }
+.nav-links a.here { color: var(--gold); }
+.theme-toggle {
+  background: none; border: none; cursor: pointer;
+  color: var(--dim); display: flex; align-items: center;
+  padding: 4px; transition: color .2s;
+}
+.theme-toggle:hover { color: var(--paper); }
+.theme-toggle svg { width: 15px; height: 15px; }
+
+/* ── Hero ── */
+.hero {
+  min-height: 100vh;
+  display: flex; align-items: flex-end;
+  padding: 0 52px 88px;
+  position: relative; overflow: hidden;
+  border-bottom: 1px solid var(--rule);
+}
+.hero-bg {
+  position: absolute; right: -4vw; top: 50%;
+  transform: translateY(-50%);
+  font-family: 'Noto Serif SC', serif;
+  font-size: 55vw; font-weight: 900; line-height: 1;
+  color: transparent;
+  -webkit-text-stroke: 1px var(--hero-stroke);
+  user-select: none; pointer-events: none;
+  letter-spacing: -.04em;
+}
+.hero-content { position: relative; z-index: 2; max-width: 600px; }
+.hero-eyebrow {
+  display: flex; align-items: center; gap: 12px;
+  font-family: 'Cormorant SC', serif;
+  font-size: 12px; letter-spacing: .2em;
+  text-transform: uppercase; color: var(--gold);
+  font-weight: 400; margin-bottom: 28px;
+}
+.hero-eyebrow::before {
+  content: ''; display: block;
+  width: 28px; height: 1px;
+  background: var(--gold); opacity: .6;
+}
+.hero-title {
+  font-family: 'Noto Serif SC', serif;
+  font-size: clamp(48px, 7vw, 88px);
+  font-weight: 900; line-height: 1.05;
+  letter-spacing: .04em; color: var(--paper);
+  margin-bottom: 20px;
+}
+.hero-count {
+  font-size: 10px; letter-spacing: .2em;
+  color: var(--dim); font-weight: 300; margin-bottom: 36px;
+}
+.hero-rule {
+  width: 40px; height: 1px;
+  background: var(--gold); opacity: .35; margin-bottom: 20px;
+}
+.hero-desc {
+  font-family: 'Libre Caslon Text', 'Noto Serif SC', serif;
+  font-size: 14px; font-weight: 400; line-height: 2;
+  color: var(--paper-faint); max-width: 380px;
+}
+.hero-scroll {
+  position: absolute; bottom: 40px; right: 52px; z-index: 2;
+  writing-mode: vertical-rl;
+  font-family: 'Cormorant SC', serif;
+  font-size: 11px; letter-spacing: .18em;
+  text-transform: uppercase; color: var(--muted);
+  display: flex; align-items: center; gap: 10px;
+}
+.hero-scroll-line {
+  width: 1px; height: 40px;
+  background: linear-gradient(to bottom, var(--muted), transparent);
+}
+
+/* ── Projects list ── */
+.projects { padding: 0 0 120px; }
+
+.project-entry {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 480px;
+  border-bottom: 1px solid var(--rule);
+  position: relative; overflow: hidden;
+  text-decoration: none;
+}
+.project-entry:nth-child(even) { direction: rtl; }
+.project-entry:nth-child(even) > * { direction: ltr; }
+
+/* ── Visual column ── */
+.project-visual-col {
+  position: relative; overflow: hidden;
+  background: var(--surface);
+  display: flex; align-items: center; justify-content: center;
+  padding: 56px 64px;
+  transition: background .3s;
+}
+.project-visual-col::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: var(--cover-overlay);
+  pointer-events: none;
+}
+
+.project-screens {
+  position: relative; z-index: 1;
+  width: 100%; display: flex; flex-direction: column; gap: 12px;
+  align-items: center;
+}
+
+.screen-main {
+  width: 100%; max-width: 360px;
+  border-radius: 6px;
+  border: 1px solid var(--rule);
+  box-shadow: var(--shadow-sm);
+  display: block;
+  transition: transform .5s cubic-bezier(.22,1,.36,1), box-shadow .5s ease;
+}
+.screen-secondary {
+  width: 86%; max-width: 300px;
+  border-radius: 6px;
+  border: 1px solid var(--rule);
+  box-shadow: var(--shadow-sm);
+  display: block; opacity: .7;
+  transition: transform .5s cubic-bezier(.22,1,.36,1), opacity .3s;
+}
+.project-entry:hover .screen-main {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: var(--shadow-hover);
+}
+.project-entry:hover .screen-secondary {
+  transform: translateY(-4px);
+  opacity: .9;
+}
+
+.project-icon-solo {
+  position: relative; z-index: 1;
+}
+.project-icon-solo img {
+  width: 80px; height: 80px;
+  border-radius: 18px;
+  border: 1px solid var(--rule);
+  box-shadow: var(--shadow-sm);
+  transition: transform .5s cubic-bezier(.22,1,.36,1), box-shadow .5s ease;
+}
+.project-entry:hover .project-icon-solo img {
+  transform: translateY(-8px) scale(1.05);
+  box-shadow: var(--shadow-hover);
+}
+
+/* ── Info column ── */
+.project-info-col {
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 56px 64px;
+  border-left: 1px solid var(--rule);
+}
+.project-entry:nth-child(even) .project-info-col {
+  border-left: none;
+  border-right: 1px solid var(--rule);
+}
+
+.project-num {
+  font-size: 9px; letter-spacing: .2em;
+  color: var(--gold-d); margin-bottom: 24px; font-weight: 300;
+}
+.project-title {
+  font-family: 'Noto Serif SC', serif;
+  font-size: clamp(28px, 3vw, 40px);
+  font-weight: 700; line-height: 1.2;
+  letter-spacing: .02em; color: var(--paper);
+  margin-bottom: 6px; transition: color .2s;
+}
+.project-entry:hover .project-title { color: var(--gold); }
+
+.project-type-line {
+  font-family: 'Cormorant SC', serif;
+  font-size: 11px; letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--dim); margin-bottom: 14px;
+}
+.project-subtitle {
+  font-family: 'Libre Caslon Text', 'Noto Serif SC', serif;
+  font-size: 14px; font-weight: 400; line-height: 1.9;
+  color: var(--dim); margin-bottom: 28px;
+}
+.project-divider {
+  width: 32px; height: 1px;
+  background: color-mix(in srgb, var(--gold) 30%, transparent);
+  margin-bottom: 24px;
+}
+.project-desc {
+  font-family: 'Libre Caslon Text', 'Noto Serif SC', serif;
+  font-size: 13px; font-weight: 400; line-height: 2;
+  color: var(--paper-dim); max-width: 380px;
+  margin-bottom: 32px;
+}
+.project-footer {
+  display: flex; align-items: center; justify-content: space-between;
+  padding-top: 20px; border-top: 1px solid var(--rule);
+  gap: 12px; flex-wrap: wrap;
+}
+.project-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+.tag {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 9px; letter-spacing: .08em;
+  color: var(--gold-d);
+  background: color-mix(in srgb, var(--gold) 8%, transparent);
+  border: 1px solid color-mix(in srgb, var(--gold) 20%, transparent);
+  border-radius: 2px; padding: 2px 8px;
+}
+.project-cta {
+  font-size: 10px; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--gold-d);
+  display: flex; align-items: center; gap: 8px;
+  transition: color .2s; white-space: nowrap;
+}
+.cta-arrow { transition: transform .2s; }
+.project-entry:hover .project-cta { color: var(--gold); }
+.project-entry:hover .cta-arrow { transform: translateX(4px); }
+
+/* ── Footer ── */
+footer {
+  border-top: 1px solid var(--rule);
+  padding: 28px 52px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.foot-back {
+  font-size: 11px; letter-spacing: .1em;
+  color: var(--dim); transition: color .2s;
+}
+.foot-back:hover { color: var(--paper); }
+.foot-copy { font-size: 9px; letter-spacing: .12em; color: var(--muted); }
+
+/* ── Responsive ── */
+@media (max-width: 860px) {
+  .project-entry, .project-entry:nth-child(even) {
+    grid-template-columns: 1fr;
+    direction: ltr;
+  }
+  .project-visual-col { padding: 48px; min-height: 280px; }
+  .project-info-col {
+    padding: 40px 32px;
+    border-left: none;
+    border-top: 1px solid var(--rule);
+  }
+  .project-entry:nth-child(even) .project-info-col {
+    border-right: none;
+    border-top: 1px solid var(--rule);
+  }
+  nav { padding: 0 24px; }
+  .hero { padding: 0 24px 72px; }
+  footer { padding: 24px; }
+}
+</style>
+
+<script is:inline>
+function updateIcon(isDark) {
+  document.getElementById('iconSun').style.display  = isDark ? 'block' : 'none';
+  document.getElementById('iconMoon').style.display = isDark ? 'none'  : 'block';
+}
+function toggleTheme() {
+  var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  var next = isDark ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', next);
+  localStorage.setItem('site-theme', next);
+  updateIcon(next === 'dark');
+}
+(function () {
+  var saved = localStorage.getItem('site-theme') || 'light';
+  updateIcon(saved === 'dark');
+}());
+</script>
+
+</Base>

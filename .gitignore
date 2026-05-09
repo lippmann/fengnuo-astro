@@ -3,3 +3,6 @@ dist/
 .astro/
 .env
 .DS_Store
+.vercel/
+_temp/
+*\ (Copia\ en\ conflicto*

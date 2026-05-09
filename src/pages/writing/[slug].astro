@@ -1,0 +1,240 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const articles = await getCollection('writing');
+  return articles.map(art => ({
+    params: { slug: art.slug },
+    props: { art },
+  }));
+}
+
+const { art } = Astro.props;
+const { Content } = await art.render();
+
+function formatDateFull(d: Date) {
+  return `${d.getFullYear()} 年 ${d.getMonth() + 1} 月 ${d.getDate()} 日`;
+}
+---
+
+<Base title={`${art.data.title} · 冯诺`} description={art.data.description ?? ''}>
+
+<nav>
+  <a class="nav-home" href="/">冯诺</a>
+  <ul class="nav-links">
+    <li><a href="/translations">译的书</a></li>
+    <li><a href="/writing" class="here">写的文</a></li>
+    <li><a href="/projects">编的程</a></li>
+    <li><a href="/tweets">碎的念</a></li>
+  </ul>
+  <button class="theme-toggle" id="themeBtn" onclick="toggleTheme()" aria-label="切换主题">
+    <svg id="iconSun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="display:none">
+      <circle cx="12" cy="12" r="4"/>
+      <line x1="12" y1="2" x2="12" y2="4"/>
+      <line x1="12" y1="20" x2="12" y2="22"/>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+      <line x1="2" y1="12" x2="4" y2="12"/>
+      <line x1="20" y1="12" x2="22" y2="12"/>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+    </svg>
+    <svg id="iconMoon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+    </svg>
+  </button>
+</nav>
+
+<article class="article-page">
+  <header class="article-header">
+    <div class="article-meta">
+      <a href="/writing" class="meta-back">← 写的文</a>
+      <span class="meta-sep">·</span>
+      <span class="meta-media">{art.data.media}</span>
+      <span class="meta-sep">·</span>
+      <span class="meta-date">{formatDateFull(art.data.date)}</span>
+    </div>
+    <h1 class="article-title">{art.data.title}</h1>
+    {art.data.description && (
+      <p class="article-lead">{art.data.description}</p>
+    )}
+    <div class="article-rule"></div>
+  </header>
+
+  <div class="article-content">
+    <Content />
+  </div>
+
+  <footer class="article-footer">
+    <a href="/writing" class="footer-back">← 返回写的文</a>
+  </footer>
+</article>
+
+</Base>
+
+<style>
+/* ── Nav ── */
+nav {
+  position: sticky; top: 0; z-index: 50;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 48px; height: 60px;
+  background: var(--nav-gradient);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--rule);
+}
+.nav-home {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 15px; font-weight: 700;
+  color: var(--paper); letter-spacing: .02em;
+}
+.nav-links {
+  display: flex; gap: 32px; list-style: none;
+}
+.nav-links a {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 12px; font-weight: 400; letter-spacing: .18em;
+  text-transform: uppercase; color: var(--muted);
+  transition: color .2s;
+}
+.nav-links a:hover, .nav-links a.here { color: var(--gold); }
+.theme-toggle {
+  background: none; border: none; cursor: pointer;
+  color: var(--muted); padding: 6px; display: flex;
+  transition: color .2s;
+}
+.theme-toggle:hover { color: var(--paper); }
+.theme-toggle svg { width: 17px; height: 17px; }
+
+/* ── Article page ── */
+.article-page {
+  max-width: 720px; margin: 0 auto;
+  padding: 64px 48px 96px;
+}
+
+.article-header { margin-bottom: 48px; }
+
+.article-meta {
+  display: flex; align-items: center; gap: 10px;
+  margin-bottom: 24px;
+  font-family: 'Noto Serif SC', serif;
+  font-size: 11px; font-weight: 400; letter-spacing: .14em;
+  color: var(--muted);
+}
+.meta-back {
+  color: var(--gold); transition: opacity .2s;
+}
+.meta-back:hover { opacity: .7; }
+.meta-sep { opacity: .4; }
+
+.article-title {
+  font-family: 'Noto Serif SC', serif;
+  font-size: clamp(26px, 5vw, 40px);
+  font-weight: 700; line-height: 1.3;
+  color: var(--paper); margin-bottom: 16px;
+  letter-spacing: .02em;
+}
+.article-lead {
+  font-family: 'Libre Caslon Text', 'Noto Serif SC', serif;
+  font-size: 16px; font-weight: 400; line-height: 1.9;
+  color: var(--dim); margin-bottom: 28px;
+}
+.article-rule { width: 36px; height: 1px; background: var(--gold); opacity: .4; }
+
+/* ── Content typography ── */
+.article-content {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 15px; font-weight: 300; line-height: 2.0;
+  color: var(--paper);
+}
+.article-content :global(h1),
+.article-content :global(h2),
+.article-content :global(h3) {
+  font-weight: 700; margin: 2em 0 .8em;
+  color: var(--paper);
+}
+.article-content :global(h1) { font-size: 22px; }
+.article-content :global(h2) { font-size: 18px; }
+.article-content :global(h3) { font-size: 16px; }
+.article-content :global(p) { margin: 0 0 1.4em; }
+.article-content :global(strong) { font-weight: 500; color: var(--paper); }
+.article-content :global(em) { font-style: italic; color: var(--dim); }
+.article-content :global(blockquote) {
+  border-left: 2px solid var(--gold);
+  padding-left: 20px; margin: 1.5em 0;
+  color: var(--dim); font-style: italic;
+}
+.article-content :global(img) {
+  max-width: 100%; border-radius: 2px;
+  display: block; margin: 2em auto;
+  opacity: .9;
+}
+.article-content :global(hr) {
+  border: none; border-top: 1px solid var(--rule);
+  margin: 2.5em 0;
+}
+.article-content :global(a) {
+  color: var(--gold-d); text-decoration: underline;
+  text-underline-offset: 3px; opacity: .85;
+  transition: opacity .2s;
+}
+.article-content :global(a:hover) { opacity: 1; }
+
+/* hide duplicate title headings (some articles repeat title as h1 or h2) */
+.article-content :global(h1:first-child),
+.article-content :global(h2:first-child) { margin-top: 0; }
+
+/* ── Bilibili embed ── */
+.article-content :global(.bili-embed) {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%;
+  margin: 0 0 2em;
+  background: var(--surface);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.article-content :global(.bili-embed iframe) {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* ── Footer ── */
+.article-footer {
+  margin-top: 72px;
+  padding-top: 28px;
+  border-top: 1px solid var(--rule);
+}
+.footer-back {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 12px; font-weight: 400; letter-spacing: .14em;
+  color: var(--gold); transition: opacity .2s;
+}
+.footer-back:hover { opacity: .7; }
+
+@media (max-width: 640px) {
+  nav { padding: 0 20px; }
+  .article-page { padding: 40px 20px 64px; }
+}
+</style>
+
+<script is:inline>
+function updateIcon(isDark) {
+  document.getElementById('iconSun').style.display  = isDark ? 'block' : 'none';
+  document.getElementById('iconMoon').style.display = isDark ? 'none'  : 'block';
+}
+function toggleTheme() {
+  var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  var next = isDark ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', next);
+  localStorage.setItem('site-theme', next);
+  updateIcon(next === 'dark');
+}
+(function () {
+  var saved = localStorage.getItem('site-theme') || 'light';
+  updateIcon(saved === 'dark');
+}());
+</script>

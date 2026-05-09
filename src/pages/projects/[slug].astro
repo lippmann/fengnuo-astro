@@ -1,0 +1,544 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const projects = await getCollection('projects');
+  return projects.map(p => ({ params: { slug: p.slug }, props: { project: p } }));
+}
+
+const { project } = Astro.props;
+const { Content } = await project.render();
+const { title, subtitle, type, year, link, github, tags, icon, screenshots, features, steps, description } = project.data;
+---
+
+<Base title={`${title} · 编的程 · 冯诺`} description={description}>
+
+<nav>
+  <a class="nav-home" href="/">冯诺</a>
+  <ul class="nav-links">
+    <li><a href="/translations">译的书</a></li>
+    <li><a href="/writing">写的文</a></li>
+    <li><a href="/projects" class="here">编的程</a></li>
+    <li><a href="/tweets">碎的念</a></li>
+  </ul>
+  <button class="theme-toggle" id="themeBtn" onclick="toggleTheme()" aria-label="切换主题">
+    <svg id="iconSun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="display:none">
+      <circle cx="12" cy="12" r="4"/>
+      <line x1="12" y1="2" x2="12" y2="4"/><line x1="12" y1="20" x2="12" y2="22"/>
+      <line x1="2" y1="12" x2="4" y2="12"/><line x1="20" y1="12" x2="22" y2="12"/>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+    </svg>
+    <svg id="iconMoon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+    </svg>
+  </button>
+</nav>
+
+<main class="product-page">
+
+  <!-- ══ HERO ══════════════════════════════════════════════ -->
+  <section class="hero">
+    <div class="hero-text">
+      <a class="back-link" href="/projects">← 编的程</a>
+
+      <div class="product-identity">
+        {icon && <img class="product-icon" src={icon} alt={title} width="56" height="56" />}
+        <div class="product-meta">
+          <span class="meta-type">{type}</span>
+          <span class="meta-dot">·</span>
+          <span class="meta-year">{year}</span>
+        </div>
+      </div>
+
+      <h1 class="product-title">{title}</h1>
+      <p class="product-subtitle">{subtitle}</p>
+
+      <div class="product-tags">
+        {tags.map(t => <span class="tag">{t}</span>)}
+      </div>
+
+      <div class="cta-group">
+        <a class="cta-install" href={link} target="_blank" rel="noopener">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+            <polyline points="7 10 12 15 17 10"/>
+            <line x1="12" y1="15" x2="12" y2="3"/>
+          </svg>
+          安装到 Chrome
+        </a>
+        {github && (
+          <a class="cta-github" href={github} target="_blank" rel="noopener">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/>
+            </svg>
+            GitHub
+          </a>
+        )}
+      </div>
+    </div>
+
+    {screenshots && screenshots.length > 0 && (
+      <div class="hero-screens">
+        {screenshots.map((src, i) => (
+          <div class={`screen-card screen-card--${i}`}>
+            <img src={src} alt={`${title} screenshot`} loading={i === 0 ? 'eager' : 'lazy'} />
+          </div>
+        ))}
+      </div>
+    )}
+  </section>
+
+  <!-- ══ FEATURES ═══════════════════════════════════════════ -->
+  {features && features.length > 0 && (
+    <section class="features-section">
+      <div class="section-label">
+        <span class="label-line"></span>
+        <span class="label-text">核心功能</span>
+      </div>
+      <div class="features-grid">
+        {features.map((f, i) => (
+          <div class="feature-card">
+            <span class="feature-num">{String(i + 1).padStart(2, '0')}</span>
+            <h3 class="feature-title">{f.title}</h3>
+            <p class="feature-desc">{f.desc}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+  )}
+
+  <!-- ══ STEPS ══════════════════════════════════════════════ -->
+  {steps && steps.length > 0 && (
+    <section class="steps-section">
+      <div class="section-label">
+        <span class="label-line"></span>
+        <span class="label-text">使用方法</span>
+      </div>
+      <ol class="steps-list">
+        {steps.map((s, i) => (
+          <li class="step-item">
+            <span class="step-num">{String(i + 1).padStart(2, '0')}</span>
+            <span class="step-text">{s}</span>
+            {i < steps.length - 1 && <span class="step-connector" aria-hidden="true"></span>}
+          </li>
+        ))}
+      </ol>
+    </section>
+  )}
+
+  <!-- ══ STORY ══════════════════════════════════════════════ -->
+  <section class="story-section">
+    <div class="section-label">
+      <span class="label-line"></span>
+      <span class="label-text">制作者的话</span>
+    </div>
+    <div class="story-body">
+      <Content />
+    </div>
+    <span class="story-author">— 冯诺</span>
+  </section>
+
+  <!-- ══ BOTTOM CTA ══════════════════════════════════════════ -->
+  <section class="bottom-cta">
+    <p class="bottom-cta-label">免费 · Chrome 应用商店</p>
+    <a class="cta-install cta-install--large" href={link} target="_blank" rel="noopener">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+        <polyline points="7 10 12 15 17 10"/>
+        <line x1="12" y1="15" x2="12" y2="3"/>
+      </svg>
+      安装到 Chrome
+    </a>
+    <a class="back-link back-link--bottom" href="/projects">← 返回编的程</a>
+  </section>
+
+</main>
+
+</Base>
+
+<style>
+/* ── Nav ── */
+nav {
+  position: sticky; top: 0; z-index: 50;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 48px; height: 60px;
+  background: var(--nav-gradient);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--rule);
+}
+.nav-home {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 15px; font-weight: 700;
+  color: var(--paper); letter-spacing: .02em;
+}
+.nav-links { display: flex; gap: 32px; list-style: none; }
+.nav-links a {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 12px; letter-spacing: .18em;
+  text-transform: uppercase; color: var(--muted);
+  transition: color .2s;
+}
+.nav-links a:hover, .nav-links a.here { color: var(--gold); }
+.theme-toggle {
+  background: none; border: none; cursor: pointer;
+  color: var(--muted); padding: 6px; display: flex; transition: color .2s;
+}
+.theme-toggle:hover { color: var(--paper); }
+.theme-toggle svg { width: 17px; height: 17px; }
+
+/* ── Page shell ── */
+.product-page {
+  max-width: 1080px; margin: 0 auto;
+  padding: 0 48px 0;
+}
+
+/* ── Back link ── */
+.back-link {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px; letter-spacing: .06em;
+  color: var(--muted); display: inline-block;
+  margin-bottom: 36px; margin-top: 48px;
+  transition: color .2s;
+}
+.back-link:hover { color: var(--gold); }
+
+/* ══ HERO ══════════════════════════════════════════════════ */
+.hero {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 72px;
+  align-items: center;
+  padding-bottom: 72px;
+  border-bottom: 1px solid var(--rule);
+  min-height: calc(100vh - 60px);
+}
+
+.hero-text {
+  display: flex; flex-direction: column;
+  animation: fadeUp .6s ease both;
+}
+
+/* identity row: icon + meta */
+.product-identity {
+  display: flex; align-items: center; gap: 14px;
+  margin-bottom: 20px;
+}
+.product-icon {
+  width: 56px; height: 56px;
+  border-radius: 13px;
+  border: 1px solid var(--rule);
+  flex-shrink: 0;
+}
+.product-meta {
+  display: flex; align-items: center; gap: 8px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px; letter-spacing: .04em;
+  color: var(--muted);
+}
+.meta-dot { opacity: .4; }
+
+/* title */
+.product-title {
+  font-family: 'Noto Serif SC', serif;
+  font-size: clamp(52px, 8vw, 88px);
+  font-weight: 900; line-height: 1.0;
+  color: var(--paper); letter-spacing: .01em;
+  margin-bottom: 18px;
+}
+
+/* subtitle */
+.product-subtitle {
+  font-family: 'Libre Caslon Text', 'Noto Serif SC', serif;
+  font-size: 18px; font-weight: 400; line-height: 1.75;
+  color: var(--dim);
+  max-width: 420px;
+  margin-bottom: 28px;
+}
+
+/* tags */
+.product-tags {
+  display: flex; gap: 6px; flex-wrap: wrap;
+  margin-bottom: 40px;
+}
+.tag {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px; letter-spacing: .06em;
+  color: var(--gold);
+  background: color-mix(in srgb, var(--gold) 10%, transparent);
+  border: 1px solid color-mix(in srgb, var(--gold) 28%, transparent);
+  border-radius: 2px; padding: 3px 10px;
+}
+
+/* CTA group */
+.cta-group { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+
+.cta-install {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px; letter-spacing: .06em;
+  font-weight: 400;
+  background: var(--gold); color: var(--bg);
+  border: none; border-radius: 3px;
+  padding: 12px 24px;
+  cursor: pointer; text-decoration: none;
+  transition: opacity .2s, transform .15s;
+}
+.cta-install:hover { opacity: .88; transform: translateY(-1px); }
+
+.cta-install--large {
+  font-size: 13px; padding: 14px 32px;
+}
+
+.cta-github {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px; letter-spacing: .06em;
+  color: var(--dim);
+  border: 1px solid var(--rule);
+  border-radius: 3px; padding: 12px 22px;
+  text-decoration: none; transition: border-color .2s, color .2s;
+}
+.cta-github:hover { border-color: var(--gold); color: var(--gold); }
+
+/* screenshots — right column */
+.hero-screens {
+  position: relative;
+  height: 360px;
+  animation: fadeUp .6s .15s ease both;
+}
+
+.screen-card {
+  position: absolute;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--surface);
+  box-shadow: var(--shadow-sm);
+  transition: transform .3s, box-shadow .3s;
+}
+.screen-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); }
+
+.screen-card--0 {
+  width: 88%; top: 16px; left: 0;
+  z-index: 2;
+}
+.screen-card--1 {
+  width: 80%; bottom: 0; right: 0;
+  z-index: 1;
+  opacity: .85;
+  transform: translateY(12px) translateX(8px);
+}
+.screen-card:hover { z-index: 10; opacity: 1; }
+
+.screen-card img {
+  display: block; width: 100%; height: auto;
+}
+
+/* ══ SHARED SECTION LABEL ════════════════════════════════════ */
+.section-label {
+  display: flex; align-items: center; gap: 14px;
+  margin-bottom: 36px;
+}
+.label-line {
+  display: block; flex-shrink: 0;
+  width: 28px; height: 1px;
+  background: var(--gold); opacity: .5;
+}
+.label-text {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px; letter-spacing: .16em;
+  text-transform: uppercase; color: var(--muted);
+}
+
+/* ══ FEATURES ══════════════════════════════════════════════ */
+.features-section {
+  padding: 72px 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1px;
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  overflow: hidden;
+  background: var(--rule);
+}
+
+.feature-card {
+  background: var(--bg);
+  padding: 28px 28px 32px;
+  transition: background .2s;
+  position: relative;
+}
+.feature-card:hover { background: var(--surface); }
+
+.feature-num {
+  display: block;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px; letter-spacing: .08em;
+  color: var(--gold); margin-bottom: 12px;
+}
+
+.feature-title {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 16px; font-weight: 700;
+  color: var(--paper); line-height: 1.4;
+  margin-bottom: 10px;
+}
+
+.feature-desc {
+  font-family: 'Libre Caslon Text', 'Noto Serif SC', serif;
+  font-size: 13px; line-height: 1.85;
+  color: var(--dim);
+}
+
+/* ══ STEPS ═════════════════════════════════════════════════ */
+.steps-section {
+  padding: 72px 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+.steps-list {
+  list-style: none;
+  display: flex; flex-direction: column; gap: 0;
+  max-width: 640px;
+}
+
+.step-item {
+  display: grid;
+  grid-template-columns: 44px 1fr;
+  gap: 0 16px;
+  position: relative;
+  padding-bottom: 4px;
+}
+
+.step-num {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px; letter-spacing: .08em;
+  color: var(--gold);
+  padding-top: 3px;
+  position: relative; z-index: 1;
+}
+
+.step-text {
+  font-family: 'Libre Caslon Text', 'Noto Serif SC', serif;
+  font-size: 14px; line-height: 1.9;
+  color: var(--dim);
+  padding-bottom: 18px;
+}
+
+/* vertical connector line between steps */
+.step-item:not(:last-child) .step-num::after {
+  content: '';
+  position: absolute;
+  left: 50%; top: 24px;
+  width: 1px;
+  height: calc(100% + 4px);
+  background: var(--rule);
+  transform: translateX(-50%);
+}
+
+/* ══ STORY ══════════════════════════════════════════════════ */
+.story-section {
+  padding: 72px 0;
+  border-bottom: 1px solid var(--rule);
+  max-width: 640px;
+}
+
+.story-body {
+  font-family: 'Libre Caslon Text', 'Noto Serif SC', serif;
+  font-size: 16px; line-height: 2.1;
+  color: var(--dim);
+  font-style: italic;
+  margin-bottom: 24px;
+}
+
+.story-body :global(p) { margin-bottom: 1.2em; }
+.story-body :global(p:last-child) { margin-bottom: 0; }
+
+.story-author {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px; letter-spacing: .1em;
+  color: var(--muted);
+}
+
+/* ══ BOTTOM CTA ═════════════════════════════════════════════ */
+.bottom-cta {
+  padding: 80px 0 80px;
+  display: flex; flex-direction: column;
+  align-items: flex-start; gap: 20px;
+}
+
+.bottom-cta-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px; letter-spacing: .1em;
+  color: var(--muted);
+}
+
+.back-link--bottom {
+  margin-top: 16px; margin-bottom: 0;
+}
+
+/* ══ ANIMATION ══════════════════════════════════════════════ */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ══ RESPONSIVE ═════════════════════════════════════════════ */
+@media (max-width: 768px) {
+  nav { padding: 0 20px; }
+  .product-page { padding: 0 20px 0; }
+
+  .hero {
+    grid-template-columns: 1fr;
+    min-height: auto;
+    padding-bottom: 48px;
+    gap: 0;
+  }
+
+  .hero-screens {
+    height: 260px;
+    margin-top: 0;
+    margin-bottom: 48px;
+    order: -1;
+  }
+
+  .back-link { margin-top: 32px; }
+
+  .screen-card--0 { width: 84%; }
+  .screen-card--1 { width: 72%; }
+
+  .product-title { font-size: clamp(44px, 12vw, 72px); }
+
+  .features-grid { grid-template-columns: 1fr; }
+
+  .features-section,
+  .steps-section,
+  .story-section { padding: 48px 0; }
+
+  .bottom-cta { padding: 48px 0 60px; }
+}
+</style>
+
+<script is:inline>
+function updateIcon(isDark) {
+  document.getElementById('iconSun').style.display  = isDark ? 'block' : 'none';
+  document.getElementById('iconMoon').style.display = isDark ? 'none'  : 'block';
+}
+function toggleTheme() {
+  var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  var next = isDark ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', next);
+  localStorage.setItem('site-theme', next);
+  updateIcon(next === 'dark');
+}
+(function () {
+  var saved = localStorage.getItem('site-theme') || 'light';
+  updateIcon(saved === 'dark');
+}());
+</script>
