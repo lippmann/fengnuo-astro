@@ -225,13 +225,13 @@ import Base from '../layouts/Base.astro';
 .social-link {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  padding: 6px 12px 6px 10px;
+  padding: 6px 12px;
   border: 1px solid var(--rule);
   border-radius: 2px;
+  font-family: 'Libre Baskerville', serif;
   font-size: 10px;
   font-weight: 400;
-  letter-spacing: .08em;
+  letter-spacing: .06em;
   color: var(--dim);
   text-transform: uppercase;
   transition: border-color .2s, color .2s, background .2s;
@@ -241,14 +241,6 @@ import Base from '../layouts/Base.astro';
   color: var(--gold);
   background: color-mix(in srgb, var(--gold) 6%, transparent);
 }
-.social-icon {
-  width: 13px;
-  height: 13px;
-  flex-shrink: 0;
-  opacity: .7;
-  transition: opacity .2s;
-}
-.social-link:hover .social-icon { opacity: 1; }
 
 .hero-right {
   display: grid;
