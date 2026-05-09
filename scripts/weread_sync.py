@@ -77,28 +77,35 @@ def _absorb_set_cookie(headers: dict):
 
 
 def _refresh_skey():
-    """Hit the login page to trigger a set-cookie with a fresh wr_skey."""
-    try:
-        req = urllib.request.Request(
-            "https://weread.qq.com/web/shelf",
-            method="GET",
-            headers={
-                "Cookie":          _cookie_header(),
-                "User-Agent":      (
-                    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
-                    "AppleWebKit/537.36 (KHTML, like Gecko) "
-                    "Chrome/124.0.0.0 Safari/537.36"
-                ),
-                "Referer":         "https://weread.qq.com/",
-                "Accept":          "text/html,application/xhtml+xml,*/*",
-                "Accept-Language": "zh-CN,zh;q=0.9",
-            }
-        )
-        with urllib.request.urlopen(req, timeout=15, context=_SSL) as r:
-            _absorb_set_cookie(dict(r.headers))
-        print(f"[weread] skey refresh done, wr_skey={_cookie_jar.get('wr_skey','?')[:6]}…")
-    except Exception as e:
-        print(f"[weread] skey refresh warning: {e}")
+    """Hit i.weread.qq.com to establish a session there and absorb its cookies."""
+    # First warm up the main site so wr_skey is fresh
+    for url, label in [
+        ("https://weread.qq.com/web/shelf", "main shelf"),
+        ("https://i.weread.qq.com/shelf/sync?synckey=0&teenmode=0&album=1&onlyBookid=0", "i-shelf"),
+    ]:
+        try:
+            req = urllib.request.Request(
+                url,
+                method="GET",
+                headers={
+                    "Cookie":          _cookie_header(),
+                    "User-Agent":      (
+                        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+                        "AppleWebKit/537.36 (KHTML, like Gecko) "
+                        "Chrome/124.0.0.0 Safari/537.36"
+                    ),
+                    "Referer":         "https://weread.qq.com/",
+                    "Accept":          "application/json, text/html, */*",
+                    "Accept-Language": "zh-CN,zh;q=0.9",
+                    "Origin":          "https://weread.qq.com",
+                }
+            )
+            with urllib.request.urlopen(req, timeout=15, context=_SSL) as r:
+                _absorb_set_cookie(dict(r.headers))
+                r.read()  # drain body
+            print(f"[weread] session warm-up ({label}) done")
+        except Exception as e:
+            print(f"[weread] session warm-up warning ({label}): {e}")
 
 
 def _fetch_json(url: str) -> dict:
