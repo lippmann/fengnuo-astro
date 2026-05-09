@@ -1,5 +1,18 @@
 [
   {
+    "id": "douban_486763128",
+    "platform": "douban",
+    "text": "深夜看李翊云的普利策获奖自传《Things in Nature Merely Grow》，突然想起来去年在澳门地铁上看完的是石黑一雄小说《A Pale View of Hills》，也是以女主人公的孩子自杀开篇。还是真实的生活更加残酷。",
+    "images": [
+      "https://img3.doubanio.com/f/shire/e49eca1517424a941871a2667a8957fd6c72d632/pics/new_menu.gif",
+      "https://img9.doubanio.com/icon/up2079635-35.jpg",
+      "https://img9.doubanio.com/icon/up2079635-35.jpg"
+    ],
+    "date": "2026-05-09",
+    "timestamp": 1778298404,
+    "url": "https://www.douban.com/topic/486763128/"
+  },
+  {
     "id": "douban_486704946",
     "platform": "douban",
     "text": "自从开始 vibe coding 之后，越来越懒了，现在连鼠标都懒得动，想让 Claude 代劳，结果它开启吐槽模式：哥，真的就点击五下就行了。",
