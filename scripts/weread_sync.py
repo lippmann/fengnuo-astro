@@ -305,8 +305,8 @@ def fetch_posts(cookie: str, days: int = DEFAULT_DAYS) -> list[dict]:
 
     print(f"[weread] found {len(books)} books on shelf")
 
-    # 2. For each book, fetch highlights and notes
-    for book in books:
+    # 2. For each book, fetch highlights and notes (cap at MAX_BOOKS most recent)
+    for book in books[:MAX_BOOKS]:
         book_id    = book.get("bookId", "")
         book_title = book.get("title",  book_id)
         book_author = book.get("author", "")
