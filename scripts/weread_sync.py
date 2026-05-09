@@ -266,7 +266,8 @@ def fetch_posts(cookie: str, days: int = DEFAULT_DAYS) -> list[dict]:
     except urllib.error.HTTPError as e:
         if e.code in (401, 403):
             print(f"[weread] ERROR {e.code}: cookie is missing or expired.")
-            print("[weread]   Refresh the cookie from weread.qq.com and update WEREAD_COOKIE.")
+            print("[weread]   Go to weread.qq.com → DevTools → Application → Cookies")
+            print("[weread]   Copy all wr_* cookie values and update WEREAD_COOKIE secret.")
         else:
             print(f"[weread] ERROR fetching shelf: {e}")
         return []
