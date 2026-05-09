@@ -52,7 +52,7 @@ html { scroll-behavior: smooth; }
 body {
   background: var(--bg);
   color: var(--paper);
-  font-family: 'IBM Plex Mono', monospace;
+  font-family: 'Libre Baskerville', 'Noto Serif SC', serif;
   -webkit-font-smoothing: antialiased;
   transition: background .25s, color .25s;
 }
