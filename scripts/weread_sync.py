@@ -31,8 +31,9 @@ BASE_URL          = "https://i.weread.qq.com"
 API_BASE_URL      = "https://weread.qq.com"
 BOOK_URL_TEMPLATE = "https://weread.qq.com/web/bookDetail/{bookId}"
 
-DEFAULT_DAYS      = 30   # look back this many days by default
-REQUEST_DELAY     = 0.5  # seconds between API calls (be polite)
+DEFAULT_DAYS      = 90   # look back this many days by default
+REQUEST_DELAY     = 0.3  # seconds between API calls
+MAX_BOOKS         = 50   # only process the first N books (most recently read)
 
 # ── TLS helper (same pattern as sync_douban.py) ──────────────────────────────
 
