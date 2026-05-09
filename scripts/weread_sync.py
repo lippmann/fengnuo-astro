@@ -43,13 +43,44 @@ _SSL.verify_mode    = ssl.CERT_NONE
 
 # ── HTTP helper ──────────────────────────────────────────────────────────────
 
-def _fetch_json(path: str, cookie: str) -> dict:
-    """GET BASE_URL+path, return parsed JSON.  Raises on HTTP/network error."""
-    url = BASE_URL + path
+# Mutable cookie jar — refreshed from set-cookie response headers
+_cookie_jar: dict[str, str] = {}
+
+
+def _parse_cookie_string(cookie_str: str) -> dict[str, str]:
+    """Parse 'k=v; k2=v2' cookie string into dict."""
+    result = {}
+    for part in cookie_str.split(";"):
+        part = part.strip()
+        if "=" in part:
+            k, _, v = part.partition("=")
+            result[k.strip()] = v.strip()
+    return result
+
+
+def _cookie_header() -> str:
+    return "; ".join(f"{k}={v}" for k, v in _cookie_jar.items())
+
+
+def _absorb_set_cookie(headers: dict):
+    """Update _cookie_jar from a set-cookie response header."""
+    sc = headers.get("set-cookie") or headers.get("Set-Cookie") or ""
+    if not sc:
+        return
+    # set-cookie may be comma-joined multiple values
+    for directive in sc.split(","):
+        kv = directive.strip().split(";")[0].strip()
+        if "=" in kv:
+            k, _, v = kv.partition("=")
+            _cookie_jar[k.strip()] = v.strip()
+
+
+def _fetch_json(url: str) -> dict:
+    """GET url with current cookie jar, absorb any cookie refresh, return JSON."""
     req = urllib.request.Request(url, headers={
-        "Cookie":          cookie,
+        "Cookie":          _cookie_header(),
         "User-Agent":      (
-            "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
             "AppleWebKit/537.36 (KHTML, like Gecko) "
             "Chrome/124.0.0.0 Safari/537.36"
         ),
@@ -60,7 +91,12 @@ def _fetch_json(path: str, cookie: str) -> dict:
     })
     with urllib.request.urlopen(req, timeout=15, context=_SSL) as r:
         raw = r.read().decode("utf-8", errors="replace")
-    return json.loads(raw)
+        _absorb_set_cookie(dict(r.headers))
+    data = json.loads(raw)
+    # WeRead returns errcode -2012 for session expiry
+    if isinstance(data, dict) and data.get("errcode") in (-2012, -2010):
+        raise urllib.error.HTTPError(url, 401, f"WeRead session expired (errcode={data['errcode']})", {}, None)
+    return data
 
 
 # ── WeRead API calls ─────────────────────────────────────────────────────────
