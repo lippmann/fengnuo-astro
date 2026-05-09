@@ -130,35 +130,11 @@ import Base from '../layouts/Base.astro';
 </Base>
 
 <style>
-nav {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 60px;
-  height: 64px;
-  border-bottom: 1px solid var(--rule);
-}
-.nav-logo {
-  font-family: 'Noto Serif SC', serif;
-  font-size: 16px;
-  font-weight: 700;
-  letter-spacing: .04em;
-  color: var(--paper);
-}
-.nav-logo span { color: var(--gold); }
-.nav-links {
-  display: flex;
-  gap: 32px;
-  list-style: none;
-}
-.nav-links a {
-  font-size: 11px;
-  letter-spacing: .12em;
-  color: var(--dim);
-  transition: color .15s;
-}
-.nav-links a:hover { color: var(--paper); }
 .theme-toggle {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  z-index: 99;
   background: none;
   border: none;
   cursor: pointer;
@@ -177,7 +153,7 @@ nav {
   grid-template-columns: 1fr 1fr;
   gap: 0;
   align-items: stretch;
-  height: calc(100vh - 64px);
+  height: 100vh;
   border-bottom: 1px solid var(--rule);
 }
 .hero-left {
