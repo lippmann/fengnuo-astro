@@ -282,7 +282,7 @@ def fetch_posts(cookie: str, days: int = DEFAULT_DAYS) -> list[dict]:
     if not cookie or not cookie.strip():
         print("[weread] ERROR: WEREAD_COOKIE is not set.")
         print("[weread]   Open weread.qq.com in Chrome, sign in, then copy the")
-        print("[weread]   full Cookie header from any /i.weread.qq.com/ XHR request")
+        print("[weread]   full Cookie header from any weread.qq.com XHR request")
         print("[weread]   in DevTools → Network tab, and export it as WEREAD_COOKIE.")
         return []
 
