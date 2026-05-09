@@ -130,6 +130,8 @@ def _get_shelf(cookie: str) -> list[dict]:
     """Return list of book dicts using the /api/user/notebook endpoint (same as obsidian plugin)."""
     global _cookie_jar
     _cookie_jar = _parse_cookie_string(cookie)
+    # Refresh wr_skey via a browser-like page request before hitting the API
+    _refresh_skey()
     data = _fetch_json(f"{API_BASE_URL}/api/user/notebook")
     books = []
     for item in data.get("books", []):
