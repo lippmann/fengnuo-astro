@@ -154,7 +154,7 @@ def _get_shelf(cookie: str) -> list[dict]:
 def _get_bookmarks(book_id: str, cookie: str) -> list[dict]:
     """Return raw bookmark (highlight) list for one book."""
     try:
-        data = _fetch_json(f"{BASE_URL}/book/bookmarklist?bookId={book_id}")
+        data = _fetch_json(f"{BASE_URL}/web/book/bookmarklist?bookId={book_id}")
         return data.get("updated", []) or data.get("bookmarks", [])
     except Exception as e:
         print(f"[weread]     bookmark fetch failed for {book_id}: {e}")
