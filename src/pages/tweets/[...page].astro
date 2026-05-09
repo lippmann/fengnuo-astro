@@ -72,7 +72,7 @@ function proxyImg(url: string) {
           </div>
           <div class="entry-body">
             <div class="entry-meta">
-              <span class="entry-platform">{item.platform === 'twitter' ? 'X' : 'Douban'}</span>
+              <span class="entry-platform">{item.platform === 'twitter' ? 'X' : item.platform === 'weread' ? 'WeRead' : 'Douban'}</span>
               <a class="entry-source" href={item.url} target="_blank" rel="noopener">查看原文</a>
               <span class="entry-date">{formatDate(item.date)}</span>
             </div>
