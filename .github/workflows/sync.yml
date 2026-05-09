@@ -21,6 +21,7 @@ jobs:
       - name: Sync all social platforms
         env:
           DOUBAN_COOKIE: ${{ secrets.DOUBAN_COOKIE }}
+          WEREAD_COOKIE: ${{ secrets.WEREAD_COOKIE }}
           THREADS_TOKEN: ${{ secrets.THREADS_TOKEN }}
           INSTAGRAM_TOKEN: ${{ secrets.INSTAGRAM_TOKEN }}
           INSTAGRAM_USER_ID: ${{ secrets.INSTAGRAM_USER_ID }}
