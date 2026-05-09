@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>字体预览 · 冯诺</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;700;900&family=IBM+Plex+Mono:ital,wght@0,300;0,400;1,300&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Serif+Display:ital@0;1&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --bg:    #f7faf9;
+  --surface: #eef3f1;
+  --paper: #0a100e;
+  --dim:   #4a5e58;
+  --muted: #8fa49e;
+  --rule:  #d8e4e0;
+  --gold:  #4d8e7a;
+}
+
+[data-theme="dark"] {
+  --bg:    #0a100e;
+  --surface: #111a17;
+  --paper: #e8f0ee;
+  --dim:   #8fa49e;
+  --muted: #4a5e58;
+  --rule:  #1e2e2a;
+  --gold:  #5aab94;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--bg);
+  color: var(--paper);
+  font-family: 'IBM Plex Mono', monospace;
+  -webkit-font-smoothing: antialiased;
+  transition: background .3s, color .3s;
+  padding: 0 0 80px;
+}
+
+/* ── Header ── */
+.page-header {
+  padding: 40px 60px 32px;
+  border-bottom: 1px solid var(--rule);
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 24px;
+}
+.page-header h1 {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--paper);
+  letter-spacing: .02em;
+}
+.page-header p {
+  font-size: 11px;
+  color: var(--muted);
+  letter-spacing: .1em;
+}
+.theme-btn {
+  background: none;
+  border: 1px solid var(--rule);
+  border-radius: 2px;
+  cursor: pointer;
+  color: var(--dim);
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  letter-spacing: .1em;
+  padding: 6px 14px;
+  transition: border-color .2s, color .2s;
+}
+.theme-btn:hover { border-color: var(--gold); color: var(--gold); }
+
+/* ── Legend ── */
+.legend {
+  padding: 20px 60px;
+  display: flex;
+  gap: 32px;
+  border-bottom: 1px solid var(--rule);
+}
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 10px;
+  letter-spacing: .1em;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+.legend-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--gold);
+  opacity: .5;
+}
+.legend-dot.active { opacity: 1; }
+
+/* ── Font sections ── */
+.font-section {
+  border-bottom: 1px solid var(--rule);
+  padding: 56px 60px;
+  position: relative;
+  transition: background .2s;
+}
+.font-section:hover { background: var(--surface); }
+
+.font-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 36px;
+}
+.font-num {
+  font-size: 10px;
+  letter-spacing: .2em;
+  color: var(--gold);
+  font-family: 'IBM Plex Mono', monospace;
+}
+.font-name-label {
+  font-size: 11px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--dim);
+  font-family: 'IBM Plex Mono', monospace;
+}
+.font-sep {
+  width: 24px;
+  height: 1px;
+  background: var(--rule);
+  display: inline-block;
+}
+.font-desc {
+  font-size: 10px;
+  color: var(--muted);
+  font-family: 'IBM Plex Mono', monospace;
+  letter-spacing: .06em;
+}
+
+/* ── Preview block ── */
+.preview-block {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: start;
+}
+
+.preview-left {}
+
+.eyebrow {
+  font-size: 10px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--dim);
+  font-weight: 300;
+  margin-bottom: 20px;
+}
+
+.hero-name {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 72px;
+  font-weight: 900;
+  line-height: 1.0;
+  color: var(--paper);
+  margin-bottom: 4px;
+}
+.hero-name .dot { color: var(--gold); }
+
+.tagline {
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.9;
+  color: var(--dim);
+  max-width: 380px;
+  margin-top: 28px;
+  padding-top: 28px;
+  border-top: 1px solid var(--rule);
+}
+.tagline p { margin-bottom: 10px; }
+.tagline p:last-child { margin-bottom: 0; }
+
+.nav-sample {
+  display: flex;
+  gap: 24px;
+  margin-top: 28px;
+}
+.nav-sample a {
+  font-size: 11px;
+  letter-spacing: .12em;
+  color: var(--dim);
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: color .15s;
+}
+.nav-sample a:hover { color: var(--gold); }
+.nav-sample a.here { color: var(--paper); }
+
+/* ── Right side: body text sample ── */
+.preview-right {
+  padding-left: 48px;
+  border-left: 1px solid var(--rule);
+}
+.sample-label {
+  font-size: 9px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 16px;
+  font-family: 'IBM Plex Mono', monospace;
+}
+.sample-heading {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--paper);
+  line-height: 1.2;
+  margin-bottom: 16px;
+}
+.sample-subheading {
+  font-size: 13px;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--dim);
+  margin-bottom: 20px;
+  line-height: 1.6;
+}
+.sample-body {
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--dim);
+  line-height: 1.85;
+  max-width: 380px;
+}
+.sample-meta {
+  margin-top: 20px;
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+.sample-year {
+  font-size: 10px;
+  letter-spacing: .14em;
+  color: var(--muted);
+  font-family: 'IBM Plex Mono', monospace;
+}
+.sample-tag {
+  font-size: 9px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--gold);
+  border: 1px solid var(--rule);
+  padding: 3px 8px;
+  border-radius: 1px;
+  font-family: 'IBM Plex Mono', monospace;
+}
+
+/* font-specific overrides */
+.f-libre .eyebrow,
+.f-libre .nav-sample a,
+.f-libre .sample-label,
+.f-libre .sample-year,
+.f-libre .sample-tag { font-family: 'Libre Baskerville', serif; letter-spacing: .04em; }
+.f-libre .tagline,
+.f-libre .sample-heading,
+.f-libre .sample-subheading,
+.f-libre .sample-body { font-family: 'Libre Baskerville', serif; }
+
+.f-playfair .eyebrow,
+.f-playfair .nav-sample a,
+.f-playfair .sample-label,
+.f-playfair .sample-year,
+.f-playfair .sample-tag { font-family: 'Playfair Display', serif; letter-spacing: .04em; }
+.f-playfair .tagline,
+.f-playfair .sample-heading,
+.f-playfair .sample-subheading,
+.f-playfair .sample-body { font-family: 'Playfair Display', serif; }
+.f-playfair .sample-heading { font-weight: 900; }
+
+.f-dm .eyebrow,
+.f-dm .nav-sample a,
+.f-dm .sample-label,
+.f-dm .sample-year,
+.f-dm .sample-tag { font-family: 'DM Serif Display', serif; letter-spacing: .04em; }
+.f-dm .tagline,
+.f-dm .sample-heading,
+.f-dm .sample-subheading,
+.f-dm .sample-body { font-family: 'DM Serif Display', serif; }
+
+.f-cormorant .eyebrow,
+.f-cormorant .nav-sample a,
+.f-cormorant .sample-label,
+.f-cormorant .sample-year,
+.f-cormorant .sample-tag { font-family: 'Cormorant Garamond', serif; letter-spacing: .06em; }
+.f-cormorant .tagline,
+.f-cormorant .sample-heading,
+.f-cormorant .sample-subheading,
+.f-cormorant .sample-body { font-family: 'Cormorant Garamond', serif; }
+.f-cormorant .sample-heading { font-size: 34px; font-weight: 600; }
+.f-cormorant .sample-body { font-size: 16px; }
+
+.f-mono .eyebrow,
+.f-mono .nav-sample a,
+.f-mono .sample-label,
+.f-mono .sample-year,
+.f-mono .sample-tag { font-family: 'IBM Plex Mono', monospace; }
+.f-mono .tagline,
+.f-mono .sample-heading,
+.f-mono .sample-subheading,
+.f-mono .sample-body { font-family: 'IBM Plex Mono', monospace; }
+.f-mono .sample-heading { font-size: 22px; font-weight: 400; }
+
+/* current tag */
+.current-badge {
+  display: inline-block;
+  font-size: 9px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--gold);
+  border: 1px solid var(--gold);
+  padding: 2px 7px;
+  border-radius: 1px;
+  margin-left: 10px;
+  font-family: 'IBM Plex Mono', monospace;
+  opacity: .7;
+}
+
+@media (max-width: 900px) {
+  .page-header, .legend, .font-section { padding-left: 24px; padding-right: 24px; }
+  .preview-block { grid-template-columns: 1fr; }
+  .preview-right { padding-left: 0; border-left: none; border-top: 1px solid var(--rule); padding-top: 32px; margin-top: 32px; }
+  .hero-name { font-size: 52px; }
+}
+</style>
+</head>
+<body>
+
+<header class="page-header">
+  <div>
+    <h1>字体对比预览</h1>
+    <p style="margin-top:6px">使用网站真实内容 · 青瓷配色</p>
+  </div>
+  <button class="theme-btn" onclick="toggleTheme()" id="themeBtn">切换深色</button>
+</header>
+
+<div class="legend">
+  <div class="legend-item"><span class="legend-dot active"></span>左栏：首页排版效果</div>
+  <div class="legend-item"><span class="legend-dot active"></span>右栏：文章列表排版效果</div>
+</div>
+
+<!-- 01 IBM Plex Mono (current) -->
+<section class="font-section f-mono">
+  <div class="font-tag">
+    <span class="font-num">01</span>
+    <span class="font-sep"></span>
+    <span class="font-name-label">IBM Plex Mono</span>
+    <span class="current-badge">当前</span>
+    <span class="font-sep"></span>
+    <span class="font-desc">等宽字体 · 工程感 · 独特个性</span>
+  </div>
+  <div class="preview-block">
+    <div class="preview-left">
+      <p class="eyebrow">译者 · 写作者 · Vibe Coder</p>
+      <div class="hero-name">冯诺<span class="dot">.</span></div>
+      <div class="tagline">
+        <p>职业键盘侠。写过百万字的文，译过十几本书，现在大厂 AI 口从事吹牛的工种</p>
+        <p>语言爱好者。英语 CATTI 二级译者、日语 N1</p>
+      </div>
+      <nav class="nav-sample">
+        <a href="#" class="here">译的书</a>
+        <a href="#">写的文</a>
+        <a href="#">编的程</a>
+        <a href="#">碎的念</a>
+      </nav>
+    </div>
+    <div class="preview-right">
+      <p class="sample-label">Writing · Sample</p>
+      <h2 class="sample-heading">重读卡尔维诺</h2>
+      <p class="sample-subheading">On Rereading Calvino — Notes on Invisible Cities</p>
+      <p class="sample-body">有些书是第一遍读不懂的，但你仍然会感到某种震颤。卡尔维诺写的不是城市，是记忆与欲望本身。十年后重读，才发现那震颤一直埋在那里，等你长大一点。</p>
+      <div class="sample-meta">
+        <span class="sample-year">2024 · 05 · 12</span>
+        <span class="sample-tag">Essay</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 02 Libre Baskerville -->
+<section class="font-section f-libre">
+  <div class="font-tag">
+    <span class="font-num">02</span>
+    <span class="font-sep"></span>
+    <span class="font-name-label">Libre Baskerville</span>
+    <span class="font-sep"></span>
+    <span class="font-desc">传统衬线 · 书卷气 · 与宋体气质最近</span>
+  </div>
+  <div class="preview-block">
+    <div class="preview-left">
+      <p class="eyebrow">译者 · 写作者 · Vibe Coder</p>
+      <div class="hero-name">冯诺<span class="dot">.</span></div>
+      <div class="tagline">
+        <p>职业键盘侠。写过百万字的文，译过十几本书，现在大厂 AI 口从事吹牛的工种</p>
+        <p>语言爱好者。英语 CATTI 二级译者、日语 N1</p>
+      </div>
+      <nav class="nav-sample">
+        <a href="#" class="here">译的书</a>
+        <a href="#">写的文</a>
+        <a href="#">编的程</a>
+        <a href="#">碎的念</a>
+      </nav>
+    </div>
+    <div class="preview-right">
+      <p class="sample-label">Writing · Sample</p>
+      <h2 class="sample-heading">重读卡尔维诺</h2>
+      <p class="sample-subheading">On Rereading Calvino — Notes on Invisible Cities</p>
+      <p class="sample-body">有些书是第一遍读不懂的，但你仍然会感到某种震颤。卡尔维诺写的不是城市，是记忆与欲望本身。十年后重读，才发现那震颤一直埋在那里，等你长大一点。</p>
+      <div class="sample-meta">
+        <span class="sample-year">2024 · 05 · 12</span>
+        <span class="sample-tag">Essay</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 03 Playfair Display -->
+<section class="font-section f-playfair">
+  <div class="font-tag">
+    <span class="font-num">03</span>
+    <span class="font-sep"></span>
+    <span class="font-name-label">Playfair Display</span>
+    <span class="font-sep"></span>
+    <span class="font-desc">杂志感衬线 · 粗细对比强 · 标题震撼</span>
+  </div>
+  <div class="preview-block">
+    <div class="preview-left">
+      <p class="eyebrow">译者 · 写作者 · Vibe Coder</p>
+      <div class="hero-name">冯诺<span class="dot">.</span></div>
+      <div class="tagline">
+        <p>职业键盘侠。写过百万字的文，译过十几本书，现在大厂 AI 口从事吹牛的工种</p>
+        <p>语言爱好者。英语 CATTI 二级译者、日语 N1</p>
+      </div>
+      <nav class="nav-sample">
+        <a href="#" class="here">译的书</a>
+        <a href="#">写的文</a>
+        <a href="#">编的程</a>
+        <a href="#">碎的念</a>
+      </nav>
+    </div>
+    <div class="preview-right">
+      <p class="sample-label">Writing · Sample</p>
+      <h2 class="sample-heading">重读卡尔维诺</h2>
+      <p class="sample-subheading">On Rereading Calvino — Notes on Invisible Cities</p>
+      <p class="sample-body">有些书是第一遍读不懂的，但你仍然会感到某种震颤。卡尔维诺写的不是城市，是记忆与欲望本身。十年后重读，才发现那震颤一直埋在那里，等你长大一点。</p>
+      <div class="sample-meta">
+        <span class="sample-year">2024 · 05 · 12</span>
+        <span class="sample-tag">Essay</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 04 DM Serif Display -->
+<section class="font-section f-dm">
+  <div class="font-tag">
+    <span class="font-num">04</span>
+    <span class="font-sep"></span>
+    <span class="font-name-label">DM Serif Display</span>
+    <span class="font-sep"></span>
+    <span class="font-desc">现代衬线 · 略带锐利 · 设计感强</span>
+  </div>
+  <div class="preview-block">
+    <div class="preview-left">
+      <p class="eyebrow">译者 · 写作者 · Vibe Coder</p>
+      <div class="hero-name">冯诺<span class="dot">.</span></div>
+      <div class="tagline">
+        <p>职业键盘侠。写过百万字的文，译过十几本书，现在大厂 AI 口从事吹牛的工种</p>
+        <p>语言爱好者。英语 CATTI 二级译者、日语 N1</p>
+      </div>
+      <nav class="nav-sample">
+        <a href="#" class="here">译的书</a>
+        <a href="#">写的文</a>
+        <a href="#">编的程</a>
+        <a href="#">碎的念</a>
+      </nav>
+    </div>
+    <div class="preview-right">
+      <p class="sample-label">Writing · Sample</p>
+      <h2 class="sample-heading">重读卡尔维诺</h2>
+      <p class="sample-subheading">On Rereading Calvino — Notes on Invisible Cities</p>
+      <p class="sample-body">有些书是第一遍读不懂的，但你仍然会感到某种震颤。卡尔维诺写的不是城市，是记忆与欲望本身。十年后重读，才发现那震颤一直埋在那里，等你长大一点。</p>
+      <div class="sample-meta">
+        <span class="sample-year">2024 · 05 · 12</span>
+        <span class="sample-tag">Essay</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 05 Cormorant Garamond -->
+<section class="font-section f-cormorant">
+  <div class="font-tag">
+    <span class="font-num">05</span>
+    <span class="font-sep"></span>
+    <span class="font-name-label">Cormorant Garamond</span>
+    <span class="font-sep"></span>
+    <span class="font-desc">古典优雅 · 极细笔画 · 文人气最重</span>
+  </div>
+  <div class="preview-block">
+    <div class="preview-left">
+      <p class="eyebrow">译者 · 写作者 · Vibe Coder</p>
+      <div class="hero-name">冯诺<span class="dot">.</span></div>
+      <div class="tagline">
+        <p>职业键盘侠。写过百万字的文，译过十几本书，现在大厂 AI 口从事吹牛的工种</p>
+        <p>语言爱好者。英语 CATTI 二级译者、日语 N1</p>
+      </div>
+      <nav class="nav-sample">
+        <a href="#" class="here">译的书</a>
+        <a href="#">写的文</a>
+        <a href="#">编的程</a>
+        <a href="#">碎的念</a>
+      </nav>
+    </div>
+    <div class="preview-right">
+      <p class="sample-label">Writing · Sample</p>
+      <h2 class="sample-heading">重读卡尔维诺</h2>
+      <p class="sample-subheading">On Rereading Calvino — Notes on Invisible Cities</p>
+      <p class="sample-body">有些书是第一遍读不懂的，但你仍然会感到某种震颤。卡尔维诺写的不是城市，是记忆与欲望本身。十年后重读，才发现那震颤一直埋在那里，等你长大一点。</p>
+      <div class="sample-meta">
+        <span class="sample-year">2024 · 05 · 12</span>
+        <span class="sample-tag">Essay</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+function toggleTheme() {
+  var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  document.documentElement.setAttribute('data-theme', isDark ? 'light' : 'dark');
+  document.getElementById('themeBtn').textContent = isDark ? '切换深色' : '切换浅色';
+}
+</script>
+</body>
+</html>
