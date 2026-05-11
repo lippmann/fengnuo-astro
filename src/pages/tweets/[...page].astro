@@ -89,6 +89,8 @@ function parseWeread(text: string): { annotation: string; highlight: string; boo
   <div class="feed">
     {page.data.map((item: any) => {
       const imgs = filterImages(item.images || []);
+      const isWeread = item.platform === 'weread';
+      const wr = isWeread ? parseWeread(item.text) : null;
       return (
         <div class="entry">
           <div class="entry-spine">
@@ -97,11 +99,27 @@ function parseWeread(text: string): { annotation: string; highlight: string; boo
           </div>
           <div class="entry-body">
             <div class="entry-meta">
-              <span class="entry-platform">{item.platform === 'twitter' ? 'X' : item.platform === 'weread' ? 'WeRead' : 'Douban'}</span>
-              <a class="entry-source" href={item.url} target="_blank" rel="noopener">查看原文</a>
+              <span class={`entry-platform${isWeread ? ' platform-weread' : ''}`}>
+                {item.platform === 'twitter' ? 'X' : isWeread ? 'WeRead' : 'Douban'}
+              </span>
+              {!isWeread && (
+                <a class="entry-source" href={item.url} target="_blank" rel="noopener">查看原文</a>
+              )}
               <span class="entry-date">{formatDate(item.date)}</span>
             </div>
-            <p class="entry-text">{item.text}</p>
+            {isWeread && wr ? (
+              <div class="wr-body">
+                {wr.annotation && <p class="wr-annotation">{wr.annotation}</p>}
+                {wr.highlight && (
+                  <blockquote class="wr-highlight">
+                    <span class="wr-quote-mark open">「</span>{wr.highlight}<span class="wr-quote-mark close">」</span>
+                  </blockquote>
+                )}
+                <p class="wr-bookline"><a href={item.url} target="_blank" rel="noopener">{wr.bookLine}</a></p>
+              </div>
+            ) : (
+              <p class="entry-text">{item.text}</p>
+            )}
             {imgs.length > 0 && (
               <div class="entry-imgs">
                 {imgs.slice(0, 4).map((img: string) => (
