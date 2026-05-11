@@ -24,6 +24,31 @@ function proxyImg(url: string) {
   }
   return url;
 }
+
+// Parse weread text into structured parts.
+// text format (bookmark):  "《书名》 — 作者\n[章节]\n\n摘录"
+// text format (review):    "《书名》 — 作者\n\n摘录\n💬 笔记"  (abstract may be empty)
+function parseWeread(text: string): { annotation: string; highlight: string; bookLine: string } {
+  const lines = text.split('\n');
+  const bookLine = lines[0] || '';  // always "《书名》 — 作者"
+
+  // Collect remaining lines (skip empty leading lines after book line)
+  const rest = lines.slice(1).join('\n').trim();
+
+  let highlight = '';
+  let annotation = '';
+
+  if (rest.includes('💬')) {
+    const noteIdx = rest.indexOf('💬');
+    highlight = rest.slice(0, noteIdx).trim();
+    annotation = rest.slice(noteIdx + '💬'.length).trim();
+  } else {
+    // Pure bookmark — strip optional [章节] prefix
+    highlight = rest.replace(/^\[.*?\]\n+/, '').trim();
+  }
+
+  return { annotation, highlight, bookLine };
+}
 ---
 
 <Base title="碎的念 · 冯诺" description="冯诺的碎片记录 — 豆瓣 · X / Twitter">
