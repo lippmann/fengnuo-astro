@@ -8,6 +8,7 @@
     "preview": "astro preview"
   },
   "dependencies": {
+    "@astrojs/sitemap": "^3.7.2",
     "astro": "^5.0.0",
     "css-tree": "^3.2.1",
     "csso": "^5.0.5"
