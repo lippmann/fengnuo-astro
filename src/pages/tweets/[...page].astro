@@ -115,7 +115,7 @@ function parseWeread(text: string): { annotation: string; highlight: string; boo
                     <span class="wr-quote-mark open">「</span>{wr.highlight}<span class="wr-quote-mark close">」</span>
                   </blockquote>
                 )}
-                <p class="wr-bookline"><a href={item.url} target="_blank" rel="noopener">{wr.bookLine}</a></p>
+                <p class="wr-bookline">{wr.bookLine}</p>
               </div>
             ) : (
               <p class="entry-text">{item.text}</p>
