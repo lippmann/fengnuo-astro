@@ -317,6 +317,58 @@ main {
   white-space: pre-wrap;
   transition: color .15s;
 }
+
+/* ── WeRead structured layout ── */
+.wr-body {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.wr-annotation {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.9;
+  color: var(--dim);
+  margin: 0;
+}
+.wr-highlight {
+  margin: 0;
+  padding: 12px 16px;
+  border-left: 2px solid #1677ff;
+  background: color-mix(in srgb, #1677ff 5%, transparent);
+  border-radius: 0 3px 3px 0;
+  font-family: 'Noto Serif SC', serif;
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 2;
+  color: var(--dim);
+}
+.wr-quote-mark {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 16px;
+  color: #1677ff;
+  font-weight: 400;
+  opacity: .7;
+}
+.wr-quote-mark.open  { margin-right: 1px; }
+.wr-quote-mark.close { margin-left: 1px; }
+.wr-bookline {
+  margin: 0;
+  font-family: 'Libre Baskerville', serif;
+  font-size: 11px;
+  letter-spacing: .06em;
+  color: var(--muted);
+  font-style: italic;
+  text-align: right;
+}
+.wr-bookline a {
+  color: var(--muted);
+  text-decoration: none;
+  transition: color .15s;
+}
+.wr-bookline a:hover { color: #1677ff; }
+
 .entry-imgs {
   display: flex;
   flex-wrap: wrap;
