@@ -1,5 +1,19 @@
 [
   {
+    "id": "douban_487390415",
+    "platform": "douban",
+    "text": "真有你的啊，抖音。在 iPhone 上下拉搜索「韩国」两个字，弹出的搜索建议，乍一眼还以为是 「10 大韩国顶级伦理片」。刚犯嘀咕怎么尺度这么大，定睛一看才发现写的是「绝伦推理片」。",
+    "images": [
+      "/images/douban/fe890ce2fa08e2f0596bd02bf6663e72.jpg",
+      "/images/douban/2814550158f718299ae97ccb62d0f1c3.jpg",
+      "/images/douban/2814550158f718299ae97ccb62d0f1c3.jpg",
+      "/images/douban/2814550158f718299ae97ccb62d0f1c3.jpg"
+    ],
+    "date": "2026-05-15",
+    "timestamp": 1778804507,
+    "url": "https://www.douban.com/topic/487390415/"
+  },
+  {
     "id": "douban_487316580",
     "platform": "douban",
     "text": "打车上班的路上，Spotify 播了一首 Hooked on a Feeling，突然就想起来 2014 年的某个清晨，我在东湖边，等驾校教练载我们去练车。当时耳机里循环着《银河护卫队》的 OST，也正好放到了这一首，开头的歌词像极了「胡搞瞎搞」。驾校的名字、去哪里练的车，一概都忘了，只记得价格不超过 1000 的红米手机上现已倒闭的虾米音乐播的这首歌。人的记忆很奇怪。",
@@ -179,11 +193,7 @@
     "id": "douban_486704946",
     "platform": "douban",
     "text": "自从开始 vibe coding 之后，越来越懒了，现在连鼠标都懒得动，想让 Claude 代劳，结果它开启吐槽模式：哥，真的就点击五下就行了。",
-    "images": [
-      "/images/douban/2814550158f718299ae97ccb62d0f1c3.jpg",
-      "/images/douban/2814550158f718299ae97ccb62d0f1c3.jpg",
-      "/images/douban/2814550158f718299ae97ccb62d0f1c3.jpg"
-    ],
+    "images": [],
     "date": "2026-05-08",
     "timestamp": 1778261728,
     "url": "https://www.douban.com/topic/486704946/"
