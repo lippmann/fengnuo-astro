@@ -18,52 +18,31 @@ function filterImages(images: string[]) {
   return images.filter(img => !img.includes('new_menu') && !img.includes('/icon/'));
 }
 
-function proxyImg(url: string) {
-  return url;
-}
-
-// Parse weread text into structured parts.
-// text format (bookmark):  "《书名》 — 作者\n[章节]\n\n摘录"
-// text format (review):    "《书名》 — 作者\n\n摘录\n💬 笔记"  (abstract may be empty)
 function parseWeread(text: string): { annotation: string; highlight: string; bookLine: string } {
   const lines = text.split('\n');
-  const bookLine = lines[0] || '';  // always "《书名》 — 作者"
-
-  // Collect remaining lines (skip empty leading lines after book line)
+  const bookLine = lines[0] || '';
   const rest = lines.slice(1).join('\n').trim();
-
   let highlight = '';
   let annotation = '';
-
   if (rest.includes('💬')) {
     const noteIdx = rest.indexOf('💬');
     highlight = rest.slice(0, noteIdx).trim();
     annotation = rest.slice(noteIdx + '💬'.length).trim();
   } else {
-    // Pure bookmark — strip optional [章节] prefix
     highlight = rest.replace(/^\[.*?\]\n+/, '').trim();
   }
-
   return { annotation, highlight, bookLine };
 }
 
-// Parse twitter text into structured parts.
-// Repost format: "自己评论\n 账号名 (@handle) 原文 — nitter_url"
-// Pure repost:   "账号名 (@handle) 原文 — nitter_url"
-// Original:      plain text, no (@handle) pattern
 function parseTwitter(text: string): { comment: string; rtAuthor: string; rtHandle: string; rtText: string } | null {
-  // Find the LAST occurrence of "账号名 (@handle)" to split comment from RT
   const rtPattern = /^([\s\S]*?)([^\n(]+?)\s+\(@([A-Za-z0-9_]{1,50})\)\s+([\s\S]+)$/;
   const m = text.match(rtPattern);
   if (!m) return null;
-
   const comment = m[1].trim();
   const rtAuthor = m[2].trim();
   const handle = m[3].trim();
   let rtText = m[4].trim().replace(/\s+—\s+https?:\/\/\S+$/, '').trim();
-
   if (!rtText || rtText.length < 3) return null;
-
   return { comment, rtAuthor, rtHandle: handle, rtText };
 }
 ---
@@ -118,53 +97,49 @@ function parseTwitter(text: string): { comment: string; rtAuthor: string; rtHand
       const wr = isWeread ? parseWeread(item.text) : null;
       const tw = isTwitter ? parseTwitter(item.text) : null;
       return (
-        <div class="entry" data-platform={item.platform}>
-          <div class="entry-spine">
-            <span class={`entry-dot dot-${item.platform}`}></span>
-            <div class="entry-line"></div>
-          </div>
-          <div class="entry-body">
-            <div class="entry-meta">
-              <span class={`entry-platform${isWeread ? ' platform-weread' : isTwitter ? ' platform-twitter' : ''}`}>
-                {item.platform === 'twitter' ? 'X' : isWeread ? '读书笔记' : '豆瓣广播'}
+        <div class="card" data-platform={item.platform}>
+          <div class="card-header">
+            <div class="card-left">
+              <span class={`badge badge-${item.platform}`}>
+                {item.platform === 'twitter' ? 'X 推文' : isWeread ? '读书笔记' : '豆瓣广播'}
               </span>
               {!isWeread && (
-                <a class="entry-source" href={item.url} target="_blank" rel="noopener">查看原文</a>
+                <a class="card-source" href={item.url} target="_blank" rel="noopener">查看原文</a>
               )}
-              <span class="entry-date">{formatDate(item.date)}</span>
             </div>
-            {isWeread && wr ? (
-              <div class="wr-body">
-                {wr.annotation && <p class="wr-annotation">{wr.annotation}</p>}
-                {wr.highlight && (
-                  <blockquote class="wr-highlight">
-                    <span class="wr-quote-mark open">「</span>{wr.highlight}<span class="wr-quote-mark close">」</span>
-                  </blockquote>
-                )}
-                <p class="wr-bookline">{wr.bookLine}</p>
-              </div>
-            ) : isTwitter && tw ? (
-              <div class="tw-body">
-                {tw.comment && <p class="entry-text tw-comment">{tw.comment}</p>}
-                <blockquote class="tw-rt">
-                  <p class="tw-rt-author">
-                    <span class="tw-rt-name">{tw.rtAuthor}</span>
-                    <span class="tw-rt-handle">@{tw.rtHandle}</span>
-                  </p>
-                  <p class="tw-rt-text">{tw.rtText}</p>
-                </blockquote>
-              </div>
-            ) : (
-              <p class="entry-text">{item.text}</p>
-            )}
-            {imgs.length > 0 && (
-              <div class="entry-imgs">
-                {imgs.slice(0, 4).map((img: string) => (
-                  <img src={proxyImg(img)} loading="lazy" alt="" />
-                ))}
-              </div>
-            )}
+            <span class="card-date">{formatDate(item.date)}</span>
           </div>
+
+          {isWeread && wr ? (
+            <div class="wr-body">
+              {wr.annotation && <p class="wr-annotation">{wr.annotation}</p>}
+              {wr.highlight && (
+                <blockquote class="wr-highlight">{wr.highlight}</blockquote>
+              )}
+              <p class="wr-bookline">{wr.bookLine}</p>
+            </div>
+          ) : isTwitter && tw ? (
+            <div class="tw-body">
+              {tw.comment && <p class="tw-comment">{tw.comment}</p>}
+              <blockquote class="tw-rt">
+                <p class="tw-rt-author">
+                  <span class="tw-rt-name">{tw.rtAuthor}</span>
+                  <span class="tw-rt-handle">@{tw.rtHandle}</span>
+                </p>
+                <p class="tw-rt-text">{tw.rtText}</p>
+              </blockquote>
+            </div>
+          ) : (
+            <p class="card-text">{item.text}</p>
+          )}
+
+          {imgs.length > 0 && (
+            <div class="card-imgs">
+              {imgs.slice(0, 4).map((img: string) => (
+                <img src={img} loading="lazy" alt="" />
+              ))}
+            </div>
+          )}
         </div>
       );
     })}
@@ -277,15 +252,10 @@ main {
   font-weight: 300;
 }
 
-.feed {
-  display: flex;
-  flex-direction: column;
-}
-
 .filter-bar {
   display: flex;
   gap: 8px;
-  margin-bottom: 40px;
+  margin-bottom: 28px;
   flex-wrap: wrap;
 }
 .filter-btn {
@@ -311,97 +281,104 @@ main {
   background: color-mix(in srgb, var(--gold) 6%, transparent);
 }
 
-.entry {
-  display: grid;
-  grid-template-columns: 32px 1fr;
-  gap: 0 16px;
-  padding-bottom: 32px;
-}
-.entry:last-child { padding-bottom: 0; }
-
-.entry-spine {
+/* ── Feed ── */
+.feed {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  gap: 12px;
 }
-.entry-dot {
-  width: 10px; height: 10px;
-  border-radius: 50%;
-  flex-shrink: 0;
-  margin-top: 4px;
-}
-.dot-twitter { background: var(--paper); }
-.dot-douban  { background: #07a761; }
-.dot-weread  { background: #1677ff; }
-.entry-line {
-  width: 1px;
-  flex: 1;
-  background: var(--rule);
-  margin-top: 8px;
-  min-height: 16px;
-}
-.entry:last-child .entry-line { display: none; }
 
-.entry-body {
-  padding-top: 1px;
-  transition: transform .2s ease, box-shadow .2s ease;
-  border-radius: 4px;
+/* ── Card ── */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 20px 22px;
+  box-shadow: var(--shadow-sm);
+  transition: transform .25s cubic-bezier(.2,.8,.2,1), box-shadow .25s cubic-bezier(.2,.8,.2,1);
+  will-change: transform;
 }
-.entry:hover .entry-body {
-  transform: translateY(-3px);
-  box-shadow: 0 6px 20px color-mix(in srgb, var(--paper) 8%, transparent);
+.card:hover {
+  transform: translateY(-6px) scale(1.004);
+  box-shadow: var(--shadow-hover);
 }
-.entry-meta {
+
+.card-header {
   display: flex;
   align-items: center;
-  gap: 12px;
-  margin-bottom: 10px;
+  justify-content: space-between;
+  margin-bottom: 12px;
 }
-.entry-platform {
+.card-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* ── Platform badges ── */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 9px;
+  border-radius: 10px;
+  border: 1px solid var(--rule);
+  background: var(--bg);
   font-family: 'Cormorant SC', serif;
-  font-size: 11px;
-  letter-spacing: .14em;
+  font-size: 9px;
+  letter-spacing: .16em;
   text-transform: uppercase;
   color: var(--muted);
-  font-weight: 400;
+  transition: border-color .2s;
 }
-.entry-source {
+.badge-weread {
+  border-color: rgba(22,119,255,.3);
+  color: #1677ff;
+  background: rgba(22,119,255,.05);
+}
+.badge-douban {
+  border-color: rgba(7,167,97,.3);
+  color: #07a761;
+  background: rgba(7,167,97,.05);
+}
+.badge-twitter {
+  border-color: rgba(10,16,14,.2);
+  color: var(--paper);
+  background: color-mix(in srgb, var(--paper) 5%, transparent);
+}
+[data-theme="dark"] .badge-twitter {
+  border-color: rgba(232,240,238,.15);
+}
+
+.card-source {
   font-family: 'Cormorant SC', serif;
-  font-size: 11px;
+  font-size: 9px;
   letter-spacing: .14em;
   text-transform: uppercase;
   color: var(--gold);
-  font-weight: 400;
-  transition: opacity .15s;
+  opacity: 0;
+  transition: opacity .2s;
 }
-.entry-source:hover { opacity: .7; }
-.platform-weread { color: #1677ff !important; }
-.platform-twitter { color: #000 !important; }
-[data-theme="dark"] .platform-twitter { color: #fff !important; }
-.entry[data-platform="twitter"] .entry-source { color: #000; }
-[data-theme="dark"] .entry[data-platform="twitter"] .entry-source { color: #fff; }
-.entry-date {
+.card:hover .card-source { opacity: 1; }
+
+.card-date {
+  font-family: 'Libre Baskerville', serif;
   font-size: 9px;
   color: var(--muted);
-  letter-spacing: .08em;
-  font-weight: 300;
+  letter-spacing: .04em;
 }
-.entry-text {
+
+/* ── Plain text ── */
+.card-text {
   font-family: 'Noto Serif SC', serif;
   font-size: 14px;
   font-weight: 300;
-  line-height: 2;
+  line-height: 1.95;
   color: var(--dim);
   white-space: pre-wrap;
-  transition: color .15s;
 }
 
-/* ── WeRead structured layout ── */
-.wr-body {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
+/* ── WeRead ── */
+.wr-body { display: flex; flex-direction: column; gap: 8px; }
 .wr-annotation {
   font-family: 'Noto Serif SC', serif;
   font-size: 13px;
@@ -412,59 +389,32 @@ main {
 }
 .wr-highlight {
   margin: 0;
-  padding: 4px 0 4px 28px;
+  padding: 8px 0 8px 18px;
   border: none;
+  border-left: 3px solid var(--gold);
   background: none;
-  border-radius: 0;
-  position: relative;
   font-family: 'Noto Serif SC', serif;
   font-size: 14px;
   font-weight: 300;
   line-height: 2;
   color: var(--dim);
 }
-.wr-highlight::before {
-  content: '\201C';
-  position: absolute;
-  left: 0;
-  top: -6px;
-  font-family: 'Libre Baskerville', Georgia, serif;
-  font-size: 48px;
-  line-height: 1;
-  color: #1677ff;
-  opacity: .55;
-  font-weight: 700;
-}
-.wr-quote-mark { display: none; }
 .wr-bookline {
   margin: 0;
   font-family: 'Libre Baskerville', serif;
-  font-size: 11px;
+  font-size: 10px;
   letter-spacing: .06em;
   color: var(--muted);
   text-align: right;
 }
 
-.entry-imgs {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  margin-top: 12px;
-  margin-bottom: 4px;
-}
-.entry-imgs img {
-  width: 100px; height: 100px;
-  object-fit: cover;
-  border-radius: 2px;
-}
-
-/* ── Twitter repost card ── */
+/* ── Twitter repost ── */
 .tw-body { display: flex; flex-direction: column; gap: 10px; }
 .tw-comment {
   font-family: 'Noto Serif SC', serif;
   font-size: 14px;
   font-weight: 300;
-  line-height: 2;
+  line-height: 1.95;
   color: var(--dim);
   margin: 0;
   white-space: pre-wrap;
@@ -473,8 +423,8 @@ main {
   margin: 0;
   padding: 12px 14px;
   border: 1px solid var(--rule);
-  border-radius: 4px;
-  background: color-mix(in srgb, var(--paper) 3%, transparent);
+  border-radius: 5px;
+  background: color-mix(in srgb, var(--bg) 60%, transparent);
 }
 .tw-rt-author {
   display: flex;
@@ -498,28 +448,51 @@ main {
   font-family: 'Noto Serif SC', serif;
   font-size: 13px;
   font-weight: 300;
-  line-height: 1.9;
+  line-height: 1.85;
   color: var(--dim);
   margin: 0;
   white-space: pre-wrap;
 }
 
+/* ── Images ── */
+.card-imgs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 14px;
+}
+.card-imgs img {
+  width: 92px;
+  height: 92px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+/* ── Pagination ── */
 .pagination {
-  display: flex; align-items: center; justify-content: space-between;
-  padding-top: 32px; margin-top: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 32px;
+  margin-top: 32px;
   border-top: 1px solid var(--rule);
 }
 .page-btn {
   font-family: 'Cormorant SC', serif;
-  font-size: 12px; font-weight: 400; letter-spacing: .14em;
-  color: var(--gold); text-decoration: none;
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: .14em;
+  color: var(--gold);
+  text-decoration: none;
   transition: opacity .2s;
 }
 .page-btn:hover { opacity: .7; }
 .page-btn.disabled { color: var(--muted); pointer-events: none; }
 .page-info {
   font-family: 'Cormorant SC', serif;
-  font-size: 11px; font-weight: 400; letter-spacing: .14em;
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: .14em;
   color: var(--muted);
 }
 
@@ -567,10 +540,9 @@ function toggleTheme() {
   updateIcon(saved === 'dark');
 }());
 
-// Filter
 (function () {
   var btns = document.querySelectorAll('.filter-btn');
-  var entries = document.querySelectorAll('.entry');
+  var entries = document.querySelectorAll('.card');
   btns.forEach(function (btn) {
     btn.addEventListener('click', function () {
       var filter = btn.getAttribute('data-filter');
