@@ -75,7 +75,13 @@ def _parse_topic(tid: str, html: str) -> dict | None:
     date_m = re.search(r'<span class="create-time">([^<]+)</span>', html)
     paragraphs = re.findall(r'<p data-align[^>]*>(.*?)</p>', html, re.DOTALL)
     remote_images = re.findall(r'<img[^>]+src="(https://[^"]+doubanio[^"]+)"', html)
-    remote_images = [i for i in remote_images if not i.endswith(".svg")][:4]
+    remote_images = [
+        i for i in remote_images
+        if not i.endswith(".svg")
+        and "/icon/" not in i
+        and "new_menu" not in i
+        and "/f/shire/" not in i
+    ][:4]
 
     text = "\n".join(
         re.sub(r'<[^>]+>', '', p).strip()
