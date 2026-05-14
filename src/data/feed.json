@@ -1,5 +1,18 @@
 [
   {
+    "id": "douban_487316580",
+    "platform": "douban",
+    "text": "打车上班的路上，Spotify 播了一首 Hooked on a Feeling，突然就想起来 2014 年的某个清晨，我在东湖边，等驾校教练载我们去练车。当时耳机里循环着《银河护卫队》的 OST，也正好放到了这一首，开头的歌词像极了「胡搞瞎搞」。驾校的名字、去哪里练的车，一概都忘了，只记得价格不超过 1000 的红米手机上现已倒闭的虾米音乐播的这首歌。人的记忆很奇怪。",
+    "images": [
+      "https://img3.doubanio.com/f/shire/e49eca1517424a941871a2667a8957fd6c72d632/pics/new_menu.gif",
+      "https://img9.doubanio.com/icon/up2079635-35.jpg",
+      "https://img9.doubanio.com/icon/up2079635-35.jpg"
+    ],
+    "date": "2026-05-14",
+    "timestamp": 1778758626,
+    "url": "https://www.douban.com/topic/487316580/"
+  },
+  {
     "id": "douban_487272912",
     "platform": "douban",
     "text": "看到豆瓣 App 侧边栏右下角出现了一个“每日福利”按钮，点进去是购物返利页面，顿时涌上来一种复杂的感觉，就像看到一个曾经酷爱陀思妥耶夫斯基和克尔凯郭尔的文青同学，突然有天给你发了条拼多多链接并留言：“兄弟在不？帮忙砍一刀，谢了！”并附上四个表示拜托的 emoji。你有点惋惜，但同时也很欣慰，因为这意味着你以后的拼多多链接也可以多发一个人了。",
@@ -28,16 +41,79 @@
     "url": "https://www.douban.com/topic/487252692/"
   },
   {
+    "id": "weread_CB_9ApFZDFY40vi73a71Z7xVDgo_review_351769930_894lVGrtM",
+    "platform": "weread",
+    "text": "《Things in Nature Merely Grow》 — Yiyun Li\n\nTo foresee is to give too much weight to intuition; foreseeing might be waving a white flag prematurely.\n\n💬 预见，或许就会提前举白旗。",
+    "images": [],
+    "date": "2026-05-13",
+    "timestamp": 1778662668,
+    "url": "https://weread.qq.com/web/bookDetail/CB_9ApFZDFY40vi73a71Z7xVDgo"
+  },
+  {
+    "id": "weread_CB_9ApFZDFY40vi73a71Z7xVDgo_review_351769930_894kIy3Lc",
+    "platform": "weread",
+    "text": "《Things in Nature Merely Grow》 — Yiyun Li\n\nAfter a while, Vincent pointed out this baffling fact: groups of three tended to be composed of two old women with one old man—or two young men with one young woman. “You see, it’s never two old men with one old woman or two young women with one young man,” Vincent said. “Why is that?”\n\n💬 我也喜欢 people watching，但没有发现这个规律，果真如此吗？或许女性结伴同行本来就是社会常态。",
+    "images": [],
+    "date": "2026-05-13",
+    "timestamp": 1778661558,
+    "url": "https://weread.qq.com/web/bookDetail/CB_9ApFZDFY40vi73a71Z7xVDgo"
+  },
+  {
+    "id": "weread_CB_9ApFZDFY40vi73a71Z7xVDgo_review_351769930_894ffRe54",
+    "platform": "weread",
+    "text": "《Things in Nature Merely Grow》 — Yiyun Li\n\nTwo years after Vincent died, she informed me that there was some karma in my losing a child: I had failed to return her love for me.)\n\n💬 李翊云的亲妈有点残忍。",
+    "images": [],
+    "date": "2026-05-13",
+    "timestamp": 1778656554,
+    "url": "https://weread.qq.com/web/bookDetail/CB_9ApFZDFY40vi73a71Z7xVDgo"
+  },
+  {
+    "id": "weread_CB_9ApFZDFY40vi73a71Z7xVDgo_review_351769930_894eSPDFP",
+    "platform": "weread",
+    "text": "《Things in Nature Merely Grow》 — Yiyun Li\n\nJames would teach himself several languages: Welsh, German, Romanian, and Russian, on top of Spanish, Italian, and Japanese, the languages he took at school. His phone, I once found out by accident, was set in Lithuanian\n\n💬 在李翊云儿子James身上找到了共鸣，我也喜欢把手机界面设成我正在学习的语言。",
+    "images": [],
+    "date": "2026-05-13",
+    "timestamp": 1778656213,
+    "url": "https://weread.qq.com/web/bookDetail/CB_9ApFZDFY40vi73a71Z7xVDgo"
+  },
+  {
     "id": "twitter_2054400044779151791",
     "platform": "twitter",
-    "text": "Peak shithousery. End Wokeness (@EndWokeness) Rubio is wearing the Maduro tracksuit on his flight to China — https://nitter.privacyredirect.com/EndWokeness/status/2054340832359039153#m",
+    "text": "Peak shithousery. End Wokeness (@EndWokeness) Rubio is wearing the Maduro tracksuit on his flight to China — https://nitter.net/EndWokeness/status/2054340832359039153#m",
     "images": [
-      "https://nitter.privacyredirect.com/pic/media%2FHIJ8FRPWAAAHx15.jpg",
-      "https://nitter.privacyredirect.com/pic/media%2FHIJ8FRMWYAA-vaA.jpg"
+      "https://nitter.net/pic/media%2FHIJ8FRPWAAAHx15.jpg",
+      "https://nitter.net/pic/media%2FHIJ8FRMWYAA-vaA.jpg"
     ],
     "date": "2026-05-13",
     "timestamp": 1778642114,
     "url": "https://x.com/Surudo1892/status/2054400044779151791"
+  },
+  {
+    "id": "weread_CB_9ApFZDFY40vi73a71Z7xVDgo_review_351769930_893Xml7T8",
+    "platform": "weread",
+    "text": "《Things in Nature Merely Grow》 — Yiyun Li\n\nI avoid putting my intuitions into words, which would be pinning a butterfly on a specimen board so as to claim the certainty of possession.\n\n💬 把直觉付诸文字，就像把蝴蝶做成标本。",
+    "images": [],
+    "date": "2026-05-13",
+    "timestamp": 1778640159,
+    "url": "https://weread.qq.com/web/bookDetail/CB_9ApFZDFY40vi73a71Z7xVDgo"
+  },
+  {
+    "id": "weread_CB_9ApFZDFY40vi73a71Z7xVDgo_review_351769930_893Xf4REI",
+    "platform": "weread",
+    "text": "《Things in Nature Merely Grow》 — Yiyun Li\n\nAnd I should add: my mother was in the conference room that day and laughed and jeered along with her colleagues. But when I got home from school that evening, her wrath was a story that I prefer not to remember.\n\n💬 The most crushiating thing in life is your most beloved ones betray you when you need it most.",
+    "images": [],
+    "date": "2026-05-13",
+    "timestamp": 1778640052,
+    "url": "https://weread.qq.com/web/bookDetail/CB_9ApFZDFY40vi73a71Z7xVDgo"
+  },
+  {
+    "id": "weread_CB_9ApFZDFY40vi73a71Z7xVDgo_review_351769930_893Ux7xdY",
+    "platform": "weread",
+    "text": "《Things in Nature Merely Grow》 — Yiyun Li\n\nEvery semester, then and later, I would teach Grace Paley’s story “Friends,” and every time I would point out a passage to my students, though I doubt many of them truly understood its weight. An older woman, reminiscing about her daughter’s death, says to her friends: “You know the night Abby died, when the police called me and told me? That was my first night’s sleep in two years. I knew where she was.”\n\n💬 非常震撼的一句话。",
+    "images": [],
+    "date": "2026-05-13",
+    "timestamp": 1778637570,
+    "url": "https://weread.qq.com/web/bookDetail/CB_9ApFZDFY40vi73a71Z7xVDgo"
   },
   {
     "id": "douban_487108410",
@@ -55,7 +131,7 @@
   {
     "id": "twitter_2053856346408398875",
     "platform": "twitter",
-    "text": "Kurt Vonnegut, Italo Calvino, Kazuo Ishiguro. Reads with Ravi (@readswithravi) Have you ever read a book by an author that was so good it made you want to read everything else they've written? — https://nitter.privacyredirect.com/readswithravi/status/2053845582947778571#m",
+    "text": "Kurt Vonnegut, Italo Calvino, Kazuo Ishiguro. Reads with Ravi (@readswithravi) Have you ever read a book by an author that was so good it made you want to read everything else they've written? — https://nitter.net/readswithravi/status/2053845582947778571#m",
     "images": [],
     "date": "2026-05-11",
     "timestamp": 1778512486,
@@ -625,9 +701,9 @@
   {
     "id": "twitter_2042573393376002534",
     "platform": "twitter",
-    "text": "Proper lad. Last summer I went to Hong Kong wearing No. 23 shirt to watch our team play against AC Milan in a friendly. Liverpool FC (@LFC) We can confirm Andy Robertson will bring his Reds career to an end at the conclusion of the current season. He will do so as a Liverpool legend ❤️ — https://nitter.privacyredirect.com/LFC/status/2042294218232643936#m",
+    "text": "Proper lad. Last summer I went to Hong Kong wearing No. 23 shirt to watch our team play against AC Milan in a friendly. Liverpool FC (@LFC) We can confirm Andy Robertson will bring his Reds career to an end at the conclusion of the current season. He will do so as a Liverpool legend ❤️ — https://nitter.net/LFC/status/2042294218232643936#m",
     "images": [
-      "https://nitter.privacyredirect.com/pic/pbs.twimg.com%2Fmedia%2FHFepjb7XAAA9OVg.jpg"
+      "https://nitter.net/pic/pbs.twimg.com%2Fmedia%2FHFepjb7XAAA9OVg.jpg"
     ],
     "date": "2026-04-10",
     "timestamp": 1775822420,
@@ -718,9 +794,9 @@
   {
     "id": "twitter_2037377311851593733",
     "platform": "twitter",
-    "text": "Why is the avatar of this subreddit Zhu Yuanzhang? Images That Make You Feel Pain (@ManMilk2) — https://nitter.privacyredirect.com/ManMilk2/status/2037258288409031039#m",
+    "text": "Why is the avatar of this subreddit Zhu Yuanzhang? Images That Make You Feel Pain (@ManMilk2) — https://nitter.net/ManMilk2/status/2037258288409031039#m",
     "images": [
-      "https://nitter.privacyredirect.com/pic/media%2FHEXLnbKWcAA1OIv.jpg"
+      "https://nitter.net/pic/media%2FHEXLnbKWcAA1OIv.jpg"
     ],
     "date": "2026-03-27",
     "timestamp": 1774583578,
@@ -738,9 +814,9 @@
   {
     "id": "twitter_2031092860221796511",
     "platform": "twitter",
-    "text": "Who tf says it’s romantic in books? Atlas Press (@realAtlasPress) “Being poor is only romantic in books.” —Sidney Sheldon — https://nitter.privacyredirect.com/realAtlasPress/status/2030690508729614529#m",
+    "text": "Who tf says it’s romantic in books? Atlas Press (@realAtlasPress) “Being poor is only romantic in books.” —Sidney Sheldon — https://nitter.net/realAtlasPress/status/2030690508729614529#m",
     "images": [
-      "https://nitter.privacyredirect.com/pic/media%2FHC5hTtrbwAEVCfl.jpg"
+      "https://nitter.net/pic/media%2FHC5hTtrbwAEVCfl.jpg"
     ],
     "date": "2026-03-09",
     "timestamp": 1773085248,
@@ -767,9 +843,9 @@
   {
     "id": "twitter_2028347298066182629",
     "platform": "twitter",
-    "text": "支持！ 玩个锤子 (@cccchuizi) 【开工季福利来袭！！！】 为了感谢大家对我们的支持，我们打算免费送一台 Mac Mini256GB + 2000刀PackyAPI额度，助力2026年VibeCoding 和养殖龙虾！ 一等奖：macmini 256GB 一台 二等奖：Packyapi额度100 刀✖️10 人 三等奖：Packyapi额度50 刀✖️20 人 点赞+评论+转发即可参与抽奖！(中奖后我们会仔细检查哦) 3 月 8 号截止～ 网站链接：packyapi.com 相关文档：docs.packyapi.com — https://nitter.privacyredirect.com/cccchuizi/status/2028304925659398474#m",
+    "text": "支持！ 玩个锤子 (@cccchuizi) 【开工季福利来袭！！！】 为了感谢大家对我们的支持，我们打算免费送一台 Mac Mini256GB + 2000刀PackyAPI额度，助力2026年VibeCoding 和养殖龙虾！ 一等奖：macmini 256GB 一台 二等奖：Packyapi额度100 刀✖️10 人 三等奖：Packyapi额度50 刀✖️20 人 点赞+评论+转发即可参与抽奖！(中奖后我们会仔细检查哦) 3 月 8 号截止～ 网站链接：packyapi.com 相关文档：docs.packyapi.com — https://nitter.net/cccchuizi/status/2028304925659398474#m",
     "images": [
-      "https://nitter.privacyredirect.com/pic/media%2FHCX7AjGbMAAIQuN.jpg"
+      "https://nitter.net/pic/media%2FHCX7AjGbMAAIQuN.jpg"
     ],
     "date": "2026-03-02",
     "timestamp": 1772430655,
@@ -778,9 +854,9 @@
   {
     "id": "twitter_2028075316015468749",
     "platform": "twitter",
-    "text": "This guy just went to pee and his colleagues chose him to be the next Supreme Leader. Visegrád 24 (@visegrad24) BREAKING: Ayatollah Arafi has been appointed as the acting Supreme Leader of Iran, ISNA reports. — https://nitter.privacyredirect.com/visegrad24/status/2028048230143906069#m",
+    "text": "This guy just went to pee and his colleagues chose him to be the next Supreme Leader. Visegrád 24 (@visegrad24) BREAKING: Ayatollah Arafi has been appointed as the acting Supreme Leader of Iran, ISNA reports. — https://nitter.net/visegrad24/status/2028048230143906069#m",
     "images": [
-      "https://nitter.privacyredirect.com/pic/media%2FHCUTHUsWsAA0p_h.jpg"
+      "https://nitter.net/pic/media%2FHCUTHUsWsAA0p_h.jpg"
     ],
     "date": "2026-03-01",
     "timestamp": 1772365809,
@@ -816,9 +892,9 @@
   {
     "id": "twitter_1940744534075625790",
     "platform": "twitter",
-    "text": "RIP. Liverpool FC (@LFC) Liverpool Football Club are devastated by the tragic passing of Diogo Jota. — https://nitter.privacyredirect.com/LFC/status/1940703005117980709#m",
+    "text": "RIP. Liverpool FC (@LFC) Liverpool Football Club are devastated by the tragic passing of Diogo Jota. — https://nitter.net/LFC/status/1940703005117980709#m",
     "images": [
-      "https://nitter.privacyredirect.com/pic/pbs.twimg.com%2Fmedia%2FGu7BzIZWUAA_rr0.jpg"
+      "https://nitter.net/pic/pbs.twimg.com%2Fmedia%2FGu7BzIZWUAA_rr0.jpg"
     ],
     "date": "2025-07-03",
     "timestamp": 1751544528,
@@ -827,9 +903,9 @@
   {
     "id": "twitter_1937234742321250467",
     "platform": "twitter",
-    "text": "Premier league all day long. ESPN UK (@ESPNUK) You can only watch one competition for the rest of your life... 📺 — https://nitter.privacyredirect.com/ESPNUK/status/1937212218342564240#m",
+    "text": "Premier league all day long. ESPN UK (@ESPNUK) You can only watch one competition for the rest of your life... 📺 — https://nitter.net/ESPNUK/status/1937212218342564240#m",
     "images": [
-      "https://nitter.privacyredirect.com/pic/media%2FGuJcNo9WcAAr883.jpg"
+      "https://nitter.net/pic/media%2FGuJcNo9WcAAr883.jpg"
     ],
     "date": "2025-06-23",
     "timestamp": 1750707729,
