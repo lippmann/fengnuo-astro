@@ -1,15 +1,25 @@
 #!/usr/bin/env python3
 """X (Twitter) sync via nitter RSS fallback instances."""
 
+import hashlib
 import re
 import ssl
 import urllib.request
 import xml.etree.ElementTree as ET
 from datetime import datetime
 from email.utils import parsedate_to_datetime
+from pathlib import Path
+from urllib.parse import unquote
 
 USERNAME  = "Surudo1892"
 MAX_POSTS = 10
+IMG_DIR   = Path(__file__).parent.parent / "public" / "images" / "twitter"
+
+NITTER_INSTANCES = [
+    "https://nitter.privacyredirect.com",
+    "https://nitter.poast.org",
+    "https://nitter.net",
+]
 
 NITTER_INSTANCES = [
     "https://nitter.privacyredirect.com",
@@ -20,6 +30,40 @@ NITTER_INSTANCES = [
 _SSL = ssl.create_default_context()
 _SSL.check_hostname = False
 _SSL.verify_mode = ssl.CERT_NONE
+
+
+def _nitter_to_twimg(url: str) -> str:
+    """Convert nitter image URL to pbs.twimg.com direct URL."""
+    path = re.sub(r'^https://nitter\.[^/]+/pic/', '', url)
+    decoded = unquote(path)
+    if decoded.startswith('pbs.twimg.com/'):
+        return 'https://' + decoded
+    return 'https://pbs.twimg.com/' + decoded
+
+
+def _download_image(twimg_url: str) -> str | None:
+    """Download a Twitter image locally, return public path or None."""
+    IMG_DIR.mkdir(parents=True, exist_ok=True)
+    ext = twimg_url.split('?')[0].rsplit('.', 1)[-1]
+    if ext not in ('jpg', 'jpeg', 'png', 'gif', 'webp'):
+        ext = 'jpg'
+    fname = hashlib.md5(twimg_url.encode()).hexdigest() + '.' + ext
+    dest = IMG_DIR / fname
+    if dest.exists():
+        return f'/images/twitter/{fname}'
+    try:
+        req = urllib.request.Request(twimg_url, headers={
+            'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) '
+                          'AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36',
+            'Referer': 'https://x.com/',
+        })
+        with urllib.request.urlopen(req, timeout=15, context=_SSL) as r:
+            dest.write_bytes(r.read())
+        print(f'[twitter]     downloaded image → {fname}')
+        return f'/images/twitter/{fname}'
+    except Exception as e:
+        print(f'[twitter]     image download failed {twimg_url}: {e}')
+        return None
 
 
 def _fetch_rss(instance: str) -> bytes | None:
@@ -62,13 +106,18 @@ def _parse_rss(xml_bytes: bytes) -> list[dict]:
         if not text:
             continue
 
-        # Extract images from description
+        # Extract images from description, convert nitter → pbs.twimg.com, download locally
         images = []
         if desc_el is not None and desc_el.text:
-            images = re.findall(
+            raw_imgs = re.findall(
                 r'<img[^>]+src="(https://[^"]+\.(?:jpg|jpeg|png|webp)[^"]*)"',
                 desc_el.text
             )
+            for img_url in raw_imgs[:4]:
+                twimg_url = _nitter_to_twimg(img_url)
+                local = _download_image(twimg_url)
+                if local:
+                    images.append(local)
 
         # Parse date
         date_str, ts = "", 0
@@ -95,7 +144,7 @@ def _parse_rss(xml_bytes: bytes) -> list[dict]:
             "id": post_id,
             "platform": "twitter",
             "text": text,
-            "images": images[:4],
+            "images": images,
             "date": date_str,
             "timestamp": ts,
             "url": link,
