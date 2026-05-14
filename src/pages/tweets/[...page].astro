@@ -389,15 +389,27 @@ main {
 }
 .wr-highlight {
   margin: 0;
-  padding: 8px 0 8px 18px;
+  padding: 4px 0 4px 44px;
   border: none;
-  border-left: 3px solid var(--gold);
   background: none;
+  position: relative;
   font-family: 'Noto Serif SC', serif;
   font-size: 14px;
   font-weight: 300;
   line-height: 2;
   color: var(--dim);
+}
+.wr-highlight::before {
+  content: '\201C';
+  position: absolute;
+  left: 0;
+  top: -10px;
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-size: 56px;
+  line-height: 1;
+  color: #1677ff;
+  opacity: .6;
+  font-weight: 700;
 }
 .wr-bookline {
   margin: 0;
