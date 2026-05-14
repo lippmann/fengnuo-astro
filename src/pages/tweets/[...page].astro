@@ -106,6 +106,13 @@ function parseTwitter(text: string): { comment: string; rtAuthor: string; rtHand
     <p class="page-count">{page.total} 条记录 &nbsp;·&nbsp; Page {page.currentPage} / {page.lastPage}</p>
   </header>
 
+  <div class="filter-bar">
+    <button class="filter-btn active" data-filter="all">全部</button>
+    <button class="filter-btn" data-filter="twitter">X 推文</button>
+    <button class="filter-btn" data-filter="douban">豆瓣广播</button>
+    <button class="filter-btn" data-filter="weread">读书笔记</button>
+  </div>
+
   <div class="feed">
     {page.data.map((item: any) => {
       const imgs = filterImages(item.images || []);
@@ -114,7 +121,7 @@ function parseTwitter(text: string): { comment: string; rtAuthor: string; rtHand
       const wr = isWeread ? parseWeread(item.text) : null;
       const tw = isTwitter ? parseTwitter(item.text) : null;
       return (
-        <div class="entry">
+        <div class="entry" data-platform={item.platform}>
           <div class="entry-spine">
             <span class={`entry-dot dot-${item.platform}`}></span>
             <div class="entry-line"></div>
