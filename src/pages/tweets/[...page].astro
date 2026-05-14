@@ -285,6 +285,35 @@ main {
   flex-direction: column;
 }
 
+.filter-bar {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+}
+.filter-btn {
+  font-family: 'Cormorant SC', serif;
+  font-size: 10px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--muted);
+  background: none;
+  border: 1px solid var(--rule);
+  border-radius: 2px;
+  padding: 5px 12px;
+  cursor: pointer;
+  transition: color .15s, border-color .15s, background .15s;
+}
+.filter-btn:hover {
+  color: var(--dim);
+  border-color: var(--dim);
+}
+.filter-btn.active {
+  color: var(--gold);
+  border-color: var(--gold);
+  background: color-mix(in srgb, var(--gold) 6%, transparent);
+}
+
 .entry {
   display: grid;
   grid-template-columns: 32px 1fr;
