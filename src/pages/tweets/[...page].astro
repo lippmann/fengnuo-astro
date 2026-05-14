@@ -557,4 +557,21 @@ function toggleTheme() {
   var saved = localStorage.getItem('site-theme') || 'light';
   updateIcon(saved === 'dark');
 }());
+
+// Filter
+(function () {
+  var btns = document.querySelectorAll('.filter-btn');
+  var entries = document.querySelectorAll('.entry');
+  btns.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var filter = btn.getAttribute('data-filter');
+      btns.forEach(function (b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      entries.forEach(function (entry) {
+        var show = filter === 'all' || entry.getAttribute('data-platform') === filter;
+        entry.style.display = show ? '' : 'none';
+      });
+    });
+  });
+}());
 </script>
