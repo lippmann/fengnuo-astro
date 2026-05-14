@@ -128,8 +128,8 @@ function parseTwitter(text: string): { comment: string; rtAuthor: string; rtHand
           </div>
           <div class="entry-body">
             <div class="entry-meta">
-              <span class={`entry-platform${isWeread ? ' platform-weread' : ''}`}>
-                {item.platform === 'twitter' ? 'X' : isWeread ? 'WeRead' : 'Douban'}
+              <span class={`entry-platform${isWeread ? ' platform-weread' : isTwitter ? ' platform-twitter' : ''}`}>
+                {item.platform === 'twitter' ? 'X' : isWeread ? '读书笔记' : '豆瓣广播'}
               </span>
               {!isWeread && (
                 <a class="entry-source" href={item.url} target="_blank" rel="noopener">查看原文</a>
@@ -371,6 +371,10 @@ main {
 }
 .entry-source:hover { opacity: .7; }
 .platform-weread { color: #1677ff !important; }
+.platform-twitter { color: #000 !important; }
+[data-theme="dark"] .platform-twitter { color: #fff !important; }
+.entry[data-platform="twitter"] .entry-source { color: #000; }
+[data-theme="dark"] .entry[data-platform="twitter"] .entry-source { color: #fff; }
 .entry-date {
   font-size: 9px;
   color: var(--muted);
