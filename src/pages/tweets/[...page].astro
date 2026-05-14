@@ -342,7 +342,15 @@ main {
 }
 .entry:last-child .entry-line { display: none; }
 
-.entry-body { padding-top: 1px; }
+.entry-body {
+  padding-top: 1px;
+  transition: transform .2s ease, box-shadow .2s ease;
+  border-radius: 4px;
+}
+.entry:hover .entry-body {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px color-mix(in srgb, var(--paper) 8%, transparent);
+}
 .entry-meta {
   display: flex;
   align-items: center;
