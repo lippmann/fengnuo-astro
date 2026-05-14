@@ -49,6 +49,26 @@ function parseWeread(text: string): { annotation: string; highlight: string; boo
 
   return { annotation, highlight, bookLine };
 }
+
+// Parse twitter text into structured parts.
+// Repost format: "自己评论\n 账号名 (@handle) 原文 — nitter_url"
+// Pure repost:   "账号名 (@handle) 原文 — nitter_url"
+// Original:      plain text, no (@handle) pattern
+function parseTwitter(text: string): { comment: string; rtAuthor: string; rtHandle: string; rtText: string } | null {
+  // Find the LAST occurrence of "账号名 (@handle)" to split comment from RT
+  const rtPattern = /^([\s\S]*?)([^\n(]+?)\s+\(@([A-Za-z0-9_]{1,50})\)\s+([\s\S]+)$/;
+  const m = text.match(rtPattern);
+  if (!m) return null;
+
+  const comment = m[1].trim();
+  const rtAuthor = m[2].trim();
+  const handle = m[3].trim();
+  let rtText = m[4].trim().replace(/\s+—\s+https?:\/\/\S+$/, '').trim();
+
+  if (!rtText || rtText.length < 3) return null;
+
+  return { comment, rtAuthor, rtHandle: handle, rtText };
+}
 ---
 
 <Base title="碎的念 · 冯诺" description="冯诺的碎片记录 — 豆瓣 · X / Twitter">
@@ -90,7 +110,9 @@ function parseWeread(text: string): { annotation: string; highlight: string; boo
     {page.data.map((item: any) => {
       const imgs = filterImages(item.images || []);
       const isWeread = item.platform === 'weread';
+      const isTwitter = item.platform === 'twitter';
       const wr = isWeread ? parseWeread(item.text) : null;
+      const tw = isTwitter ? parseTwitter(item.text) : null;
       return (
         <div class="entry">
           <div class="entry-spine">
@@ -116,6 +138,17 @@ function parseWeread(text: string): { annotation: string; highlight: string; boo
                   </blockquote>
                 )}
                 <p class="wr-bookline">{wr.bookLine}</p>
+              </div>
+            ) : isTwitter && tw ? (
+              <div class="tw-body">
+                {tw.comment && <p class="entry-text tw-comment">{tw.comment}</p>}
+                <blockquote class="tw-rt">
+                  <p class="tw-rt-author">
+                    <span class="tw-rt-name">{tw.rtAuthor}</span>
+                    <span class="tw-rt-handle">@{tw.rtHandle}</span>
+                  </p>
+                  <p class="tw-rt-text">{tw.rtText}</p>
+                </blockquote>
               </div>
             ) : (
               <p class="entry-text">{item.text}</p>
@@ -378,6 +411,52 @@ main {
   width: 100px; height: 100px;
   object-fit: cover;
   border-radius: 2px;
+}
+
+/* ── Twitter repost card ── */
+.tw-body { display: flex; flex-direction: column; gap: 10px; }
+.tw-comment {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 2;
+  color: var(--dim);
+  margin: 0;
+  white-space: pre-wrap;
+}
+.tw-rt {
+  margin: 0;
+  padding: 12px 14px;
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  background: color-mix(in srgb, var(--paper) 3%, transparent);
+}
+.tw-rt-author {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  margin: 0 0 6px;
+}
+.tw-rt-name {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--dim);
+}
+.tw-rt-handle {
+  font-family: 'Libre Baskerville', serif;
+  font-size: 10px;
+  color: var(--muted);
+  letter-spacing: .04em;
+}
+.tw-rt-text {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 13px;
+  font-weight: 300;
+  line-height: 1.9;
+  color: var(--dim);
+  margin: 0;
+  white-space: pre-wrap;
 }
 
 .pagination {

@@ -70,8 +70,13 @@ def main():
     # WeChat Reading highlights
     weread_cookie = os.environ.get("WEREAD_COOKIE", "")
     if weread_cookie:
-        from weread_sync import fetch_posts as fetch_weread
+        from weread_sync import fetch_posts as fetch_weread, export_updated_cookie
         new_posts.extend(fetch_weread(weread_cookie))
+        # Write refreshed cookie to file so the workflow can save it back to GitHub Secret
+        updated = export_updated_cookie()
+        if updated:
+            Path("/tmp/weread_cookie_updated.txt").write_text(updated, encoding="utf-8")
+            print("[weread] refreshed cookie written to /tmp/weread_cookie_updated.txt")
     else:
         print("[weread] WEREAD_COOKIE not set — skipping")
 

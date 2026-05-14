@@ -102,6 +102,11 @@ def _refresh_skey():
         print(f"[weread] skey refresh warning: {e}")
 
 
+def export_updated_cookie() -> str:
+    """Return the current cookie jar as a cookie string for saving back to Secret."""
+    return "; ".join(f"{k}={v}" for k, v in _cookie_jar.items())
+
+
 def _fetch_json(url: str) -> dict:
     """GET url with current cookie jar, absorb any cookie refresh, return JSON."""
     req = urllib.request.Request(url, headers={
