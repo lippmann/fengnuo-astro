@@ -19,9 +19,6 @@ function filterImages(images: string[]) {
 }
 
 function proxyImg(url: string) {
-  if (url.includes('doubanio.com')) {
-    return `https://wsrv.nl/?url=${encodeURIComponent(url)}&w=200&h=200&fit=cover`;
-  }
   return url;
 }
 
