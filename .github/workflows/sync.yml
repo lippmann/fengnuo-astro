@@ -29,11 +29,12 @@ jobs:
         run: python sync_all.py
 
       - name: Save refreshed WeRead cookie back to Secret
-        if: ${{ secrets.GH_PAT != '' }}
         env:
           GH_TOKEN: ${{ secrets.GH_PAT }}
         run: |
-          if [ -f /tmp/weread_cookie_updated.txt ]; then
+          if [ -z "$GH_TOKEN" ]; then
+            echo "[weread] GH_PAT not set, skipping secret update"
+          elif [ -f /tmp/weread_cookie_updated.txt ]; then
             NEW_COOKIE=$(cat /tmp/weread_cookie_updated.txt)
             gh secret set WEREAD_COOKIE --body "$NEW_COOKIE" --repo ${{ github.repository }}
             echo "[weread] WEREAD_COOKIE secret updated"
