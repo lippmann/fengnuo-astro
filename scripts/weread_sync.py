@@ -85,9 +85,9 @@ def _refresh_skey():
             headers={
                 "Cookie":          _cookie_header(),
                 "User-Agent":      (
-                    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+                    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
                     "AppleWebKit/537.36 (KHTML, like Gecko) "
-                    "Chrome/124.0.0.0 Safari/537.36"
+                    "Chrome/147.0.0.0 Safari/537.36"
                 ),
                 "Referer":         "https://weread.qq.com/",
                 "Accept":          "text/html,application/xhtml+xml,*/*",
@@ -107,16 +107,16 @@ def export_updated_cookie() -> str:
     return "; ".join(f"{k}={v}" for k, v in _cookie_jar.items())
 
 
-def _fetch_json(url: str) -> dict:
+def _fetch_json(url: str, referer: str = "https://weread.qq.com/") -> dict:
     """GET url with current cookie jar, absorb any cookie refresh, return JSON."""
     req = urllib.request.Request(url, headers={
         "Cookie":          _cookie_header(),
         "User-Agent":      (
-            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+            "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
             "AppleWebKit/537.36 (KHTML, like Gecko) "
-            "Chrome/124.0.0.0 Safari/537.36"
+            "Chrome/147.0.0.0 Safari/537.36"
         ),
-        "Referer":         "https://weread.qq.com/",
+        "Referer":         referer,
         "Origin":          "https://weread.qq.com",
         "Accept":          "application/json, text/plain, */*",
         "Accept-Language": "zh-CN,zh;q=0.9,en;q=0.8",
@@ -171,7 +171,8 @@ def _get_shelf(cookie: str) -> list[dict]:
 def _get_bookmarks(book_id: str, cookie: str) -> list[dict]:
     """Return raw bookmark (highlight) list for one book."""
     try:
-        data = _fetch_json(f"{BASE_URL}/web/book/bookmarklist?bookId={book_id}")
+        referer = f"https://weread.qq.com/web/reader/{book_id}"
+        data = _fetch_json(f"{BASE_URL}/web/book/bookmarklist?bookId={book_id}", referer=referer)
         return data.get("updated", []) or data.get("bookmarks", [])
     except Exception as e:
         print(f"[weread]     bookmark fetch failed for {book_id}: {e}")
