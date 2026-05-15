@@ -11,6 +11,8 @@ from pathlib import Path
 PUSHED_IDS_FILE = Path(__file__).parent / ".flomo_pushed_ids.json"
 
 _SSL = ssl.create_default_context()
+_SSL.check_hostname = False
+_SSL.verify_mode = ssl.CERT_NONE
 
 
 def _load_pushed_ids() -> set[str]:
