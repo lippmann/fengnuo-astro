@@ -87,6 +87,15 @@ def main():
     else:
         print("[feed] no new posts, feed unchanged")
 
+    # Push new entries to flomo
+    flomo_api = os.environ.get("FLOMO_API_URL", "")
+    if flomo_api:
+        from sync_flomo import push_new_posts
+        pushed = push_new_posts(feed, flomo_api)
+        print(f"[flomo] pushed {pushed} new entries")
+    else:
+        print("[flomo] FLOMO_API_URL not set — skipping")
+
     if not feed:
         print("ERROR: feed is empty", file=sys.stderr)
         sys.exit(1)

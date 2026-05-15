@@ -25,6 +25,7 @@ jobs:
           THREADS_TOKEN: ${{ secrets.THREADS_TOKEN }}
           INSTAGRAM_TOKEN: ${{ secrets.INSTAGRAM_TOKEN }}
           INSTAGRAM_USER_ID: ${{ secrets.INSTAGRAM_USER_ID }}
+          FLOMO_API_URL: ${{ secrets.FLOMO_API_URL }}
         working-directory: scripts
         run: python sync_all.py
 
@@ -46,6 +47,6 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add src/data/feed.json public/images/
+          git add src/data/feed.json public/images/ scripts/.flomo_pushed_ids.json
           git diff --cached --quiet || git commit -m "sync: update feed.json and images"
           git push
