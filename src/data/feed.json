@@ -1,5 +1,14 @@
 [
   {
+    "id": "douban_487422209",
+    "platform": "douban",
+    "text": "昨晚梦见了三年多前曾试图在一起的同龄同乡女生。醒来已经忘了细节，只记得她坐在椅子上笑。\n我们最后没在一起的原因，是我必须皈依她信的基督教派。我倒是并不排斥未来可能入教，本来几种宗教里我最有可能信的就是她所属的新教。\n可惜入教是她的必选项，但只是我的可选项。达成共识后，就友好地分开了。后来也拉拉杂杂联系过，但很快就实质性断联了，最后一次聊天记录停留在 2024 年 10 月。\n这是我生平第一次梦见她，没有任何征兆。",
+    "images": [],
+    "date": "2026-05-15",
+    "timestamp": 1778848565,
+    "url": "https://www.douban.com/topic/487422209/"
+  },
+  {
     "id": "weread_24139692_review_351769930_897asa9bB",
     "platform": "weread",
     "text": "《洪业：清朝开国史》 — 魏斐德\n\n新任巡抚方大猷（原文误为方大献——译者）发现，当清朝在衮州的统治风雨飘摇之际\n\n💬 译者发现了作者把方大猷的猷写成了献，但没有发现同一句里还把兖州写成了衮州。",
@@ -7,6 +16,17 @@
     "date": "2026-05-15",
     "timestamp": 1778822555,
     "url": "https://weread.qq.com/web/bookDetail/24139692"
+  },
+  {
+    "id": "douban_487390415",
+    "platform": "douban",
+    "text": "真有你的啊，抖音。在 iPhone 上下拉搜索「韩国」两个字，弹出的搜索建议，乍一眼还以为是 「10 大韩国顶级伦理片」。刚犯嘀咕怎么尺度这么大，定睛一看才发现写的是「绝伦推理片」。",
+    "images": [
+      "/images/douban/fe890ce2fa08e2f0596bd02bf6663e72.jpg"
+    ],
+    "date": "2026-05-15",
+    "timestamp": 1778804507,
+    "url": "https://www.douban.com/topic/487390415/"
   },
   {
     "id": "douban_487316580",
@@ -162,7 +182,7 @@
     "platform": "weread",
     "text": "《洪业：清朝开国史》 — 魏斐德\n\n弘光帝是个戏迷，据说他不理朝政，日夜沉溺于表演或观赏阮大铖所编写的《燕子笺》一类的戏曲中\n\n💬 跟慈禧能玩一块去。",
     "images": [],
-    "date": "2026-05-11",
+    "date": "2026-05-10",
     "timestamp": 1778447281,
     "url": "https://weread.qq.com/web/bookDetail/24139692"
   },
@@ -234,7 +254,7 @@
     "platform": "weread",
     "text": "《洪业：清朝开国史》 — 魏斐德\n\n史可法在安徽太湖附近指挥了两场阻击战，使农民军未能渡江进入湖广地区\n\n💬 安徽哪有太湖，或应为巢湖。",
     "images": [],
-    "date": "2026-05-07",
+    "date": "2026-05-06",
     "timestamp": 1778110548,
     "url": "https://weread.qq.com/web/bookDetail/24139692"
   },
@@ -243,7 +263,7 @@
     "platform": "weread",
     "text": "《洪业：清朝开国史》 — 魏斐德\n\n其中3/4来自长江流域，或南方地区，只有1/4是北方人。值得注意的是，他们没有一位属山东籍。\n\n💬 毕竟世修降表，老传统了。",
     "images": [],
-    "date": "2026-05-07",
+    "date": "2026-05-06",
     "timestamp": 1778105215,
     "url": "https://weread.qq.com/web/bookDetail/24139692"
   },
@@ -252,7 +272,7 @@
     "platform": "weread",
     "text": "《洪业：清朝开国史》 — 魏斐德\n\n城中饥民则就地屠杀。\n\n💬 读史最不忍看到这样的字句。",
     "images": [],
-    "date": "2026-05-07",
+    "date": "2026-05-06",
     "timestamp": 1778102764,
     "url": "https://weread.qq.com/web/bookDetail/24139692"
   },
@@ -261,7 +281,7 @@
     "platform": "weread",
     "text": "《蔣介石：失敗的勝利者》 — Alexander V. Pantsov\n\n孫對年輕女孩很熱衷。在他結婚前幾年，他曾向慶齡的二十五歲姊姊宋靄齡求婚，後者也是一個美女，她擔任他的祕書，並且只比宋慶齡大五歲。根據朋友的說法，同時之間，他還頻頻造訪日本妓院。\n\n💬 在这方面，可谓是民国曹操。",
     "images": [],
-    "date": "2026-05-07",
+    "date": "2026-05-06",
     "timestamp": 1778089108,
     "url": "https://weread.qq.com/web/bookDetail/CB_E5h4ZF4a9BLR71371Z40EGsM"
   },
@@ -396,7 +416,7 @@
     "platform": "weread",
     "text": "《汉文与东亚世界》 — 金文京\n\n秋雨に　明日思はるゝ　旅寐哉\n\n💬 哉在日语里作终助词时读かな。",
     "images": [],
-    "date": "2026-05-06",
+    "date": "2026-05-05",
     "timestamp": 1777998889,
     "url": "https://weread.qq.com/web/bookDetail/3300071678"
   },
@@ -405,7 +425,7 @@
     "platform": "weread",
     "text": "《汉文与东亚世界》 — 金文京\n\n越南革命家，被尊称为独立之父的胡志明(1890—1969)的汉诗，聊为补充：\n清明时节雨纷纷，笼里囚人欲断魂。借问自由何处有？卫兵遥指办公门。\n\n💬 胡志明的老干体跟「小鸟说早早早，你为什么背上炸药包」有异曲同工之妙。",
     "images": [],
-    "date": "2026-05-06",
+    "date": "2026-05-05",
     "timestamp": 1777998625,
     "url": "https://weread.qq.com/web/bookDetail/3300071678"
   },
@@ -480,7 +500,7 @@
     "platform": "weread",
     "text": "《瓜生同蒂：明代的皇帝和臣民》 — [美]施珊珊\n\n“天”在英语中既对应heaven，也有sky的意思。\n\n💬 应该是指天在中文里？",
     "images": [],
-    "date": "2026-04-26",
+    "date": "2026-04-25",
     "timestamp": 1777136067,
     "url": "https://weread.qq.com/web/bookDetail/3300185622"
   },
@@ -489,7 +509,7 @@
     "platform": "weread",
     "text": "《瓜生同蒂：明代的皇帝和臣民》 — [美]施珊珊\n\n最迟在1500年，明太祖的社会构想就已经失败了。\n\n💬 朱元璋的社会构想从未成功过，但流毒至今。",
     "images": [],
-    "date": "2026-04-26",
+    "date": "2026-04-25",
     "timestamp": 1777135953,
     "url": "https://weread.qq.com/web/bookDetail/3300185622"
   },
@@ -507,7 +527,7 @@
     "platform": "weread",
     "text": "《大汗之怒：元朝征伐日本小史》 — 周思成\n\n中国古代的大一统专制王朝，自秦王朝尽收天下之兵，在咸阳铸了12个金人以来，最害怕的莫过于百姓持有兵器，“习学枪、梃、弓、刀”，一而再再而三地严禁民间私藏兵器。\n\n💬 今天也是，菜刀都得登记呢。",
     "images": [],
-    "date": "2026-04-24",
+    "date": "2026-04-23",
     "timestamp": 1776969949,
     "url": "https://weread.qq.com/web/bookDetail/3300004367"
   },
@@ -712,7 +732,7 @@
     "platform": "weread",
     "text": "《红雨：一个中国县域七个世纪的暴力史》 — 罗威廉\n\n至少从当地人的角度来看，把共产党游击队简单地看做困扰该县的一长串土匪中的又一群，是合情合理的。\n\n💬 实际上没有差别",
     "images": [],
-    "date": "2026-04-01",
+    "date": "2026-03-31",
     "timestamp": 1774985457,
     "url": "https://weread.qq.com/web/bookDetail/23453609"
   },
@@ -721,7 +741,7 @@
     "platform": "weread",
     "text": "《红雨：一个中国县域七个世纪的暴力史》 — 罗威廉\n\n麻城县在任何时期都是一个危险的地方。长期存在的祸害是通常所称的土匪\n\n💬 很像黑泽明《七武士》的背景",
     "images": [],
-    "date": "2026-04-01",
+    "date": "2026-03-31",
     "timestamp": 1774985293,
     "url": "https://weread.qq.com/web/bookDetail/23453609"
   },
@@ -730,7 +750,7 @@
     "platform": "weread",
     "text": "《红雨：一个中国县域七个世纪的暴力史》 — 罗威廉\n\n东晋时期（317—420），亚洲内陆一个叫麻秋的将军在朝中野心家石虎手下任职，他占据着今天麻城所在的地方。为了巩固这一有利阵地，他责令当地百姓修建一座令人畏惧的城池。\n\n💬 亚洲内陆一般是指中亚了，这里译成中原比较好。另，合肥人看到人名叫麻秋很难不笑，因为在合肥话里是小鸡鸡的意思。",
     "images": [],
-    "date": "2026-03-31",
+    "date": "2026-03-30",
     "timestamp": 1774894682,
     "url": "https://weread.qq.com/web/bookDetail/23453609"
   },
@@ -739,14 +759,14 @@
     "platform": "weread",
     "text": "《红雨：一个中国县域七个世纪的暴力史》 — 罗威廉\n\n晚唐季宋\n\n💬 突然意识到在朝代里用晚这个字好像只有晚唐、晚明、晚清比较顺口，其他听起来都别扭。",
     "images": [],
-    "date": "2026-03-31",
+    "date": "2026-03-30",
     "timestamp": 1774894465,
     "url": "https://weread.qq.com/web/bookDetail/23453609"
   },
   {
     "id": "twitter_2037377311851593733",
     "platform": "twitter",
-    "text": "Why is the avatar of this subreddit Zhu Yuanzhang? Images That Make You Feel Pain (@ManMilk2) — https://nitter.net/ManMilk2/status/2037258288409031039#m",
+    "text": "Why is the avatar of this subreddit Zhu Yuanzhang? Images That Make You Feel Pain (@ManMilk2)",
     "images": [
       "/images/twitter/61009f8435ffa2141b377392bc9313fe.jpg"
     ],
@@ -797,7 +817,7 @@
     "platform": "twitter",
     "text": "{\"comment\": \"支持！\", \"rtAuthor\": \"玩个锤子\", \"rtHandle\": \"cccchuizi\", \"rtText\": \"【开工季福利来袭！！！】 为了感谢大家对我们的支持，我们打算免费送一台 Mac Mini256GB + 2000刀PackyAPI额度，助力2026年VibeCoding 和养殖龙虾！ 一等奖：macmini 256GB 一台 二等奖：Packyapi额度100 刀✖️10 人 三等奖：Packyapi额度50 刀✖️20 人 点赞+评论+转发即可参与抽奖！(中奖后我们会仔细检查哦) 3 月 8 号截止～ 网站链接：packyapi.com 相关文档：docs.packyapi.com\"}",
     "images": [
-      "https://pbs.twimg.com/media/HCX7AjGbMAAIQuN.jpg"
+      "/images/twitter/43a158ca1f86e7d057aca6d2c370b93a.jpg"
     ],
     "date": "2026-03-02",
     "timestamp": 1772430655,
