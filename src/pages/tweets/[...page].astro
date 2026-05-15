@@ -88,7 +88,7 @@ function parseTwitter(text: string): { comment: string; rtAuthor: string; rtHand
 
   <div class="filter-bar">
     <button class="filter-btn active" data-filter="all">全部</button>
-    <button class="filter-btn" data-filter="twitter">X 推文</button>
+    <button class="filter-btn" data-filter="twitter">推特博文</button>
     <button class="filter-btn" data-filter="douban">豆瓣广播</button>
     <button class="filter-btn" data-filter="weread">读书笔记</button>
   </div>
@@ -105,7 +105,7 @@ function parseTwitter(text: string): { comment: string; rtAuthor: string; rtHand
           <div class="card-header">
             <div class="card-left">
               <span class={`badge badge-${item.platform}`}>
-                {item.platform === 'twitter' ? 'X 推文' : isWeread ? '读书笔记' : '豆瓣广播'}
+                {item.platform === 'twitter' ? '推特博文' : isWeread ? '读书笔记' : '豆瓣广播'}
               </span>
               {!isWeread && (
                 <a class="card-source" href={item.url} target="_blank" rel="noopener">查看原文</a>
@@ -277,7 +277,7 @@ main {
   color: var(--muted);
   background: none;
   border: 1px solid var(--rule);
-  border-radius: 2px;
+  border-radius: 8px;
   padding: 5px 12px;
   cursor: pointer;
   transition: color .15s, border-color .15s, background .15s;
