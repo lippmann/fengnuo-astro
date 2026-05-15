@@ -134,16 +134,17 @@ def _fetch_json(url: str) -> dict:
 # ── WeRead API calls ─────────────────────────────────────────────────────────
 
 def _get_shelf(cookie: str) -> list[dict]:
-    """Return list of book dicts using the /api/user/notebook endpoint (same as obsidian plugin)."""
+    """Return list of book dicts from the full bookshelf (includes books with only highlights)."""
     global _cookie_jar
     _cookie_jar = _parse_cookie_string(cookie)
-    # Warm up both weread.qq.com and i.weread.qq.com sessions
     _refresh_skey()
     print(f"[weread] cookie keys after warm-up: {list(_cookie_jar.keys())}")
-    data = _fetch_json(f"{API_BASE_URL}/api/user/notebook")
+    # /web/shelf/sync returns ALL books on shelf, not just ones with reviews
+    data = _fetch_json(f"{API_BASE_URL}/web/shelf/sync?synckey=0&teenmode=0&album=0&onlyBookid=0")
     books = []
     for item in data.get("books", []):
-        info = item.get("bookInfo") or item.get("book") or item
+        # shelf/sync nests book info under "book" key
+        info = item.get("book") or item.get("bookInfo") or item
         if not info or not info.get("bookId"):
             continue
         books.append(info)
