@@ -134,21 +134,38 @@ def _fetch_json(url: str) -> dict:
 # ── WeRead API calls ─────────────────────────────────────────────────────────
 
 def _get_shelf(cookie: str) -> list[dict]:
-    """Return list of book dicts from the full bookshelf (includes books with only highlights)."""
+    """Return list of book dicts — tries multiple APIs to get the fullest book list."""
     global _cookie_jar
     _cookie_jar = _parse_cookie_string(cookie)
     _refresh_skey()
     print(f"[weread] cookie keys after warm-up: {list(_cookie_jar.keys())}")
-    # /web/shelf/sync returns ALL books on shelf, not just ones with reviews
-    data = _fetch_json(f"{API_BASE_URL}/web/shelf/sync?synckey=0&teenmode=0&album=0&onlyBookid=0")
-    books = []
-    for item in data.get("books", []):
-        # shelf/sync nests book info under "book" key
-        info = item.get("book") or item.get("bookInfo") or item
-        if not info or not info.get("bookId"):
-            continue
-        books.append(info)
-    return books
+
+    by_id: dict[str, dict] = {}
+
+    # API 1: /api/user/notebook — books with reviews (always works)
+    try:
+        data = _fetch_json(f"{API_BASE_URL}/api/user/notebook")
+        for item in data.get("books", []):
+            info = item.get("bookInfo") or item.get("book") or item
+            if info and info.get("bookId"):
+                by_id[info["bookId"]] = info
+        print(f"[weread] notebook API: {len(by_id)} books")
+    except Exception as e:
+        print(f"[weread] notebook API failed: {e}")
+
+    # API 2: /web/shelf/sync — full bookshelf including highlight-only books
+    try:
+        data = _fetch_json(f"{API_BASE_URL}/web/shelf/sync?synckey=0&teenmode=0&album=0&onlyBookid=0")
+        before = len(by_id)
+        for item in data.get("books", []):
+            info = item.get("book") or item.get("bookInfo") or item
+            if info and info.get("bookId") and info["bookId"] not in by_id:
+                by_id[info["bookId"]] = info
+        print(f"[weread] shelf/sync API: added {len(by_id) - before} more books")
+    except Exception as e:
+        print(f"[weread] shelf/sync API failed: {e}")
+
+    return list(by_id.values())
 
 
 def _get_bookmarks(book_id: str, cookie: str) -> list[dict]:
