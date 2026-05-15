@@ -45,10 +45,10 @@ def _format(item: dict) -> str:
             if highlight:
                 parts.append(f"> {highlight}")
             parts.append(f"——{book_line}")
-            return "\n".join(parts) + "\n#读书笔记"
+            return "\n".join(parts) + "\n#reading"
         else:
             highlight = re.sub(r"^\[.*?\]\n+", "", rest).strip()
-            return f"> {highlight}\n\n——{book_line}\n#读书笔记"
+            return f"> {highlight}\n\n——{book_line}\n#reading"
 
     if platform == "twitter":
         # New JSON-structured format
@@ -68,15 +68,15 @@ def _format(item: dict) -> str:
                     parts.append(f"> {rt_text}")
                 if url:
                     parts.append(url)
-                return "\n\n".join(parts) + "\n#推特博文"
+                return "\n\n".join(parts) + "\n#lr/murmurs"
             except json.JSONDecodeError:
                 pass
         # Plain tweet
         content = re.sub(r"\s+—\s+https?://\S+$", "", text).strip()
-        return f"{content}\n\n{url}\n#推特博文" if url else f"{content}\n#推特博文"
+        return f"{content}\n\n{url}\n#lr/murmurs" if url else f"{content}\n#lr/murmurs"
 
     if platform == "douban":
-        return f"{text}\n\n{url}\n#豆瓣广播" if url else f"{text}\n#豆瓣广播"
+        return f"{text}\n\n{url}\n#lr/murmurs" if url else f"{text}\n#lr/murmurs"
 
     return text
 
