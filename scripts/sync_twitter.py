@@ -2,6 +2,7 @@
 """X (Twitter) sync via nitter RSS fallback instances."""
 
 import hashlib
+import json
 import re
 import ssl
 import urllib.request
@@ -14,12 +15,6 @@ from urllib.parse import unquote
 USERNAME  = "Surudo1892"
 MAX_POSTS = 10
 IMG_DIR   = Path(__file__).parent.parent / "public" / "images" / "twitter"
-
-NITTER_INSTANCES = [
-    "https://nitter.privacyredirect.com",
-    "https://nitter.poast.org",
-    "https://nitter.net",
-]
 
 NITTER_INSTANCES = [
     "https://nitter.privacyredirect.com",
@@ -95,16 +90,46 @@ def _parse_rss(xml_bytes: bytes) -> list[dict]:
         guid_el   = item.find("guid")
 
         # Skip retweets
-        title = (title_el.text or "") if title_el is not None else ""
+        title = (title_el.text or "").strip() if title_el is not None else ""
         if title.startswith("RT by"):
             continue
 
-        # Extract text (strip HTML)
+        # Extract text (strip HTML) — this is the full description including RT author/text
         raw = (desc_el.text or "") if desc_el is not None else title
-        text = re.sub(r'<[^>]+>', '', raw).strip()
-        text = re.sub(r'\s+', ' ', text)
-        if not text:
+        full_text = re.sub(r'<[^>]+>', '', raw).strip()
+        full_text = re.sub(r'\s+', ' ', full_text)
+        if not full_text:
             continue
+
+        # nitter <title> = my comment (the part before the RT attribution)
+        # nitter <description> = full text: "comment author (@handle) rt_text — url"
+        # We store comment and rt_text separately for clean rendering.
+        # Strip trailing nitter URL from full_text first.
+        clean_text = re.sub(r'\s+—\s+https?://\S+$', '', full_text).strip()
+
+        # Detect if this is a repost: look for "author (@handle) rt_text" pattern
+        rt_m = re.search(r'^(.*?)\s+\(@([A-Za-z0-9_]{1,50})\)\s+(.+)$', clean_text, re.DOTALL)
+        if rt_m and len(rt_m.group(3).strip()) >= 3:
+            # title is my comment; strip it from before the RT attribution
+            comment = title.strip()
+            rt_author_raw = rt_m.group(1).strip()
+            rt_handle = rt_m.group(2).strip()
+            rt_text = rt_m.group(3).strip()
+            # rt_author_raw may start with comment text; remove it
+            if comment and rt_author_raw.startswith(comment):
+                rt_author = rt_author_raw[len(comment):].strip()
+            else:
+                rt_author = rt_author_raw
+            # Store structured fields
+            text = json.dumps({
+                "comment": comment,
+                "rtAuthor": rt_author,
+                "rtHandle": rt_handle,
+                "rtText": rt_text,
+            }, ensure_ascii=False)
+        else:
+            # Plain tweet — just use clean_text
+            text = clean_text
 
         # Extract images from description, convert nitter → pbs.twimg.com, download locally
         images = []
