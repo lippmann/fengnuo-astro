@@ -224,7 +224,11 @@
     "id": "douban_487494743",
     "platform": "douban",
     "text": "艳星马天尼，冲这名字高低得整一杯。",
-    "images": [],
+    "images": [
+      "/images/douban/2814550158f718299ae97ccb62d0f1c3.jpg",
+      "/images/douban/2814550158f718299ae97ccb62d0f1c3.jpg",
+      "/images/douban/2814550158f718299ae97ccb62d0f1c3.jpg"
+    ],
     "date": "2026-05-15",
     "timestamp": 1778886912,
     "url": "https://www.douban.com/topic/487494743/"
