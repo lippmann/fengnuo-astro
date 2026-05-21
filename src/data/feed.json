@@ -1,5 +1,14 @@
 [
   {
+    "id": "douban_488162424",
+    "platform": "douban",
+    "text": "本来准备睡觉，但不小心一直在 X 上刷阿斯顿维拉获得欧联冠军的各种推送，有素人的，有官方的，甚至有威廉王子的。\n我不是维拉球迷，但也替他们高兴，几十年没拿过冠军了。虽然只能算是二流的欧洲冠军，但带来的喜悦，比那些大俱乐部（包括我的主队利物浦）拿欧冠还要多。\n不免就想到了中午看《Things in Nature Merely Grow》时特地划线的一句话：只与有意义的占位符一起生活，但须认识到占位符始终只是占位符。 （To live only with meaningful placeholders and to acknowledge that they are nevertheless only placeholders.）\n阿斯顿维拉对很多人来说，就是有意义的占位符。",
+    "images": [],
+    "date": "2026-05-22",
+    "timestamp": 1779420563,
+    "url": "https://www.douban.com/topic/488162424/"
+  },
+  {
     "id": "weread_CB_9ApFZDFY40vi73a71Z7xVDgo_review_351769930_89ggyKQXD",
     "platform": "weread",
     "text": "《Things in Nature Merely Grow》 — Yiyun Li\n\nto live only with meaningful placeholders and to acknowledge that they are nevertheless only placeholders.\n\n💬 要活得像有意义的占位符，但依然要承认占位符始终是占位符。",
@@ -416,10 +425,7 @@
     "platform": "douban",
     "text": "真有你的啊，抖音。在 iPhone 上下拉搜索「韩国」两个字，弹出的搜索建议，乍一眼还以为是 「10 大韩国顶级伦理片」。刚犯嘀咕怎么尺度这么大，定睛一看才发现写的是「绝伦推理片」。",
     "images": [
-      "/images/douban/fe890ce2fa08e2f0596bd02bf6663e72.jpg",
-      "/images/douban/2814550158f718299ae97ccb62d0f1c3.jpg",
-      "/images/douban/2814550158f718299ae97ccb62d0f1c3.jpg",
-      "/images/douban/2814550158f718299ae97ccb62d0f1c3.jpg"
+      "/images/douban/fe890ce2fa08e2f0596bd02bf6663e72.jpg"
     ],
     "date": "2026-05-15",
     "timestamp": 1778804507,
