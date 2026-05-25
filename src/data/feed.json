@@ -1,5 +1,50 @@
 [
   {
+    "id": "weread_3300185594_review_351769930_89mrMRgO9",
+    "platform": "weread",
+    "text": "《汉书（全本全注全译版，辛德勇导读）》 — [汉]班固\n\n众庶[插图]莫不多[插图]光\n\n💬 应该是是霍光自己造势宣传的，朝堂上的事，普通百姓怎么可能知道。",
+    "images": [],
+    "date": "2026-05-25",
+    "timestamp": 1779690439,
+    "url": "https://weread.qq.com/web/bookDetail/3300185594"
+  },
+  {
+    "id": "weread_3300185594_3300185594_112_6234-6361",
+    "platform": "weread",
+    "text": "《汉书（全本全注全译版，辛德勇导读）》 — [汉]班固\n[112]\n\n光顿首让曰：“臣不如金日䃅[插图]。”日䃅亦曰：“臣外国人，不如光。”",
+    "images": [],
+    "date": "2026-05-25",
+    "timestamp": 1779690175,
+    "url": "https://weread.qq.com/web/bookDetail/3300185594"
+  },
+  {
+    "id": "weread_3300090276_3300090276_22_2136-2212",
+    "platform": "weread",
+    "text": "《霍光王朝》 — 孔令堃\n[22]\n\n霍光自幼并没有受过良好的教育，文化水平不高，武略水平也未见过人之处。所以班固对霍光的能力评价为四个字：不学亡术。苏轼评价霍光的能力也是四个字：才气不足。",
+    "images": [],
+    "date": "2026-05-25",
+    "timestamp": 1779688629,
+    "url": "https://weread.qq.com/web/bookDetail/3300090276"
+  },
+  {
+    "id": "weread_3300090276_3300090276_16_3563-3601",
+    "platform": "weread",
+    "text": "《霍光王朝》 — 孔令堃\n[16]\n\n看似霍光和刘贺之间剑拨弩张的斗争，其实都是被卫太子党，或者说大儒们操作完成。",
+    "images": [],
+    "date": "2026-05-25",
+    "timestamp": 1779687900,
+    "url": "https://weread.qq.com/web/bookDetail/3300090276"
+  },
+  {
+    "id": "weread_3300090276_3300090276_16_2719-2841",
+    "platform": "weread",
+    "text": "《霍光王朝》 — 孔令堃\n[16]\n\n是时候串串人物关系了，我们知道了眭弘和夏侯胜都是鲁国人，他俩为刘病已的崛起玩了命的造势。这位典狱长大人丙吉，也是鲁国人。那么说这三位鲁国老乡，凭什么冒天下之大不韪效忠于卫太子刘据呢？那是因为刘据的夫人史氏就是鲁国人。这位史氏，就是刘病已的亲奶奶",
+    "images": [],
+    "date": "2026-05-25",
+    "timestamp": 1779687835,
+    "url": "https://weread.qq.com/web/bookDetail/3300090276"
+  },
+  {
     "id": "twitter_2058618990625472831",
     "platform": "twitter",
     "text": "This is my favourite photo of 1989 Tiananmen Square massacre. I call it Guns and Roses. fire images (@fireimages)",
@@ -376,7 +421,11 @@
     "id": "douban_487791239",
     "platform": "douban",
     "text": "微信读书推出了自己的 skill，在 OpenClaw 上安装之后，让它根据我的读书记录，分析一下我的政治经济立场。结论大体正确，但是最后这句评论着实没绷住：「哈耶克会点头，吴思会握手，卢梭会气得跳脚」。",
-    "images": [],
+    "images": [
+      "/images/douban/2814550158f718299ae97ccb62d0f1c3.jpg",
+      "/images/douban/2814550158f718299ae97ccb62d0f1c3.jpg",
+      "/images/douban/2814550158f718299ae97ccb62d0f1c3.jpg"
+    ],
     "date": "2026-05-18",
     "timestamp": 1779137753,
     "url": "https://www.douban.com/topic/487791239/"
