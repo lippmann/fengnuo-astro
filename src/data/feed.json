@@ -1,5 +1,14 @@
 [
   {
+    "id": "twitter_2058884808131150163",
+    "platform": "twitter",
+    "text": "{\"comment\": \"I am never going to leave this app.\", \"rtAuthor\": \"Elon Musk\", \"rtHandle\": \"elonmusk\", \"rtText\": \"Putting “Ph.D.” in your social media name is a sure sign of a pompous retard\"}",
+    "images": [],
+    "date": "2026-05-25",
+    "timestamp": 1779711365,
+    "url": "https://x.com/Surudo1892/status/2058884808131150163"
+  },
+  {
     "id": "weread_3300185594_review_351769930_89mrMRgO9",
     "platform": "weread",
     "text": "《汉书（全本全注全译版，辛德勇导读）》 — [汉]班固\n\n众庶[插图]莫不多[插图]光\n\n💬 应该是是霍光自己造势宣传的，朝堂上的事，普通百姓怎么可能知道。",
@@ -421,11 +430,7 @@
     "id": "douban_487791239",
     "platform": "douban",
     "text": "微信读书推出了自己的 skill，在 OpenClaw 上安装之后，让它根据我的读书记录，分析一下我的政治经济立场。结论大体正确，但是最后这句评论着实没绷住：「哈耶克会点头，吴思会握手，卢梭会气得跳脚」。",
-    "images": [
-      "/images/douban/2814550158f718299ae97ccb62d0f1c3.jpg",
-      "/images/douban/2814550158f718299ae97ccb62d0f1c3.jpg",
-      "/images/douban/2814550158f718299ae97ccb62d0f1c3.jpg"
-    ],
+    "images": [],
     "date": "2026-05-18",
     "timestamp": 1779137753,
     "url": "https://www.douban.com/topic/487791239/"
