@@ -3018,8 +3018,11 @@
   {
     "id": "twitter_2054400044779151791",
     "platform": "twitter",
-    "text": "Peak shithousery.",
-    "images": [],
+    "text": "{\"comment\": \"Peak shithousery.\", \"rtAuthor\": \"End Wokeness\", \"rtHandle\": \"EndWokeness\", \"rtText\": \"Rubio is wearing the Maduro tracksuit on his flight to China\"}",
+    "images": [
+      "/images/twitter/4124937a9837f13236b2829213b430c7.jpg",
+      "/images/twitter/427f62c03035c766921d2527162ae5d3.jpg"
+    ],
     "date": "2026-05-13",
     "timestamp": 1778642114,
     "url": "https://x.com/Surudo1892/status/2054400044779151791"
