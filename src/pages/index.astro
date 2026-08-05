@@ -31,6 +31,7 @@ import Base from '../layouts/Base.astro';
       <p>杂食动物。阅读狂魔、20 年利物浦球迷、英式摇滚&amp;音乐剧爱好者</p>
     </div>
     <div class="hero-social">
+      <p class="social-label">我的网络行踪：</p>
       <div class="social-row">
         <a class="social-link" href="https://read.fengnuo.me" target="_blank" rel="noopener">微信阅读</a>
         <span class="social-desc">微信读书阅读记录</span>
@@ -53,6 +54,7 @@ import Base from '../layouts/Base.astro';
       </div>
       <div class="social-row">
         <a class="social-link" href="https://github.com/lippmann" target="_blank" rel="noopener">GitHub</a>
+        <span class="social-desc">vibe coding 作品集散地</span>
       </div>
     </div>
   </div>
@@ -239,6 +241,12 @@ import Base from '../layouts/Base.astro';
   align-items: flex-start;
   gap: 8px;
   margin-top: 40px;
+}
+.social-label {
+  font-size: 11px;
+  color: var(--dim);
+  letter-spacing: .04em;
+  margin: 0 0 2px;
 }
 .social-row {
   display: flex;
