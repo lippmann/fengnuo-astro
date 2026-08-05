@@ -31,11 +31,29 @@ import Base from '../layouts/Base.astro';
       <p>杂食动物。阅读狂魔、20 年利物浦球迷、英式摇滚&amp;音乐剧爱好者</p>
     </div>
     <div class="hero-social">
-      <a class="social-link" href="https://www.douban.com/people/L.Revolution/" target="_blank" rel="noopener">豆瓣</a>
-      <a class="social-link" href="https://x.com/Surudo1892" target="_blank" rel="noopener">X</a>
-      <a class="social-link" href="https://github.com/lippmann" target="_blank" rel="noopener">GitHub</a>
-      <a class="social-link" href="https://www.goodreads.com/user/show/6966773-rui" target="_blank" rel="noopener">Goodreads</a>
-      <a class="social-link" href="https://bookmeter.com/users/994960" target="_blank" rel="noopener">Bookmeter</a>
+      <div class="social-row">
+        <a class="social-link" href="https://read.fengnuo.me" target="_blank" rel="noopener">微信阅读</a>
+        <span class="social-desc">微信读书阅读记录</span>
+      </div>
+      <div class="social-row">
+        <a class="social-link" href="https://www.douban.com/people/L.Revolution/" target="_blank" rel="noopener">豆瓣</a>
+        <span class="social-desc">日常记录及书影音标记</span>
+      </div>
+      <div class="social-row">
+        <a class="social-link" href="https://x.com/Surudo1892" target="_blank" rel="noopener">X</a>
+        <span class="social-desc">英文吐槽</span>
+      </div>
+      <div class="social-row">
+        <a class="social-link" href="https://www.goodreads.com/user/show/6966773-rui" target="_blank" rel="noopener">Goodreads</a>
+        <span class="social-desc">西文书阅读记录</span>
+      </div>
+      <div class="social-row">
+        <a class="social-link" href="https://bookmeter.com/users/994960" target="_blank" rel="noopener">BOOK</a>
+        <span class="social-desc">日文书阅读记录</span>
+      </div>
+      <div class="social-row">
+        <a class="social-link" href="https://github.com/lippmann" target="_blank" rel="noopener">GitHub</a>
+      </div>
     </div>
   </div>
   <div class="hero-right">
@@ -217,9 +235,15 @@ import Base from '../layouts/Base.astro';
 }
 .hero-social {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: flex-start;
   gap: 8px;
   margin-top: 40px;
+}
+.social-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 .social-link {
   display: inline-flex;
@@ -234,11 +258,17 @@ import Base from '../layouts/Base.astro';
   color: var(--dim);
   text-transform: uppercase;
   transition: border-color .2s, color .2s, background .2s;
+  white-space: nowrap;
 }
 .social-link:hover {
   border-color: var(--gold);
   color: var(--gold);
   background: color-mix(in srgb, var(--gold) 6%, transparent);
+}
+.social-desc {
+  font-size: 11px;
+  color: var(--dim);
+  opacity: .6;
 }
 
 .hero-right {
